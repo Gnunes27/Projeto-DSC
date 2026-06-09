@@ -4,15 +4,16 @@ O objetivo deste projeto é o desenvolvimento de uma plataforma de e-commerce vo
 	A compra, venda e o controle de estoque devem ser integrados ao sistema. Quando um determinado livro estiver em quantidade abaixo de um valor estipulado, o responsável pela reposição dos livros deve ser informado. 
  	Nesta etapa inicial, o sistema não contempla a gestão de logística própria (entrega), integrando-se apenas a gateways de frete terceirizados.
 
-## CLIENTE
+### INTERESSADOS
+#### CLIENTE
 
-Cadastra e gerencia suas próprias informações pessoais, senhas e endereços de entrega.
-Navega pelo catálogo de livros, utiliza filtros de busca e adiciona itens ao carrinho.
-Realiza compras, escolhe a forma de pagamento e acompanha o histórico e o rastreamento dos seus pedidos.
-Pode avaliar os livros comprados, deixando notas e resenhas na plataforma.
+* Cadastra e gerencia suas próprias informações pessoais, senhas e endereços de entrega.
+* Navega pelo catálogo de livros, utiliza filtros de busca e adiciona itens ao carrinho.
+* Realiza compras, escolhe a forma de pagamento e acompanha o histórico e o rastreamento dos seus pedidos.
+* Pode avaliar os livros comprados, deixando notas e resenhas na plataforma.
 
-## ADM
+#### ADMINISTRADOR
     
-Cadastra, edita e exclui usuários (funcionários), clientes e livros do catálogo.
-Visualiza relatórios financeiros de vendas, faturamento e desempenho operacional.
-Visualiza relatórios dos salários e comissões de todos os funcionários.
+* Cadastra, edita e exclui usuários (funcionários), clientes e livros do catálogo.
+* Visualiza relatórios financeiros de vendas, faturamento e desempenho operacional.
+* Visualiza relatórios dos salários e comissões de todos os funcionários.
