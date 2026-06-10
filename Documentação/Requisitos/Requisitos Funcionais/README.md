@@ -88,5 +88,16 @@ as categorias escolhidas.
 #### RF24. O sistema deve permitir a busca por nomes de livros.
 - Usuário: Cliente, Administrador.
 
+### REQUISITOS NÃO FUNCIONAIS
 
+#### RNF01. O sistema deve possuir um meio de autenticação.
+- Descrição: O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
 
+#### RNF02. Somente o administrador deve possuir acesso à serviços internos do sistema.
+- Descrição: Somente o administrador pode conseguir acessar os serviços internos do sistema como RF04, RF05, RF06 entre outros.
+
+#### RNF03. Permitir a autenticação do usuário em um tempo de 10 segundos.
+
+### REQUISITOS SUPLEMENTARES
+
+#### RS01. O sistema deve armazenar as senhas dos usuários criptografadas.
