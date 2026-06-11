@@ -12,5 +12,5 @@
 
 | Developer                | GitHub | 
 |--------------------------|--------|
-| 1 - Bruno Rodrigues Magalhães     | [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)]()|
+| 1 - Bruno Rodrigues Magalhães     | [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Bruno6R)|
 | 2 - Gabriel Nunes de Almeida      | [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Gnunes27)|
