@@ -1,3 +1,4 @@
+
 # Especificação de Requisitos Funcionais - Sistema de Gestão de Livraria
 
 ## REQUISITOS
@@ -6,14 +7,14 @@
 
 #### RF01. O sistema deve permitir a compra de livros.
 - Usuário: Cliente.
-  
-#### RF02. O sitema deve permitir o acesso de um cliente aos serviços mesmo sem estar logado.
+ 
+#### RF02. O sistema deve permitir o acesso de um cliente aos serviços mesmo sem estar logado.
 - Usuário: Cliente.
 
 #### RF03. O sistema deve possuir um sistema de promoções.
 - Usuário: Administrador, Cliente.
 
-#### RF04. O sistema deve exibir o relatório de quanto foi faturado em uma período especificado.
+#### RF04. O sistema deve exibir o relatório de quanto foi faturado em um período especificado.
 - Usuário: Administrador.
 
 #### RF05. O sistema deve mostrar quais foram os livros mais vendidos de um período especificado.
@@ -34,15 +35,15 @@
 #### RF10.  Dentro do sistema deve ser possível avaliar os livros disponíveis no catálogo.
 - Usuário: Cliente.
 
-#### RF11. O sistema deve permitir a exclusão avaliações.
+#### RF11. O sistema deve permitir a exclusão de avaliações.
 - Usuário: Administrador, Cliente.
 
-- Descrição: O administrador deve ser capaz de excluir qualquer comentário dos clientes. Os clientes tem a possibilidade de excluir o próprio comentário.
+- Descrição: O administrador deve ser capaz de excluir qualquer comentário dos clientes. Os clientes têm a possibilidade de excluir o próprio comentário.
 
 #### RF12. O sistema deve permitir a edição de avaliações.
 - Usuário: Cliente, Administrador.
 
-- Descrição: O administrador deve ser capaz de editar os comentários de clientes. Os clientes possuem a possibiliade de editar o próprio comentário.
+- Descrição: O administrador deve ser capaz de editar os comentários de clientes. Os clientes possuem a possibilidade de editar o próprio comentário.
 
 #### RF13.  O sistema deve permitir dois níveis de acesso diferentes, administrador e cliente.
 - Usuário: Administrador, Cliente.
@@ -55,19 +56,19 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 #### RF15. O sistema deve permitir a remoção de livros no catálogo do sistema.
 - Usuário: Administrador.
-  
+ 
 #### RF16. Deve ser possível excluir uma conta de cliente do sistema.
 - Usuário: Administrador, Cliente.
 
 - Descrição: O administrador deve conseguir excluir a conta de qualquer cliente. O cliente deve ser capaz de excluir somente a própria conta.
 
-#### RF17. O sistema deve possuir uma interface simples contendo uma aba para a conta do cliente, uma aba para pesquisa de livros e a página principal.
+#### RF17. O sistema deve possuir uma interface simples contendo uma área para as informações da conta do cliente, uma área para pesquisa de livros e uma página principal.
 - Usuário: Cliente.
 
-#### RF18. A página principal do sistema deve conter os livros mais comprados da semana em destaque.
+#### RF18. O sistema deve disponibilizar a visualização dos 10 livros mais comprados da semana.
 - Usuário: Cliente.
 
-#### RF19. Na página principal do sistema deve conter listas com alguns dos livros mais comprados das três categorias mais compradas.
+#### RF19. O sistema deve disponibilizar a visualização dos 5 livros mais comprados das três categorias mais compradas.
 - Usuário: Cliente.
 
 #### RF20. O sistema deve possuir uma parte dedicada para suporte, com um guia sobre as principais funcionalidades do site.
@@ -88,6 +89,11 @@ as categorias escolhidas.
 #### RF24. O sistema deve permitir a busca por nomes de livros.
 - Usuário: Cliente, Administrador.
 
+#### RF25. O sistema deve conter opções relacionadas ao cliente.
+- Usuário: Cliente.
+
+- Descrição: O sistema deverá conter uma opção de excluir a conta e ver avaliações feitas pelo cliente.
+
 ### REQUISITOS NÃO FUNCIONAIS
 
 #### RNF01. O sistema deve possuir um meio de autenticação.
@@ -97,6 +103,12 @@ as categorias escolhidas.
 - Descrição: Somente o administrador pode conseguir acessar os serviços internos do sistema como RF04, RF05, RF06 entre outros.
 
 #### RNF03. Permitir a autenticação do usuário em um tempo de 10 segundos.
+
+#### RNF04. Não deve ser permitida a venda de livros sem que o usuário esteja devidamente autenticado.
+
+#### RNF05. Não deve ser permitido a publicação de avaliações sem a autenticação do cliente.
+
+#### RNF06. O sistema não deve permitir a adição de dois livros iguais no catálogo.
 
 ### REQUISITOS SUPLEMENTARES
 
