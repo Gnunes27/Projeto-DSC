@@ -1,4 +1,5 @@
 com\mycompany\livraria\view\TelaLoginView$1.class
+com\mycompany\livraria\view\TelaLoginView$7.class
 com\mycompany\livraria\conexao\ConnectionFactory.class
 com\mycompany\livraria\Livraria.class
 com\mycompany\livraria\view\TelaInicialView$3.class
@@ -10,3 +11,4 @@ com\mycompany\livraria\view\TelaLoginView$5.class
 com\mycompany\livraria\view\TelaLoginView$2.class
 com\mycompany\livraria\view\TelaLoginView.class
 com\mycompany\livraria\view\TelaInicialView$1.class
+com\mycompany\livraria\view\TelaLoginView$6.class

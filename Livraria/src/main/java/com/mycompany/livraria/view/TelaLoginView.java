@@ -41,16 +41,6 @@ public class TelaLoginView extends javax.swing.JFrame {
         buttonNewLogin = new javax.swing.JButton();
         buttonRegistrar = new javax.swing.JButton();
         panelDireitoCards = new javax.swing.JPanel();
-        panelRegistrar = new javax.swing.JPanel();
-        labelLogo1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
         panelLogin = new javax.swing.JPanel();
         labelLogo = new javax.swing.JLabel();
         labelUser = new javax.swing.JLabel();
@@ -58,6 +48,17 @@ public class TelaLoginView extends javax.swing.JFrame {
         labelUser1 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         buttonOK = new javax.swing.JButton();
+        panelRegistrar = new javax.swing.JPanel();
+        labelLogo1 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtNovaSenha = new javax.swing.JPasswordField();
+        txtConfirmarSenha = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        labelNome = new javax.swing.JLabel();
+        labelEmail = new javax.swing.JLabel();
+        labelSenha = new javax.swing.JLabel();
+        labelConfirmar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,7 +81,7 @@ public class TelaLoginView extends javax.swing.JFrame {
                 buttonNewLoginActionPerformed(evt);
             }
         });
-        panelLoginGrid.add(buttonNewLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
+        panelLoginGrid.add(buttonNewLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 110, -1));
 
         buttonRegistrar.setBackground(new java.awt.Color(204, 204, 204));
         buttonRegistrar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -92,44 +93,11 @@ public class TelaLoginView extends javax.swing.JFrame {
                 buttonRegistrarActionPerformed(evt);
             }
         });
-        panelLoginGrid.add(buttonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 110, -1));
+        panelLoginGrid.add(buttonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
 
         getContentPane().add(panelLoginGrid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 600));
 
         panelDireitoCards.setLayout(new java.awt.CardLayout());
-
-        panelRegistrar.setBackground(new java.awt.Color(51, 51, 51));
-        panelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        labelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
-        labelLogo1.setPreferredSize(new java.awt.Dimension(550, 100));
-        panelRegistrar.add(labelLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
-
-        jLabel1.setText("Nome: ");
-        panelRegistrar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-
-        jTextField1.setText("jTextField1");
-        panelRegistrar.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 460, -1));
-
-        jLabel2.setText("Email: ");
-        panelRegistrar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
-
-        jTextField2.setText("jTextField2");
-        panelRegistrar.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 460, -1));
-
-        jLabel3.setText("Senha: ");
-        panelRegistrar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
-
-        jPasswordField1.setText("jPasswordField1");
-        panelRegistrar.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 210, -1));
-
-        jLabel4.setText("Confirmar: ");
-        panelRegistrar.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, -1));
-
-        jPasswordField2.setText("jPasswordField2");
-        panelRegistrar.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 220, -1));
-
-        panelDireitoCards.add(panelRegistrar, "card3");
 
         panelLogin.setBackground(new java.awt.Color(51, 51, 51));
         panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,24 +109,24 @@ public class TelaLoginView extends javax.swing.JFrame {
         labelUser.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         labelUser.setText("Usuario:");
         labelUser.setOpaque(true);
-        panelLogin.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
-        panelLogin.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 330, -1));
+        panelLogin.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+        panelLogin.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 420, -1));
 
         labelUser1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         labelUser1.setText("Senha: ");
         labelUser1.setOpaque(true);
-        panelLogin.add(labelUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 50, -1));
+        panelLogin.add(labelUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 50, -1));
 
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaActionPerformed(evt);
             }
         });
-        panelLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 330, -1));
+        panelLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 420, -1));
 
         buttonOK.setBackground(new java.awt.Color(204, 204, 204));
         buttonOK.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        buttonOK.setText("Ok");
+        buttonOK.setText("Entrar");
         buttonOK.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonOK.setOpaque(true);
         buttonOK.addActionListener(new java.awt.event.ActionListener() {
@@ -166,9 +134,59 @@ public class TelaLoginView extends javax.swing.JFrame {
                 buttonOKActionPerformed(evt);
             }
         });
-        panelLogin.add(buttonOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 50, -1));
+        panelLogin.add(buttonOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 530, 80, -1));
 
-        panelDireitoCards.add(panelLogin, "card2");
+        panelDireitoCards.add(panelLogin, "panelLogin");
+
+        panelRegistrar.setBackground(new java.awt.Color(51, 51, 51));
+        panelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
+        labelLogo1.setPreferredSize(new java.awt.Dimension(550, 100));
+        panelRegistrar.add(labelLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
+        panelRegistrar.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 460, -1));
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        panelRegistrar.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 460, -1));
+
+        txtNovaSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNovaSenhaActionPerformed(evt);
+            }
+        });
+        panelRegistrar.add(txtNovaSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 210, -1));
+        panelRegistrar.add(txtConfirmarSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 220, -1));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("Confirmar");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 204, 0), null, null));
+        panelRegistrar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 530, 110, -1));
+
+        labelNome.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelNome.setText("Nome:");
+        labelNome.setOpaque(true);
+        panelRegistrar.add(labelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+
+        labelEmail.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelEmail.setText("Email:");
+        labelEmail.setOpaque(true);
+        panelRegistrar.add(labelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+
+        labelSenha.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelSenha.setText("Senha:");
+        labelSenha.setOpaque(true);
+        panelRegistrar.add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+
+        labelConfirmar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelConfirmar.setText("Confirmar:");
+        labelConfirmar.setOpaque(true);
+        panelRegistrar.add(labelConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, -1));
+
+        panelDireitoCards.add(panelRegistrar, "panelRegistrar");
 
         getContentPane().add(panelDireitoCards, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 550, 600));
 
@@ -176,17 +194,25 @@ public class TelaLoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonNewLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewLoginActionPerformed
-        // TODO add your handling code here:
+        java.awt.CardLayout card = (java.awt.CardLayout) panelDireitoCards.getLayout();
+
+        card.show(panelDireitoCards, "panelLogin");
+        panelDireitoCards.revalidate();
+        panelDireitoCards.repaint();
     }//GEN-LAST:event_buttonNewLoginActionPerformed
 
     private void buttonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarActionPerformed
-        // TODO add your handling code here:
+        java.awt.CardLayout card = (java.awt.CardLayout) panelDireitoCards.getLayout();
+
+        card.show(panelDireitoCards, "panelRegistrar");
+        panelDireitoCards.revalidate();
+        panelDireitoCards.repaint();
     }//GEN-LAST:event_buttonRegistrarActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
-    
+
     // Botão OK
     private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
         String usuario = txtUser.getText();
@@ -223,6 +249,14 @@ public class TelaLoginView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buttonOKActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtNovaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNovaSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNovaSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,23 +298,24 @@ public class TelaLoginView extends javax.swing.JFrame {
     private javax.swing.JButton buttonNewLogin;
     private javax.swing.JButton buttonOK;
     private javax.swing.JButton buttonRegistrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel labelConfirmar;
+    private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelLoginGrid;
     private javax.swing.JLabel labelLogo;
     private javax.swing.JLabel labelLogo1;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel labelUser;
     private javax.swing.JLabel labelUser1;
     private javax.swing.JPanel panelDireitoCards;
     private javax.swing.JPanel panelLogin;
     private javax.swing.JPanel panelLoginGrid;
     private javax.swing.JPanel panelRegistrar;
+    private javax.swing.JPasswordField txtConfirmarSenha;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JPasswordField txtNovaSenha;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
