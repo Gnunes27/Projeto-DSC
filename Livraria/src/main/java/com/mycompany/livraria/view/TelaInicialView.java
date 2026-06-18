@@ -15,6 +15,7 @@ public class TelaInicialView extends javax.swing.JFrame {
      */
     public TelaInicialView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,7 +28,9 @@ public class TelaInicialView extends javax.swing.JFrame {
     private void initComponents() {
 
         painel1Banner = new javax.swing.JPanel();
-        buttonLogin = new javax.swing.JButton();
+        buttonIconeLogin = new javax.swing.JButton();
+        buttonBarraPesquisa = new javax.swing.JButton();
+        txtBarraPesquisa = new javax.swing.JTextField();
         labelBanner = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -35,22 +38,35 @@ public class TelaInicialView extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("frameInicial"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         painel1Banner.setBackground(new java.awt.Color(204, 204, 255));
         painel1Banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonLogin.setBorderPainted(false);
-        buttonLogin.setContentAreaFilled(false);
-        buttonLogin.setFocusPainted(false);
-        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+        buttonIconeLogin.setBorderPainted(false);
+        buttonIconeLogin.setContentAreaFilled(false);
+        buttonIconeLogin.setFocusPainted(false);
+        buttonIconeLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonLoginActionPerformed(evt);
+                buttonIconeLoginActionPerformed(evt);
             }
         });
-        painel1Banner.add(buttonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 50, 40));
+        painel1Banner.add(buttonIconeLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 50, 40));
+
+        buttonBarraPesquisa.setBorderPainted(false);
+        buttonBarraPesquisa.setContentAreaFilled(false);
+        buttonBarraPesquisa.setFocusPainted(false);
+        buttonBarraPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBarraPesquisaActionPerformed(evt);
+            }
+        });
+        painel1Banner.add(buttonBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 20, 20));
+
+        txtBarraPesquisa.setBackground(new java.awt.Color(255, 255, 255));
+        txtBarraPesquisa.setBorder(null);
+        painel1Banner.add(txtBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 140, 20));
 
         labelBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
         painel1Banner.add(labelBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
@@ -64,10 +80,21 @@ public class TelaInicialView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Logado");
-    }//GEN-LAST:event_buttonLoginActionPerformed
+    private void buttonIconeLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIconeLoginActionPerformed
+        TelaLoginView tLogin = new TelaLoginView(this);
+        this.setVisible(false);
+        tLogin.setVisible(true);
+    }//GEN-LAST:event_buttonIconeLoginActionPerformed
+
+    private void buttonBarraPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarraPesquisaActionPerformed
+        String pesquisa = txtBarraPesquisa.getText().trim();
+        if(!pesquisa.isEmpty()){
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Ainda Não foi implementado!",
+                    "ERRO",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonBarraPesquisaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,9 +132,11 @@ public class TelaInicialView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonLogin;
+    private javax.swing.JButton buttonBarraPesquisa;
+    private javax.swing.JButton buttonIconeLogin;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelBanner;
     private javax.swing.JPanel painel1Banner;
+    private javax.swing.JTextField txtBarraPesquisa;
     // End of variables declaration//GEN-END:variables
 }

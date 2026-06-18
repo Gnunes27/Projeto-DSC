@@ -13,8 +13,19 @@ public class TelaLoginView extends javax.swing.JFrame {
     /**
      * Creates new form TelaLoginView
      */
+    // Atributo para alternar entre telas temporarias
+    private javax.swing.JFrame telaAnterior;
+    
     public TelaLoginView() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+    
+    
+    public TelaLoginView(javax.swing.JFrame telaAnterior) {
+        initComponents();
+        this.telaAnterior = telaAnterior;
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -130,7 +141,25 @@ public class TelaLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
-        // TODO add your handling code here:
+        String usuario = txtUser.getText();
+        String senha = new String(txtSenha.getPassword());
+        
+        if(usuario.equals("user") && senha.equals("1234")){
+            if(telaAnterior == null){
+                TelaInicialView telaInicial = new TelaInicialView();
+                telaInicial.setVisible(true);
+                this.dispose();
+            }else{
+                telaAnterior.setVisible(true);
+                this.dispose();
+            }
+        
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Usuario ou senha incorretos!",
+                    "Erro de Autenticação",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_buttonOKActionPerformed
 
     /**
@@ -162,6 +191,7 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TelaLoginView().setVisible(true);
             }
