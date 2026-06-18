@@ -15,13 +15,12 @@ public class TelaLoginView extends javax.swing.JFrame {
      */
     // Atributo para alternar entre telas temporarias
     private javax.swing.JFrame telaAnterior;
-    
+
     public TelaLoginView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    
+
     public TelaLoginView(javax.swing.JFrame telaAnterior) {
         initComponents();
         this.telaAnterior = telaAnterior;
@@ -41,7 +40,18 @@ public class TelaLoginView extends javax.swing.JFrame {
         labelLoginGrid = new javax.swing.JLabel();
         buttonNewLogin = new javax.swing.JButton();
         buttonRegistrar = new javax.swing.JButton();
-        painelLoginHero = new javax.swing.JPanel();
+        panelDireitoCards = new javax.swing.JPanel();
+        panelRegistrar = new javax.swing.JPanel();
+        labelLogo1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        panelLogin = new javax.swing.JPanel();
         labelLogo = new javax.swing.JLabel();
         labelUser = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
@@ -86,30 +96,64 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         getContentPane().add(panelLoginGrid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 600));
 
-        painelLoginHero.setBackground(new java.awt.Color(51, 51, 51));
-        painelLoginHero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelDireitoCards.setLayout(new java.awt.CardLayout());
+
+        panelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
+        labelLogo1.setPreferredSize(new java.awt.Dimension(550, 100));
+        panelRegistrar.add(labelLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
+
+        jLabel1.setText("Nome: ");
+        panelRegistrar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+
+        jTextField1.setText("jTextField1");
+        panelRegistrar.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 460, -1));
+
+        jLabel2.setText("Email: ");
+        panelRegistrar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+
+        jTextField2.setText("jTextField2");
+        panelRegistrar.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 460, -1));
+
+        jLabel3.setText("Senha: ");
+        panelRegistrar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
+
+        jPasswordField1.setText("jPasswordField1");
+        panelRegistrar.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 210, -1));
+
+        jLabel4.setText("Confirmar: ");
+        panelRegistrar.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, -1));
+
+        jPasswordField2.setText("jPasswordField2");
+        panelRegistrar.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 220, -1));
+
+        panelDireitoCards.add(panelRegistrar, "card3");
+
+        panelLogin.setBackground(new java.awt.Color(51, 51, 51));
+        panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
         labelLogo.setPreferredSize(new java.awt.Dimension(550, 100));
-        painelLoginHero.add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
+        panelLogin.add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
 
         labelUser.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         labelUser.setText("Usuario:");
         labelUser.setOpaque(true);
-        painelLoginHero.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
-        painelLoginHero.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 330, -1));
+        panelLogin.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
+        panelLogin.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 330, -1));
 
         labelUser1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         labelUser1.setText("Senha: ");
         labelUser1.setOpaque(true);
-        painelLoginHero.add(labelUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 50, -1));
+        panelLogin.add(labelUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 50, -1));
 
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaActionPerformed(evt);
             }
         });
-        painelLoginHero.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 330, -1));
+        panelLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 330, -1));
 
         buttonOK.setBackground(new java.awt.Color(204, 204, 204));
         buttonOK.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -121,9 +165,11 @@ public class TelaLoginView extends javax.swing.JFrame {
                 buttonOKActionPerformed(evt);
             }
         });
-        painelLoginHero.add(buttonOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 50, -1));
+        panelLogin.add(buttonOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 50, -1));
 
-        getContentPane().add(painelLoginHero, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 550, 600));
+        panelDireitoCards.add(panelLogin, "card2");
+
+        getContentPane().add(panelDireitoCards, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 550, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -139,26 +185,41 @@ public class TelaLoginView extends javax.swing.JFrame {
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
-
+    
+    // Botão OK
     private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
         String usuario = txtUser.getText();
         String senha = new String(txtSenha.getPassword());
-        
-        if(usuario.equals("user") && senha.equals("1234")){
-            if(telaAnterior == null){
-                TelaInicialView telaInicial = new TelaInicialView();
-                telaInicial.setVisible(true);
+
+        String avisoMensagem = "";
+        String avisoTitulo = "";
+        int tipoMensagem = javax.swing.JOptionPane.ERROR_MESSAGE;
+
+        if (usuario.isEmpty() || senha.isEmpty()) {
+            avisoMensagem = "Por favor, preencha todos os campos!";
+            avisoTitulo = "Campos Vazios";
+            tipoMensagem = javax.swing.JOptionPane.WARNING_MESSAGE;
+
+        } else if (!usuario.equals("user") || !senha.equals("123")) {
+            avisoMensagem = "Usuário ou senha incorretos!";
+            avisoTitulo = "Erro de Autenticação";
+            tipoMensagem = javax.swing.JOptionPane.ERROR_MESSAGE;
+        }
+
+        if (!avisoMensagem.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    avisoMensagem,
+                    avisoTitulo,
+                    tipoMensagem);
+        } else {
+            if (this.telaAnterior == null) {
+                TelaInicialView inicial = new TelaInicialView();
+                inicial.setVisible(true);
                 this.dispose();
-            }else{
+            } else {
                 telaAnterior.setVisible(true);
                 this.dispose();
             }
-        
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(this,
-                    "Usuario ou senha incorretos!",
-                    "Erro de Autenticação",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonOKActionPerformed
 
@@ -202,12 +263,23 @@ public class TelaLoginView extends javax.swing.JFrame {
     private javax.swing.JButton buttonNewLogin;
     private javax.swing.JButton buttonOK;
     private javax.swing.JButton buttonRegistrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel labelLoginGrid;
     private javax.swing.JLabel labelLogo;
+    private javax.swing.JLabel labelLogo1;
     private javax.swing.JLabel labelUser;
     private javax.swing.JLabel labelUser1;
-    private javax.swing.JPanel painelLoginHero;
+    private javax.swing.JPanel panelDireitoCards;
+    private javax.swing.JPanel panelLogin;
     private javax.swing.JPanel panelLoginGrid;
+    private javax.swing.JPanel panelRegistrar;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
