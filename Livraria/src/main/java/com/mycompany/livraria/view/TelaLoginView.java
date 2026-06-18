@@ -98,6 +98,7 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         panelDireitoCards.setLayout(new java.awt.CardLayout());
 
+        panelRegistrar.setBackground(new java.awt.Color(51, 51, 51));
         panelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
