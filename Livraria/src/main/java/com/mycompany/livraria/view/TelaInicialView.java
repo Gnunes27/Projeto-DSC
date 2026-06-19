@@ -8,16 +8,49 @@ package com.mycompany.livraria.view;
  *
  * @author Gnunes
  */
-public class TelaInicialView extends javax.swing.JFrame {
+  
 
-    /**
-     * Creates new form TelaInicialView
-     */
-    public TelaInicialView() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-       
-    }
+    public class TelaInicialView extends javax.swing.JFrame {
+
+        /**
+         * Creates new form TelaInicialView
+         */
+        public TelaInicialView() {
+            initComponents();
+            this.setLocationRelativeTo(null);
+
+            // --- CÓDIGO DE TESTE SIMULANDO O BANCO DE DADOS ---
+            // 1. Criamos dados falsos para testar a Fileira 1 (Ex: Mais Vendidos)
+            String[] titulosFicticios = {
+                "O Senhor dos Anéis",
+                "Duna",
+                "Corte de Espinhos e Rosas",
+                "1984",
+                "Percy Jackson"
+            };
+            double[] precosFicticios = {79.90, 54.90, 42.00, 39.90, 49.90};
+
+            // 2. Rodamos um laço para fabricar os 5 cards e jogá-los na fileira
+            // Certifique-se de usar o nome correto do seu painel de fileira (ex: panelFileira1)
+            for (int i = 0; i < titulosFicticios.length; i++) {
+                String titulo = titulosFicticios[i];
+                double preco = precosFicticios[i];
+
+                // Chama o método que fabrica o JPanel do card
+                javax.swing.JPanel novoCard = criarCardLivroDinamico(titulo, preco);
+
+                // Adiciona o card criado dentro do painel da fileira
+                panelFileira1.add(novoCard);
+            }
+
+            // 3. Comandos obrigatórios para o Swing atualizar o layout na tela
+            panelFileira1.revalidate();
+            panelFileira1.repaint();
+
+            // --------------------------------------------------
+        }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,20 +62,16 @@ public class TelaInicialView extends javax.swing.JFrame {
     private void initComponents() {
 
         painel1Banner = new javax.swing.JPanel();
-        buttonIconeLogin = new javax.swing.JButton();
-        buttonBarraPesquisa = new javax.swing.JButton();
         txtBarraPesquisa = new javax.swing.JTextField();
         labelBanner = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        panelConteudoPrincipal = new javax.swing.JPanel();
+        panelConteudoTotal = new javax.swing.JPanel();
         panelCategoriasPrincipais = new javax.swing.JPanel();
-        panelPrincipal = new javax.swing.JPanel();
-        labelTituloCategoria1 = new javax.swing.JLabel();
+        panelOpcoes = new javax.swing.JPanel();
+        labelPanelOpcoes = new javax.swing.JLabel();
+        panelTop5 = new javax.swing.JPanel();
+        labelTop5MaisVendidos = new javax.swing.JLabel();
         panelFileira1 = new javax.swing.JPanel();
-        card1 = new javax.swing.JPanel();
-        labelImageCard1 = new javax.swing.JLabel();
-        labelNome_Preco = new javax.swing.JLabel();
-        buttonAddCarrinho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -54,26 +83,6 @@ public class TelaInicialView extends javax.swing.JFrame {
         painel1Banner.setBackground(new java.awt.Color(204, 204, 255));
         painel1Banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonIconeLogin.setBorderPainted(false);
-        buttonIconeLogin.setContentAreaFilled(false);
-        buttonIconeLogin.setFocusPainted(false);
-        buttonIconeLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonIconeLoginActionPerformed(evt);
-            }
-        });
-        painel1Banner.add(buttonIconeLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 50, 40));
-
-        buttonBarraPesquisa.setBorderPainted(false);
-        buttonBarraPesquisa.setContentAreaFilled(false);
-        buttonBarraPesquisa.setFocusPainted(false);
-        buttonBarraPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonBarraPesquisaActionPerformed(evt);
-            }
-        });
-        painel1Banner.add(buttonBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 20, 20));
-
         txtBarraPesquisa.setBorder(null);
         painel1Banner.add(txtBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 140, 20));
 
@@ -82,82 +91,118 @@ public class TelaInicialView extends javax.swing.JFrame {
 
         getContentPane().add(painel1Banner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
 
-        panelConteudoPrincipal.setLayout(new javax.swing.BoxLayout(panelConteudoPrincipal, javax.swing.BoxLayout.Y_AXIS));
+        panelConteudoTotal.setLayout(new javax.swing.BoxLayout(panelConteudoTotal, javax.swing.BoxLayout.Y_AXIS));
 
         panelCategoriasPrincipais.setLayout(new javax.swing.BoxLayout(panelCategoriasPrincipais, javax.swing.BoxLayout.Y_AXIS));
 
-        labelTituloCategoria1.setText("Categoria 1");
-        panelPrincipal.add(labelTituloCategoria1);
+        labelPanelOpcoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PainelTopo.png"))); // NOI18N
+        panelOpcoes.add(labelPanelOpcoes);
 
-        panelCategoriasPrincipais.add(panelPrincipal);
+        panelCategoriasPrincipais.add(panelOpcoes);
 
-        panelFileira1.setLayout(new java.awt.FlowLayout(0, 25, 5));
+        labelTop5MaisVendidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Top5MaisVendidos.png"))); // NOI18N
+        panelTop5.add(labelTop5MaisVendidos);
 
-        card1.setLayout(new javax.swing.BoxLayout(card1, javax.swing.BoxLayout.Y_AXIS));
+        panelCategoriasPrincipais.add(panelTop5);
 
-        labelImageCard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capaLivro.png"))); // NOI18N
-        labelImageCard1.setText("Nome");
-        labelImageCard1.setHorizontalTextPosition(javax.swing.JLabel.CENTER);
-        labelImageCard1.setVerticalTextPosition(javax.swing.JLabel.CENTER);
-        labelImageCard1.setAlignmentX(0.5F);
-        labelImageCard1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                labelImageCard1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                labelImageCard1MouseExited(evt);
-            }
-        });
-        card1.add(labelImageCard1);
-
-        labelNome_Preco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelNome_Preco.setText("Nome - Preço");
-        labelNome_Preco.setAlignmentX(0.5F);
-        card1.add(labelNome_Preco);
-
-        buttonAddCarrinho.setText("+Carrinho");
-        buttonAddCarrinho.setAlignmentX(0.5F);
-        card1.add(buttonAddCarrinho);
-
-        panelFileira1.add(card1);
-
+        panelFileira1.setLayout(new java.awt.FlowLayout(1, 25, 5));
         panelCategoriasPrincipais.add(panelFileira1);
 
-        panelConteudoPrincipal.add(panelCategoriasPrincipais);
+        panelConteudoTotal.add(panelCategoriasPrincipais);
 
-        jScrollPane1.setViewportView(panelConteudoPrincipal);
+        jScrollPane1.setViewportView(panelConteudoTotal);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
+    // Metodo para criação de cards de livro
+    private javax.swing.JPanel criarCardLivroDinamico(String titulo, double preco) {
+        // 1. Instancia o painel do Card
+        javax.swing.JPanel card = new javax.swing.JPanel();
+        card.setLayout(new javax.swing.BoxLayout(card, javax.swing.BoxLayout.Y_AXIS));
+        card.setBackground(java.awt.Color.WHITE);
+        card.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-    private void buttonIconeLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIconeLoginActionPerformed
-        TelaLoginView tLogin = new TelaLoginView(this);
-        this.setVisible(false);
-        tLogin.setVisible(true);
-    }//GEN-LAST:event_buttonIconeLoginActionPerformed
+        // 2. Cria a Capa (JLabel) com o tamanho fixo padrão
+        javax.swing.JLabel lblCapa = new javax.swing.JLabel();
+        lblCapa.setPreferredSize(new java.awt.Dimension(120, 180));
+        lblCapa.setMaximumSize(new java.awt.Dimension(120, 180));
+        lblCapa.setMinimumSize(new java.awt.Dimension(120, 180));
+        lblCapa.setAlignmentX(0.5F);
 
-    private void buttonBarraPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarraPesquisaActionPerformed
-        String pesquisa = txtBarraPesquisa.getText().trim();
-        if(!pesquisa.isEmpty()){
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                    "Ainda Não foi implementado!",
-                    "ERRO",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        lblCapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capaLivro.png")));
+
+        // Aplica o truque de escrever o título centralizado dentro da capa padrão
+        lblCapa.setText("<html><body style='width: 90px; text-align: center; margin: 0 auto;'>" 
+             + "<span style='color: #FFFFFF; font-family: Arial; font-size: 13px; font-weight: bold;"
+             + "text-shadow: 1px 1px 3px rgba(0,0,0,0.8);'>" 
+             + titulo 
+             + "</span>" 
+             + "</body></html>");
+        lblCapa.setHorizontalTextPosition(javax.swing.JLabel.CENTER);
+        lblCapa.setVerticalTextPosition(javax.swing.JLabel.CENTER);
+        lblCapa.setAlignmentX(0.5F);
+
+        // 3. Cria a Label do Preço embaixo
+        javax.swing.JLabel lblPreco = new javax.swing.JLabel("R$ " + String.format("%.2f", preco));
+        lblPreco.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
+        lblPreco.setAlignmentX(0.5F);
+        lblPreco.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 5, 0));
+
+        // 4. Cria o Botão do Carrinho
+        javax.swing.JButton btnCarrinho = new javax.swing.JButton("+ Carrinho");
+        btnCarrinho.setAlignmentX(0.5F);
+
+        // Configura o evento do botão do carrinho (Exemplo rápido)
+        btnCarrinho.addActionListener(e -> {
+            System.out.println("Livro adicionado: " + titulo);
+            // Aqui futuramente vai a lógica de injetar no carrinho da equipe de vocês
+        });
+
+        // 5. Junta todo mundo dentro do painel do Card
+        card.add(lblCapa);
+        card.add(lblPreco);
+        card.add(card.add(btnCarrinho));
+
+        return card;
+    }
+
+    /*public void popularFileiraNoBanco(javax.swing.JPanel painelFileira, String categoria, int limite) {
+        // Limpa a fileira para não duplicar os livros caso o método seja chamado duas vezes
+        painelFileira.removeAll();
+
+        // Query dinâmica usando interrogações (?) para evitar SQL Injection
+        String sql = "SELECT titulo, preco FROM livros WHERE categoria = ? LIMIT ?";
+
+        try (java.sql.Connection conn = ConexaoBanco.getConexao(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Define os parâmetros da busca com base no que foi passado no método
+            stmt.setString(1, categoria);
+            stmt.setInt(2, limite);
+
+            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String titulo = rs.getString("titulo");
+                    double preco = rs.getDouble("preco");
+
+                    // Fabrica o card completo usando nossa função anterior
+                    javax.swing.JPanel novoCard = criarCardLivroDinamico(titulo, preco);
+
+                    // Adiciona o card criado direto dentro da fileira do NetBeans!
+                    painelFileira.add(novoCard);
+                }
+            }
+
+            // COMANDO CRÍTICO: Avisa o Swing para redesenhar a tela com os novos componentes
+            painelFileira.revalidate();
+            painelFileira.repaint();
+
+        } catch (java.sql.SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar fileira: " + e.getMessage());
         }
-    }//GEN-LAST:event_buttonBarraPesquisaActionPerformed
-
-    private void labelImageCard1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImageCard1MouseEntered
-            // TODO add your handling code here:
-        labelImageCard1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
-    }//GEN-LAST:event_labelImageCard1MouseEntered
-
-    private void labelImageCard1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImageCard1MouseExited
-        // TODO add your handling code here:
-        labelImageCard1.setBorder(null);
-    }//GEN-LAST:event_labelImageCard1MouseExited
-
+    }*/
     /**
      * @param args the command line arguments
      */
@@ -189,27 +234,23 @@ public class TelaInicialView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicialView().setVisible(true);
-               
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAddCarrinho;
-    private javax.swing.JButton buttonBarraPesquisa;
-    private javax.swing.JButton buttonIconeLogin;
-    private javax.swing.JPanel card1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBanner;
-    private javax.swing.JLabel labelImageCard1;
-    private javax.swing.JLabel labelNome_Preco;
-    private javax.swing.JLabel labelTituloCategoria1;
+    private javax.swing.JLabel labelPanelOpcoes;
+    private javax.swing.JLabel labelTop5MaisVendidos;
     private javax.swing.JPanel painel1Banner;
     private javax.swing.JPanel panelCategoriasPrincipais;
-    private javax.swing.JPanel panelConteudoPrincipal;
+    private javax.swing.JPanel panelConteudoTotal;
     private javax.swing.JPanel panelFileira1;
-    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelOpcoes;
+    private javax.swing.JPanel panelTop5;
     private javax.swing.JTextField txtBarraPesquisa;
     // End of variables declaration//GEN-END:variables
-    
+
 }
