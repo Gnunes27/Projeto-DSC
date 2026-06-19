@@ -246,68 +246,67 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 #### RF19. O sistema deve permitir a visualização dos dados dos clientes com exceção da senha.
 - Usuário: Administrador.
   
-- Descrição:
+- Descrição: O administrador deve ser capaz de visualizar os dados dos clientes do sistema, porém, a senha dos usuários deve permanecer desconhecida para o administrador.
 
-- Fontes:
+- Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada:
+- Informações de entrada: Identificação do cliente.
 
-- Informações de saída:
+- Informações de saída: Dados do cliente.
 
-- Requisitos não funcionais relacionados: 
+- Requisitos não funcionais relacionados: RNF01.
 
 #### RF20. O sistema deve permitir que cada livro tenha mais de uma categoria atribuída à ele.
 - Usuário: Cliente.
   
-- Descrição:
+- Descrição: Cada livro, adicionado no catálogo do sistema, deve possuir pelo menos uma categoria relacionada a ele que poderá ser observada pelos usuários.
 
-- Fontes:
+- Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada:
+- Informações de entrada: Nda.
+- 
+- Informações de saída: Nda.
 
-- Informações de saída:
-
-- Requisitos não funcionais relacionados: 
+- Requisitos não funcionais relacionados: RNF10.
 
 #### RF21. O sistema deve permitir a busca de livros com base em categorias especificadas.
 - Usuário: Cliente, Administrador.
   
-- Descrição: Deve ser especificado as categorias que serão pesquisadas no sistema. Logo após isso o sistema deve retornar quais são os livros que possuem
-as categorias escolhidas.
+- Descrição: Deve ser especificado as categorias que serão pesquisadas no sistema. Logo após isso o sistema deve retornar quais são os livros que possuem as categorias escolhidas.
 
-- Fontes:
+- Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada:
+- Informações de entrada: Categorias desejadas.
 
-- Informações de saída:
+- Informações de saída: Livros que contém todas essas categorias.
 
-- Requisitos não funcionais relacionados: 
+- Requisitos não funcionais relacionados: Nda.
 
 #### RF22. O sistema deve permitir a busca por nomes de livros.
 - Usuário: Cliente, Administrador.
   
-- Descrição:
+- Descrição: O sistema deve permitir que o usuário busque por livros, adicionados previamente no catálogo do sistema, informando o nome do livro desejado.
 
-- Fontes:
+- Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada:
+- Informações de entrada: Nome do livro desejado.
 
-- Informações de saída:
+- Informações de saída: Livros que contenham o nome informado.
 
-- Requisitos não funcionais relacionados: 
+- Requisitos não funcionais relacionados: Nda.
 
 #### RF23. O sistema deve conter opções relacionadas ao cliente.
 - Usuário: Cliente.
   
-- Descrição: O sistema deverá conter uma opção de excluir a conta e ver avaliações feitas pelo cliente.
+- Descrição: O sistema deverá conter um espaço para agrupar as informações e opções relacionadas à conta dos clientes.
 
-- Fontes:
+- Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada:
+- Informações de entrada: Seleção do espaço reservado.
 
-- Informações de saída:
+- Informações de saída: Informações e opções da conta.
 
-- Requisitos não funcionais relacionados: 
+- Requisitos não funcionais relacionados: Nda.
 
 ### REQUISITOS NÃO FUNCIONAIS
 
@@ -329,6 +328,8 @@ as categorias escolhidas.
 #### RNF08. O sistema não deve permitir a edição de uma avaliação que não seja publicada pelo próprio cliente.
 
 #### RNF09. O sistema não deve permitir que um cliente exclua uma conta que não seja a própria.
+
+#### RNF10. O sistema não deve permitir que um livro possua duas categorias iguais.
 
 ### REQUISITOS SUPLEMENTARES
 
