@@ -16,6 +16,7 @@ public class TelaInicialView extends javax.swing.JFrame {
     public TelaInicialView() {
         initComponents();
         this.setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -32,7 +33,16 @@ public class TelaInicialView extends javax.swing.JFrame {
         buttonBarraPesquisa = new javax.swing.JButton();
         txtBarraPesquisa = new javax.swing.JTextField();
         labelBanner = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelConteudoPrincipal = new javax.swing.JPanel();
+        panelCategoriasPrincipais = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
+        labelTituloCategoria1 = new javax.swing.JLabel();
+        panelFileira1 = new javax.swing.JPanel();
+        card1 = new javax.swing.JPanel();
+        labelImageCard1 = new javax.swing.JLabel();
+        labelNome_Preco = new javax.swing.JLabel();
+        buttonAddCarrinho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -64,7 +74,6 @@ public class TelaInicialView extends javax.swing.JFrame {
         });
         painel1Banner.add(buttonBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 20, 20));
 
-        txtBarraPesquisa.setBackground(new java.awt.Color(255, 255, 255));
         txtBarraPesquisa.setBorder(null);
         painel1Banner.add(txtBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 140, 20));
 
@@ -73,9 +82,52 @@ public class TelaInicialView extends javax.swing.JFrame {
 
         getContentPane().add(painel1Banner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 500));
+        panelConteudoPrincipal.setLayout(new javax.swing.BoxLayout(panelConteudoPrincipal, javax.swing.BoxLayout.Y_AXIS));
+
+        panelCategoriasPrincipais.setLayout(new javax.swing.BoxLayout(panelCategoriasPrincipais, javax.swing.BoxLayout.Y_AXIS));
+
+        labelTituloCategoria1.setText("Categoria 1");
+        panelPrincipal.add(labelTituloCategoria1);
+
+        panelCategoriasPrincipais.add(panelPrincipal);
+
+        panelFileira1.setLayout(new java.awt.FlowLayout(0, 25, 5));
+
+        card1.setLayout(new javax.swing.BoxLayout(card1, javax.swing.BoxLayout.Y_AXIS));
+
+        labelImageCard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capaLivro.png"))); // NOI18N
+        labelImageCard1.setText("Nome");
+        labelImageCard1.setHorizontalTextPosition(javax.swing.JLabel.CENTER);
+        labelImageCard1.setVerticalTextPosition(javax.swing.JLabel.CENTER);
+        labelImageCard1.setAlignmentX(0.5F);
+        labelImageCard1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labelImageCard1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelImageCard1MouseExited(evt);
+            }
+        });
+        card1.add(labelImageCard1);
+
+        labelNome_Preco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelNome_Preco.setText("Nome - Preço");
+        labelNome_Preco.setAlignmentX(0.5F);
+        card1.add(labelNome_Preco);
+
+        buttonAddCarrinho.setText("+Carrinho");
+        buttonAddCarrinho.setAlignmentX(0.5F);
+        card1.add(buttonAddCarrinho);
+
+        panelFileira1.add(card1);
+
+        panelCategoriasPrincipais.add(panelFileira1);
+
+        panelConteudoPrincipal.add(panelCategoriasPrincipais);
+
+        jScrollPane1.setViewportView(panelConteudoPrincipal);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -95,6 +147,16 @@ public class TelaInicialView extends javax.swing.JFrame {
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonBarraPesquisaActionPerformed
+
+    private void labelImageCard1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImageCard1MouseEntered
+            // TODO add your handling code here:
+        labelImageCard1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+    }//GEN-LAST:event_labelImageCard1MouseEntered
+
+    private void labelImageCard1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImageCard1MouseExited
+        // TODO add your handling code here:
+        labelImageCard1.setBorder(null);
+    }//GEN-LAST:event_labelImageCard1MouseExited
 
     /**
      * @param args the command line arguments
@@ -127,16 +189,27 @@ public class TelaInicialView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicialView().setVisible(true);
+               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAddCarrinho;
     private javax.swing.JButton buttonBarraPesquisa;
     private javax.swing.JButton buttonIconeLogin;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel card1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBanner;
+    private javax.swing.JLabel labelImageCard1;
+    private javax.swing.JLabel labelNome_Preco;
+    private javax.swing.JLabel labelTituloCategoria1;
     private javax.swing.JPanel painel1Banner;
+    private javax.swing.JPanel panelCategoriasPrincipais;
+    private javax.swing.JPanel panelConteudoPrincipal;
+    private javax.swing.JPanel panelFileira1;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTextField txtBarraPesquisa;
     // End of variables declaration//GEN-END:variables
+    
 }

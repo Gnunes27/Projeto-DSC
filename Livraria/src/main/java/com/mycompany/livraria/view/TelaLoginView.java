@@ -73,8 +73,8 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         buttonNewLogin.setBackground(new java.awt.Color(204, 204, 204));
         buttonNewLogin.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        buttonNewLogin.setText("Login");
-        buttonNewLogin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonNewLogin.setText("Logar-se");
+        buttonNewLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonNewLogin.setOpaque(true);
         buttonNewLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,8 +85,8 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         buttonRegistrar.setBackground(new java.awt.Color(204, 204, 204));
         buttonRegistrar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        buttonRegistrar.setText("Registrar");
-        buttonRegistrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonRegistrar.setText("Registrar-se");
+        buttonRegistrar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonRegistrar.setOpaque(true);
         buttonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +127,7 @@ public class TelaLoginView extends javax.swing.JFrame {
         buttonOK.setBackground(new java.awt.Color(204, 204, 204));
         buttonOK.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         buttonOK.setText("Entrar");
-        buttonOK.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonOK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonOK.setOpaque(true);
         buttonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,11 +163,11 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Confirmar");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 204, 0), null, null));
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelRegistrar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 530, 110, -1));
 
         labelNome.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        labelNome.setText("Nome:");
+        labelNome.setText("Nome de Usuário:");
         labelNome.setOpaque(true);
         panelRegistrar.add(labelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
