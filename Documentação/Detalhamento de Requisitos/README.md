@@ -8,7 +8,7 @@
 #### RF01. O sistema deve permitir a compra de livros.
 - Usuário: Cliente.
 
-- Descrição: O sistema deve permitir a compra de livros disponíveis no catálogo da loja, para usuários autenticados, informando ao cliente o preço individual de cada livro além do preço total
+- Descrição: O sistema deve permitir a compra de livros disponíveis no catálogo da loja, para clientes autenticados, informando ao cliente o preço individual de cada livro além do preço total
   da compra.
 
 - Fontes: Equipe de Desenvolvimento de Software.
@@ -19,7 +19,7 @@
 
 - Requisitos não funcionais relacionados: Nda.
  
-#### RF02. O sistema deve permitir o acesso de um cliente aos serviços mesmo sem estar logado.
+#### RF02. O sistema deve permitir o acesso de um cliente aos serviços disponíveis mesmo sem estar logado.
 - Usuário: Cliente.
   
 - Descrição: O usuário deve ser capaz de navegar e acessar os serviços ofertados pelo sistema, com exceção da compra, sem a necessidade de autenticação.
@@ -204,10 +204,10 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: RNF10.
 
-#### RF16. O sistema deve possuir uma interface simples contendo uma área para as informações da conta do cliente, o carrinho de compras, uma área para pesquisa de livros e uma página principal.
+#### RF16. O sistema deve possuir uma interface simples contendo uma área para as informações e opções da conta do cliente, o carrinho de compras, uma área para pesquisa de livros e uma página principal.
 - Usuário: Cliente.
   
-- Descrição: O sistema deve apresentar uma área que forneça as informações e opções da conta do cliente contendo o nome de usuário e a possibilidade de excluir a conta. Através da área de pesquisa deve ser possível pesquisar os livros por nome, categoria e autor podendo escolher informar uma ou mais dessas informações. A página principal deve conter os principais serviços ofertados pelo sistema.
+- Descrição: O sistema deve apresentar uma área que forneça as informações e opções da conta do cliente contendo as informações sobre a conta do cliente além de opções relacionadas à ela. Através da área de pesquisa deve ser possível pesquisar os livros por nome, categoria e autor podendo escolher informar uma ou mais dessas informações. A página principal deve conter os principais serviços ofertados pelo sistema.
 
 - Fontes: Equipe de Desenvolvimento de Software.
 
@@ -217,7 +217,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: Nda.
 
-#### RF17. O sistema deve disponibilizar a visualização dos 10 livros mais comprados da semana.
+#### RF17. O sistema deve disponibilizar a visualização dos 5 livros mais comprados da semana.
 - Usuário: Cliente.
   
 - Descrição: Deverá ser exibido os 10 livros mais comprados da semana.
@@ -292,19 +292,6 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 - Informações de entrada: Nome do livro desejado.
 
 - Informações de saída: Livros que contenham o nome informado.
-
-- Requisitos não funcionais relacionados: Nda.
-
-#### RF23. O sistema deve conter opções relacionadas ao cliente.
-- Usuário: Cliente.
-  
-- Descrição: O sistema deverá conter um espaço para agrupar as informações e opções relacionadas à conta dos clientes.
-
-- Fontes: Equipe de Desenvolvimento de Software.
-
-- Informações de entrada: Seleção do espaço reservado.
-
-- Informações de saída: Informações e opções da conta.
 
 - Requisitos não funcionais relacionados: Nda.
 
