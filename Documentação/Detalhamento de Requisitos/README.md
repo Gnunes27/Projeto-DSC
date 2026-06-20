@@ -179,12 +179,12 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 #### RF14. O sistema deve permitir a remoção de livros no catálogo do sistema.
 - Usuário: Administrador.
   
-- Descrição: O administrador deve ser capaz de remover os livros, adicionados no catálogo previamente, do sistema. O administrador deve informar informações
-  sobre o livro que deseja excluir, além de escolher e confirmar a exclusão daquele livro.
+- Descrição: O administrador deve ser capaz de remover os livros, adicionados no catálogo previamente, do sistema. O administrador deve informar os dados
+  sobre o livro que deseja excluir, além de confirmar a exclusão daquele livro.
 
 - Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada: Nome do livro ou ISBN ou autor.
+- Informações de entrada: ISBN do livro.
 
 - Informações de saída: Livro excluído do catálogo.
 
