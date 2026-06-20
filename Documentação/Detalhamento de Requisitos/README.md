@@ -56,7 +56,7 @@
 
 - Informações de saída: Total arrecadado no tempo especificado.
 
-- Requisitos não funcionais relacionados: Nda.
+- Requisitos não funcionais relacionados: RNF01.
 
 #### RF05. O sistema deve mostrar quais foram os livros mais vendidos de um período especificado.
 - Usuário: Administrador.
@@ -69,7 +69,7 @@
 
 - Informações de saída: livros em ordem do mais vendido para o menos vendido.
 
-- Requisitos não funcionais relacionados: Nda.
+- Requisitos não funcionais relacionados: RNF01.
 
 #### RF06. O sistema deve exibir quais foram os livros menos vendidos de um período especificado.
 - Usuário: Administrador.
@@ -82,7 +82,7 @@
 
 - Informações de saída: Livros em ordenados dos menos vendidos.
 
-- Requisitos não funcionais relacionados: Nda.
+- Requisitos não funcionais relacionados: RNF01.
 
 #### RF07. O sistema deve exibir quantas vezes cada livro foi vendido, o preço da unidade e o total vendido.
 - Usuário: Administrador.
@@ -95,7 +95,7 @@
 
 - Informações de saída: Nda.
 
-- Requisitos não funcionais relacionados: Nda.
+- Requisitos não funcionais relacionados: RNF01.
 
 #### RF08. O sistema deve ser capaz de armazenar livros dentro de um carrinho de compras.
 - Usuário: Cliente.
@@ -174,7 +174,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Informações de saída: Livro adicionado no catálogo do sistema.
 
-- Requisitos não funcionais relacionados: RNF05.
+- Requisitos não funcionais relacionados: RNF01, RNF05.
 
 #### RF14. O sistema deve permitir a remoção de livros no catálogo do sistema.
 - Usuário: Administrador.
@@ -188,7 +188,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Informações de saída: Livro excluído do catálogo.
 
-- Requisitos não funcionais relacionados: RNF02.
+- Requisitos não funcionais relacionados: RNF01, RNF02.
  
 #### RF15. Deve ser possível excluir uma conta de cliente do sistema.
 - Usuário: Administrador, Cliente.
