@@ -28,21 +28,104 @@ public class TelaAdmView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        panelLogo = new javax.swing.JPanel();
+        labelLogo = new javax.swing.JLabel();
+        panelGrid = new javax.swing.JPanel();
+        buttonCatalogo = new javax.swing.JButton();
+        buttonDelCliente = new javax.swing.JButton();
+        buttonAddLivro = new javax.swing.JButton();
+        buttonDelLivro = new javax.swing.JButton();
+        buttonListaCliente = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelLogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoADM.png"))); // NOI18N
+        panelLogo.add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
+
+        getContentPane().add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
+
+        panelGrid.setBackground(new java.awt.Color(0, 0, 0));
+        panelGrid.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonCatalogo.setBackground(new java.awt.Color(204, 204, 204));
+        buttonCatalogo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonCatalogo.setText("Catálogo");
+        buttonCatalogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonCatalogo.setOpaque(true);
+        buttonCatalogo.addActionListener(this::buttonCatalogoActionPerformed);
+        panelGrid.add(buttonCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, -1));
+
+        buttonDelCliente.setBackground(new java.awt.Color(204, 204, 204));
+        buttonDelCliente.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonDelCliente.setText("Del Cliente");
+        buttonDelCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonDelCliente.setOpaque(true);
+        buttonDelCliente.addActionListener(this::buttonDelClienteActionPerformed);
+        panelGrid.add(buttonDelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, -1));
+
+        buttonAddLivro.setBackground(new java.awt.Color(204, 204, 204));
+        buttonAddLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonAddLivro.setText("Add Livro");
+        buttonAddLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonAddLivro.setOpaque(true);
+        buttonAddLivro.addActionListener(this::buttonAddLivroActionPerformed);
+        panelGrid.add(buttonAddLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
+
+        buttonDelLivro.setBackground(new java.awt.Color(204, 204, 204));
+        buttonDelLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonDelLivro.setText("Del Livro");
+        buttonDelLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonDelLivro.setOpaque(true);
+        buttonDelLivro.addActionListener(this::buttonDelLivroActionPerformed);
+        panelGrid.add(buttonDelLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, -1));
+
+        buttonListaCliente.setBackground(new java.awt.Color(204, 204, 204));
+        buttonListaCliente.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonListaCliente.setText("Lista Clientes");
+        buttonListaCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonListaCliente.setOpaque(true);
+        buttonListaCliente.addActionListener(this::buttonListaClienteActionPerformed);
+        panelGrid.add(buttonListaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 110, -1));
+
+        getContentPane().add(panelGrid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 150, 500));
+
+        jPanel1.setLayout(new java.awt.CardLayout());
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane1.setViewportView(jPanel3);
+
+        jPanel1.add(jScrollPane1, "card2");
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 650, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDelClienteActionPerformed
+
+    private void buttonDelLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDelLivroActionPerformed
+
+    private void buttonListaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonListaClienteActionPerformed
+
+    private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCatalogoActionPerformed
+
+    private void buttonAddLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonAddLivroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +153,16 @@ public class TelaAdmView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAddLivro;
+    private javax.swing.JButton buttonCatalogo;
+    private javax.swing.JButton buttonDelCliente;
+    private javax.swing.JButton buttonDelLivro;
+    private javax.swing.JButton buttonListaCliente;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelLogo;
+    private javax.swing.JPanel panelGrid;
+    private javax.swing.JPanel panelLogo;
     // End of variables declaration//GEN-END:variables
 }
