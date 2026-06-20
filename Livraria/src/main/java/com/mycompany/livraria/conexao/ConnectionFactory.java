@@ -25,7 +25,8 @@ public class ConnectionFactory {
         }
     }
     // Script para testar a conexão com o banco de dados
-    /*public static void main(String[] args) {
+    /*
+    public static void main(String[] args) {
         try {
             System.out.println("Tentando conectar ao banco de dados...");
             java.sql.Connection con = ConnectionFactory.getConnection();
@@ -38,5 +39,6 @@ public class ConnectionFactory {
             System.out.println("FALHA! Ocorreu um erro ao tentar conectar:");
             e.printStackTrace();
         }
-    }*/
+    }
+    */
 }

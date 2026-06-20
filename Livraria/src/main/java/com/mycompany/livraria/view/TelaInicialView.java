@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.livraria.view;
+import com.mycompany.livraria.dao.PessoaDao;
+import com.mycompany.livraria.model.Pessoa;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,35 +22,12 @@ package com.mycompany.livraria.view;
             initComponents();
             this.setLocationRelativeTo(null);
 
-            // --- CÓDIGO DE TESTE SIMULANDO O BANCO DE DADOS ---
-            // 1. Criamos dados falsos para testar a Fileira 1 (Ex: Mais Vendidos)
-            String[] titulosFicticios = {
-                "O Senhor dos Anéis",
-                "Duna",
-                "Corte de Espinhos e Rosas",
-                "1984",
-                "Percy Jackson"
-            };
-            double[] precosFicticios = {79.90, 54.90, 42.00, 39.90, 49.90};
+        }
 
-            // 2. Rodamos um laço para fabricar os 5 cards e jogá-los na fileira
-            // Certifique-se de usar o nome correto do seu painel de fileira (ex: panelFileira1)
-            for (int i = 0; i < titulosFicticios.length; i++) {
-                String titulo = titulosFicticios[i];
-                double preco = precosFicticios[i];
-
-                // Chama o método que fabrica o JPanel do card
-                javax.swing.JPanel novoCard = criarCardLivroDinamico(titulo, preco);
-
-                // Adiciona o card criado dentro do painel da fileira
-                panelFileira1.add(novoCard);
-            }
-
-            // 3. Comandos obrigatórios para o Swing atualizar o layout na tela
-            panelFileira1.revalidate();
-            panelFileira1.repaint();
-
-            // --------------------------------------------------
+        public TelaInicialView(Pessoa usuario) {
+            initComponents();
+            this.setLocationRelativeTo(null);
+            // Aqui você pode usar o objeto 'usuario' para personalizar a tela, mostrar o nome, etc.
         }
 
     
@@ -105,7 +85,7 @@ package com.mycompany.livraria.view;
 
         panelCategoriasPrincipais.add(panelTop5);
 
-        panelFileira1.setLayout(new java.awt.FlowLayout(1, 25, 5));
+        panelFileira1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 25, 5));
         panelCategoriasPrincipais.add(panelFileira1);
 
         panelConteudoTotal.add(panelCategoriasPrincipais);
