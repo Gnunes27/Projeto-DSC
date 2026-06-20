@@ -170,7 +170,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Fontes: Equipe de Desenvolvimento de Software.
 
-- Informações de entrada: Nome do livro, ISBN do livro, categorias, autor, ano de publicação
+- Informações de entrada: Título do livro, ISBN do livro, categorias, autor, ano de publicação
 
 - Informações de saída: Livro adicionado no catálogo do sistema.
 
