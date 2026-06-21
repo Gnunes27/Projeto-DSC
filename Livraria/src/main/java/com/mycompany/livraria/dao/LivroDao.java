@@ -1,0 +1,108 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.livraria.dao;
+import com.mycompany.livraria.model.Livro;
+import com.mycompany.livraria.conexao.ConnectionFactory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+
+public class LivroDao {
+
+    public boolean cadastrar(Livro livro) {
+        String sql = "INSERT INTO Livro (nome, autor, categoria, preco, codigo) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, livro.getNome());
+            stmt.setString(2, livro.getAutor());
+            stmt.setString(3, livro.getCategoria());
+            stmt.setDouble(4, livro.getPreco());
+            stmt.setString(5, livro.getCodigo());
+
+            stmt.execute();
+            return true; 
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao cadastrar livro: " + e.getMessage());
+            return false; 
+        }
+    }
+
+    
+    public List<Livro> listarTodos() {
+        String sql = "SELECT nome, autor, categoria, preco, codigo FROM Livro";
+        List<Livro> listaDeLivros = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Livro livro = new Livro();
+                livro.setNome(rs.getString("nome"));
+                livro.setAutor(rs.getString("autor"));
+                livro.setCategoria(rs.getString("categoria"));
+                livro.setPreco(rs.getDouble("preco"));
+                livro.setCodigo(rs.getString("codigo"));
+               
+
+                listaDeLivros.add(livro);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar livros: " + e.getMessage());
+        }
+        
+        return listaDeLivros; 
+    }
+
+    public Livro buscar(String codigo) {
+        String sql = "SELECT * FROM Livro WHERE codigo = ?";
+        
+        try (Connection conn = ConnectionFactory.getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, codigo);
+            
+            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Livro livro = new Livro();
+                    livro.setIdLivro(rs.getInt("id_livro"));
+                    livro.setNome(rs.getString("nome"));
+                    livro.setAutor(rs.getString("autor"));
+                    livro.setCategoria(rs.getString("categoria"));
+                    livro.setPreco(rs.getDouble("preco"));
+                    livro.setCodigo(rs.getString("codigo"));
+                    return livro;
+                }
+            }
+        } catch (java.sql.SQLException e) {
+            System.err.println("Erro ao buscar livro por código: " + e.getMessage());
+        }
+        return null; 
+    }
+    
+    public boolean excluir(String codigo) {
+        String sql = "DELETE FROM Livro WHERE codigo = ?";
+        
+        try (java.sql.Connection conn = ConnectionFactory.getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, codigo);
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            return linhasAfetadas > 0; 
+            
+        } catch (java.sql.SQLException e) {
+            System.err.println("Erro ao excluir livro: " + e.getMessage());
+            return false;
+        }
+    }
+}

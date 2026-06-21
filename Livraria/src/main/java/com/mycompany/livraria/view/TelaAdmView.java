@@ -4,12 +4,17 @@
  */
 package com.mycompany.livraria.view;
 
+import com.mycompany.livraria.dao.*;
+import com.mycompany.livraria.model.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gnunes
  */
 public class TelaAdmView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAdmView.class.getName());
 
     /**
@@ -30,15 +35,38 @@ public class TelaAdmView extends javax.swing.JFrame {
 
         panelLogo = new javax.swing.JPanel();
         labelLogo = new javax.swing.JLabel();
-        panelGrid = new javax.swing.JPanel();
+        panelOpcoes = new javax.swing.JPanel();
         buttonCatalogo = new javax.swing.JButton();
         buttonDelCliente = new javax.swing.JButton();
         buttonAddLivro = new javax.swing.JButton();
         buttonDelLivro = new javax.swing.JButton();
         buttonListaCliente = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        panelCards = new javax.swing.JPanel();
+        cardCatalogo = new javax.swing.JPanel();
+        scrollCatalogo = new javax.swing.JScrollPane();
+        tableCatalogo = new javax.swing.JTable();
+        cardAddLivro = new javax.swing.JPanel();
+        labelUser = new javax.swing.JLabel();
+        labelUser1 = new javax.swing.JLabel();
+        labelUser2 = new javax.swing.JLabel();
+        labelUser3 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        labelUser4 = new javax.swing.JLabel();
+        txtTitulo = new javax.swing.JTextField();
+        txtAutor = new javax.swing.JTextField();
+        txtPreco = new javax.swing.JTextField();
+        buttonCadastrarLivro = new javax.swing.JButton();
+        cBoxCategoria = new javax.swing.JComboBox<>();
+        cardDelLivro = new javax.swing.JPanel();
+        buttonBuscar = new javax.swing.JButton();
+        txtBusca = new javax.swing.JTextField();
+        labelCodLivro = new javax.swing.JLabel();
+        buttonDeletar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaInfo = new javax.swing.JTextArea();
+        cardListaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
+        tableClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,8 +78,8 @@ public class TelaAdmView extends javax.swing.JFrame {
 
         getContentPane().add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
 
-        panelGrid.setBackground(new java.awt.Color(0, 0, 0));
-        panelGrid.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelOpcoes.setBackground(new java.awt.Color(0, 0, 0));
+        panelOpcoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonCatalogo.setBackground(new java.awt.Color(204, 204, 204));
         buttonCatalogo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -59,7 +87,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonCatalogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonCatalogo.setOpaque(true);
         buttonCatalogo.addActionListener(this::buttonCatalogoActionPerformed);
-        panelGrid.add(buttonCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, -1));
+        panelOpcoes.add(buttonCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, -1));
 
         buttonDelCliente.setBackground(new java.awt.Color(204, 204, 204));
         buttonDelCliente.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -67,7 +95,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonDelCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonDelCliente.setOpaque(true);
         buttonDelCliente.addActionListener(this::buttonDelClienteActionPerformed);
-        panelGrid.add(buttonDelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, -1));
+        panelOpcoes.add(buttonDelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, -1));
 
         buttonAddLivro.setBackground(new java.awt.Color(204, 204, 204));
         buttonAddLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -75,7 +103,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonAddLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonAddLivro.setOpaque(true);
         buttonAddLivro.addActionListener(this::buttonAddLivroActionPerformed);
-        panelGrid.add(buttonAddLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
+        panelOpcoes.add(buttonAddLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
 
         buttonDelLivro.setBackground(new java.awt.Color(204, 204, 204));
         buttonDelLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -83,7 +111,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonDelLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonDelLivro.setOpaque(true);
         buttonDelLivro.addActionListener(this::buttonDelLivroActionPerformed);
-        panelGrid.add(buttonDelLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, -1));
+        panelOpcoes.add(buttonDelLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, -1));
 
         buttonListaCliente.setBackground(new java.awt.Color(204, 204, 204));
         buttonListaCliente.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -91,18 +119,151 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonListaCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buttonListaCliente.setOpaque(true);
         buttonListaCliente.addActionListener(this::buttonListaClienteActionPerformed);
-        panelGrid.add(buttonListaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 110, -1));
+        panelOpcoes.add(buttonListaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 110, -1));
 
-        getContentPane().add(panelGrid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 150, 500));
+        getContentPane().add(panelOpcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 150, 500));
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        panelCards.setLayout(new java.awt.CardLayout());
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
-        jScrollPane1.setViewportView(jPanel3);
+        cardCatalogo.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.add(jScrollPane1, "card2");
+        tableCatalogo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Autor", "Categoria", "Preço", "Codigo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 650, 500));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        scrollCatalogo.setViewportView(tableCatalogo);
+
+        cardCatalogo.add(scrollCatalogo, java.awt.BorderLayout.CENTER);
+
+        panelCards.add(cardCatalogo, "cardCatalogo");
+
+        cardAddLivro.setBackground(new java.awt.Color(153, 153, 153));
+        cardAddLivro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelUser.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelUser.setText("Titulo:");
+        labelUser.setOpaque(true);
+        cardAddLivro.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
+
+        labelUser1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelUser1.setText("Preço:");
+        labelUser1.setOpaque(true);
+        cardAddLivro.add(labelUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
+
+        labelUser2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelUser2.setText("Autor:");
+        labelUser2.setOpaque(true);
+        cardAddLivro.add(labelUser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+
+        labelUser3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelUser3.setText("Codigo:");
+        labelUser3.setOpaque(true);
+        cardAddLivro.add(labelUser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        cardAddLivro.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 200, -1));
+
+        labelUser4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelUser4.setText("Categoria:");
+        labelUser4.setOpaque(true);
+        cardAddLivro.add(labelUser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+
+        txtTitulo.addActionListener(this::txtTituloActionPerformed);
+        cardAddLivro.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 510, -1));
+        cardAddLivro.add(txtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 510, -1));
+
+        txtPreco.addActionListener(this::txtPrecoActionPerformed);
+        cardAddLivro.add(txtPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 200, -1));
+
+        buttonCadastrarLivro.setBackground(new java.awt.Color(204, 204, 204));
+        buttonCadastrarLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonCadastrarLivro.setText("Adicionar");
+        buttonCadastrarLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonCadastrarLivro.setOpaque(true);
+        buttonCadastrarLivro.addActionListener(this::buttonCadastrarLivroActionPerformed);
+        cardAddLivro.add(buttonCadastrarLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 90, -1));
+
+        cBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione uma Categoria --", "Ficção Científica", "Romance", "Suspense", "Fantasia", "Terror", "Biografia", "Autoajuda", "História" }));
+        cardAddLivro.add(cBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, -1));
+
+        panelCards.add(cardAddLivro, "cardAddLivro");
+
+        cardDelLivro.setBackground(new java.awt.Color(153, 153, 153));
+        cardDelLivro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonBuscar.setBackground(new java.awt.Color(204, 204, 204));
+        buttonBuscar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonBuscar.setText("Buscar");
+        buttonBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonBuscar.setOpaque(true);
+        buttonBuscar.addActionListener(this::buttonBuscarActionPerformed);
+        cardDelLivro.add(buttonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 80, 20));
+        cardDelLivro.add(txtBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 250, -1));
+
+        labelCodLivro.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelCodLivro.setText("Codigo do Livro:");
+        labelCodLivro.setOpaque(true);
+        cardDelLivro.add(labelCodLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        buttonDeletar.setBackground(new java.awt.Color(204, 204, 204));
+        buttonDeletar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonDeletar.setText("Deletar");
+        buttonDeletar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonDeletar.setEnabled(false);
+        buttonDeletar.setOpaque(true);
+        buttonDeletar.addActionListener(this::buttonDeletarActionPerformed);
+        cardDelLivro.add(buttonDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 80, 20));
+
+        txtAreaInfo.setColumns(20);
+        txtAreaInfo.setRows(5);
+        jScrollPane2.setViewportView(txtAreaInfo);
+
+        cardDelLivro.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 540, 190));
+
+        panelCards.add(cardDelLivro, "cardDelLivro");
+
+        cardListaClientes.setLayout(new java.awt.BorderLayout());
+
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "Email", "ID"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableClientes);
+
+        cardListaClientes.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        panelCards.add(cardListaClientes, "cardListaClientes");
+        cardListaClientes.getAccessibleContext().setAccessibleParent(panelCards);
+
+        getContentPane().add(panelCards, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 650, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,20 +273,180 @@ public class TelaAdmView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDelClienteActionPerformed
 
     private void buttonDelLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelLivroActionPerformed
-        // TODO add your handling code here:
+        mudarTela("cardDelLivro");
     }//GEN-LAST:event_buttonDelLivroActionPerformed
 
     private void buttonListaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaClienteActionPerformed
-        // TODO add your handling code here:
+        mudarTela("cardListaClientes");
+
+        PessoaDao dao = new PessoaDao();
+        List<Pessoa> pessoas = dao.listarTodos();
+
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableClientes.getModel();
+        modelo.setNumRows(0);
+
+        for (Pessoa p : pessoas) {
+            modelo.addRow(new Object[]{
+                p.getNome(),
+                p.getEmail(),
+                p.getIdUsuario()
+            });
+        }
+
+
     }//GEN-LAST:event_buttonListaClienteActionPerformed
 
     private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
-        // TODO add your handling code here:
+
+        mudarTela("cardCatalogo");
+
+        LivroDao dao = new LivroDao();
+        List<Livro> livros = dao.listarTodos();
+
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
+        modelo.setNumRows(0);
+
+        for (Livro l : livros) {
+            modelo.addRow(new Object[]{
+                l.getNome(),
+                l.getAutor(),
+                l.getCategoria(),
+                "R$ " + String.format("%.2f", l.getPreco()),
+                l.getCodigo()
+            });
+        }
     }//GEN-LAST:event_buttonCatalogoActionPerformed
 
     private void buttonAddLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddLivroActionPerformed
-        // TODO add your handling code here:
+        mudarTela("cardAddLivro");
     }//GEN-LAST:event_buttonAddLivroActionPerformed
+
+    private void buttonCadastrarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarLivroActionPerformed
+
+        String titulo = txtTitulo.getText();
+        String autor = txtAutor.getText();
+        String tempPreco = txtPreco.getText();
+        String codigo = txtCodigo.getText();
+
+        if (titulo.isEmpty() || autor.isEmpty() || tempPreco.isEmpty() || codigo.isEmpty()) {
+            mensagem("aviso", "Preencha todos os campos!");
+            return;
+        }
+
+        if (cBoxCategoria.getSelectedIndex() == 0) {
+            mensagem("aviso", "Por favor, selecione uma categoria válida!");
+            return;
+        }
+
+        try {
+            tempPreco = tempPreco.replace(",", ".");
+            double preco = Double.parseDouble(tempPreco);
+
+            String categoria = cBoxCategoria.getSelectedItem().toString();
+
+            LivroDao dao = new LivroDao();
+            Livro livro = new Livro();
+            livro.setNome(titulo);
+            livro.setAutor(autor);
+            livro.setCategoria(categoria);
+            livro.setPreco(preco);
+            livro.setCodigo(codigo);
+
+            if (dao.cadastrar(livro)) {
+                mensagem("sucesso", "Livro adicionado com sucesso!");
+
+                txtTitulo.setText("");
+                txtAutor.setText("");
+                txtPreco.setText("");
+                txtCodigo.setText("");
+                cBoxCategoria.setSelectedIndex(0);
+                txtTitulo.requestFocus();
+            } else {
+                mensagem("erro", "Erro ao cadastrar o livro. Verifique o código!");
+            }
+
+        } catch (NumberFormatException e) {
+            mensagem("erro", "Por favor, digite um valor numérico válido para o preço!");
+        }
+
+
+    }//GEN-LAST:event_buttonCadastrarLivroActionPerformed
+
+    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTituloActionPerformed
+
+    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecoActionPerformed
+
+    private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
+        String codigoBusca = txtBusca.getText();
+
+        if (codigoBusca.isEmpty()) {
+            mensagem("aviso", "Digite um código para buscar!");
+            return;
+        }
+
+        LivroDao dao = new LivroDao();
+        Livro livro = dao.buscar(codigoBusca);
+
+        if (livro != null) {
+            String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
+                    + "Título: " + livro.getNome() + "\n"
+                    + "Autor: " + livro.getAutor() + "\n"
+                    + "Categoria: " + livro.getCategoria() + "\n"
+                    + "Preço: R$ " + String.format("%.2f", livro.getPreco()) + "\n\n"
+                    + "Este é o livro que deseja excluir?";
+
+            txtAreaInfo.setText(informacoes);
+
+            buttonDeletar.setEnabled(true);
+        } else {
+            txtAreaInfo.setText("");
+            buttonDeletar.setEnabled(false);
+            mensagem("erro", "Nenhum livro encontrado com o código: " + codigoBusca);
+        }
+    }//GEN-LAST:event_buttonBuscarActionPerformed
+
+    private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed
+
+        String codigo = txtBusca.getText();
+
+        int confirmacao = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "ATENÇÃO: Tem certeza que deseja excluir permanentemente este livro do catálogo?",
+                "Confirmar Exclusão",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+
+            LivroDao dao = new LivroDao();
+
+            if (dao.excluir(codigo)) {
+                mensagem("sucesso", "O livro foi excluído com sucesso!");
+
+                txtBusca.setText("");
+                txtAreaInfo.setText("");
+                buttonDeletar.setEnabled(false);
+                txtBusca.requestFocus();
+
+            } else {
+                mensagem("erro", "Erro ao tentar excluir o livro. Tente novamente.");
+            }
+        }
+
+    }//GEN-LAST:event_buttonDeletarActionPerformed
+
+    private void mudarTela(String nomeDoCard) {
+        java.awt.CardLayout card = (java.awt.CardLayout) panelCards.getLayout();
+        card.show(panelCards, nomeDoCard);
+
+        panelCards.revalidate();
+        panelCards.repaint();
+    }
 
     /**
      * @param args the command line arguments
@@ -152,17 +473,73 @@ public class TelaAdmView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaAdmView().setVisible(true));
     }
 
+    /**
+     * Exibe pop-ups padronizados para o usuário.
+     *
+     * * @param tipo Pode ser: "sucesso", "erro", "aviso" ou "info"
+     * @param mensagem O texto que vai aparecer na caixinha
+     */
+    private void mensagem(String tipo, String mensagem) {
+        int tipoIcone;
+        String titulo;
+
+        switch (tipo.toLowerCase()) {
+            case "erro":
+                tipoIcone = javax.swing.JOptionPane.ERROR_MESSAGE;
+                titulo = "Erro no Sistema";
+                break;
+            case "aviso":
+                tipoIcone = javax.swing.JOptionPane.WARNING_MESSAGE;
+                titulo = "Atenção";
+                break;
+            case "sucesso":
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Sucesso";
+                break;
+            default:
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Informação";
+                break;
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(this, mensagem, titulo, tipoIcone);
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddLivro;
+    private javax.swing.JButton buttonBuscar;
+    private javax.swing.JButton buttonCadastrarLivro;
     private javax.swing.JButton buttonCatalogo;
     private javax.swing.JButton buttonDelCliente;
     private javax.swing.JButton buttonDelLivro;
+    private javax.swing.JButton buttonDeletar;
     private javax.swing.JButton buttonListaCliente;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JComboBox<String> cBoxCategoria;
+    private javax.swing.JPanel cardAddLivro;
+    private javax.swing.JPanel cardCatalogo;
+    private javax.swing.JPanel cardDelLivro;
+    private javax.swing.JPanel cardListaClientes;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelCodLivro;
     private javax.swing.JLabel labelLogo;
-    private javax.swing.JPanel panelGrid;
+    private javax.swing.JLabel labelUser;
+    private javax.swing.JLabel labelUser1;
+    private javax.swing.JLabel labelUser2;
+    private javax.swing.JLabel labelUser3;
+    private javax.swing.JLabel labelUser4;
+    private javax.swing.JPanel panelCards;
     private javax.swing.JPanel panelLogo;
+    private javax.swing.JPanel panelOpcoes;
+    private javax.swing.JScrollPane scrollCatalogo;
+    private javax.swing.JTable tableCatalogo;
+    private javax.swing.JTable tableClientes;
+    private javax.swing.JTextArea txtAreaInfo;
+    private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtBusca;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtPreco;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
