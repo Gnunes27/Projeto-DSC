@@ -18,9 +18,10 @@
 
 ### EXCEÇÕES 
 
-#### 1a Cliente não autenticado. 
+#### Exceção 1a: Cliente não autenticado
 
-### FLUXOS ALTERNATIVOS
+
+### FLUXOS DE VARIANTES
 
 #### Variante 2.1: Guardar no carrinho
 - 2.1.1 [IN] Cliente decide guardar o livro no carrinho de compras.
@@ -45,7 +46,7 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES 
 
-### FLUXOS ALTERNATIVOS
+### FLUXOS DE VARIANTES
 
 ## UC3. Consultar Catálogo
 
@@ -58,7 +59,7 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES
 
-### FLUXOS ALTERNATIVOS
+### FLUXOS DE VARIANTES
 
 ## UC4. Manter Conta
 
@@ -73,7 +74,7 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES
 
-### FLUXOS ALTERNATIVOS 
+### FLUXOS DE VARIANTES
 
 ## UC5. Exibir Relatório
 
@@ -88,7 +89,7 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES
 
-### FLUXOS ALTERNATIVOS 
+### FLUXOS DE VARIANTES
 
 #### Variante 6.1: Ordenar por mais vendido
 - 6.1.1 [IN] Administrador escolhe ordenar pelos livros mais vendidos.
@@ -111,7 +112,7 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES
 
-### FLUXOS ALTERNATIVOS 
+### FLUXOS DE VARIANTES
 
 #### Variante 2.1: Excluir do catálogo
 
@@ -138,7 +139,7 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES
 
-### FLUXOS ALTERNATIVOS
+### FLUXOS DE VARIANTES
 
 ## UC8. Gerenciar Contas
 
@@ -155,4 +156,4 @@ Avança para o passo 4 do fluxo principal.
 
 ### EXCEÇÕES
 
-### FLUXOS ALTERNATIVOS
+### FLUXOS DE VARIANTES
