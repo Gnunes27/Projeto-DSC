@@ -85,3 +85,287 @@ Tela --> Cliente: Informa a confirmação da compra
 
 @enduml
 ```
+### UC2: Manter Avaliações
+
+```plantuml
+@startuml
+autonumber
+
+actor "Cliente" as Cliente
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Cliente -> Tela: Faz Login
+Tela -> Sis: autenticar(cliente)
+Sis --> Tela: Cliente autenticado
+
+Cliente -> Tela: Avaliar Livros
+Tela -> Sis: buscarLivros(cliente)
+activate Sis
+Sis -> BD: SELECT livros FROM Vendas WHERE IdCliente = Cliente
+BD --> Sis: Retorna lista de livros 
+deactivate Sis
+Sis --> Tela: Retorna lista 
+Tela --> Cliente: Exibe livros comprados
+
+Cliente -> Tela: seleciona o livro 
+Tela -> Sis: buscar(idLivro)
+Sis --> Tela: Retorna tela de avaliação
+Tela --> Cliente: Exibe a interface de avaliação
+
+Cliente -> Tela: Informa a nota e o comentário
+Tela -> Sis: registrarAvaliacao(cliente, livro, nota, comentario)
+activate Sis
+Sis -> BD: INSERT INTO Avaliacao (idLivro, idCliente, nota, comentario)
+BD --> Sis: Confirma avaliação
+deactivate Sis
+
+Sis --> Tela: Retorna true
+Tela --> Cliente: Informa que a avaliação foi registrada
+
+@enduml
+```
+
+### UC3: Consultar Catálogo
+
+```plantuml
+@startuml
+autonumber
+
+actor "Cliente" as Cliente
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Cliente -> Tela: Informa opções de consulta (título, categorias)
+Tela -> Sis: consultarCatalogo(titulo, categorias)
+activate Sis
+Sis -> BD: SELECT id, titulo FROM Livro WHERE ...
+BD --> Sis: Retorna lista de livros
+deactivate Sis
+Sis --> Tela: Retorna livros
+Tela --> Cliente: Exibe livros encontrados
+
+Cliente -> Tela: Informa o livro desejado 
+Tela -> Sis: buscar(idLivro)
+activate Sis
+
+Sis -> BD: SELECT titulo, nota, preco FROM Livro WHERE id = ?
+BD --> Sis: Retorna informações
+
+deactivate Sis
+Sis --> Tela: Retorna informações completas 
+Tela --> Cliente: Exibe os detalhes do livro
+
+@enduml
+```
+
+### UC4: Manter Conta
+
+```plantuml
+@startuml
+autonumber
+
+actor "Cliente" as Cliente
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Cliente -> Tela: Informa identificação
+Tela -> Sis: autenticar(identificacao)
+Sis --> Tela: Cliente autenticado
+
+Tela -> Sis: buscar(cliente)
+activate Sis
+Sis -> BD: SELECT * FROM Cliente WHERE IdCliente = cliente
+BD --> Sis: Retorna cliente
+deactivate Sis
+Sis --> Tela: Retorna perfil
+Tela --> Cliente: Exibe informações e opcões do perfil
+
+Cliente -> Tela: Escolhe a opção de excluir conta
+Tela -> Sis: deletar(cliente)
+Sis --> Tela: Pede confirmação de segurança
+Tela --> Cliente: mostra janela de confimação
+
+Cliente -> Tela: Confirma a exclusão da conta
+Tela -> Sis: deletar(cliente)
+activate Sis
+Sis -> BD: DELETE FROM Cliente WHERE id = ?
+BD --> Sis: Confirma exclusão da linha
+deactivate Sis
+
+Sis --> Tela: Retorna true
+Tela --> Cliente: Informa a exclusão da conta 
+Tela -> Tela: Redireciona para a tela inicial / Logout
+
+@enduml
+```
+
+### UC5: Exibir Relatório de Faturamento
+
+```plantuml
+@startuml
+autonumber
+
+actor "Administrador" as Adm
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Adm -> Tela: Informa identificação
+Tela -> Sis: autenticar(identificacao)
+Sis --> Tela: Administrador autenticado
+Tela --> Adm: Exibe as opções de relatório
+
+Adm -> Tela: Escolhe saber o faturamento com as vendas
+Tela --> Adm: Informa opções de pesquisa (período, ordenação dos livros)
+
+Adm -> Tela: Informa o período e ordenação pelos mais vendidos
+Tela -> Sis: gerarRelatorio(periodo, ordenacao)
+activate Sis
+
+Sis -> BD: SELECT * FROM Venda WHERE data BETWEEN ...
+activate BD
+BD --> Sis: Retorna dados das vendas 
+deactivate BD
+
+Sis -> Sis: Calcula o faturamento total do período
+Sis --> Tela: Retorna o relatório 
+deactivate Sis
+
+Tela --> Adm: Exibe o faturamento total 
+@enduml
+```
+
+### UC6: Gerenciar Catálogo 
+
+```plantuml
+@startuml
+autonumber
+
+actor "Administrador" as Adm
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Adm -> Tela: Informa identificação
+Tela -> Sis: autenticar(identificacao)
+Sis --> Tela: Administrador autenticado
+Tela --> Adm: Exibe opções de ADM
+
+alt Fluxo Principal: Adicionar livro no catálogo
+    Adm -> Tela: AdicionaLivro(título, ISBN, categorias, autor, ano)
+    Tela -> Sis: cadastrar(titulo, isbn, categorias, autor, ano)
+    activate Sis
+    Sis -> BD: INSERT INTO Livro (...)
+    BD --> Sis: Confirmação de registro
+    deactivate Sis
+    Sis --> Tela: Retorna true
+    
+    Tela --> Adm: Informa a confirmação da adição do livro no catálogo
+
+else Variante 3.1: Excluir do catálogo
+    Adm -> Tela: Escolhe excluir livros do catálogo
+    Tela -> Sis: buscarLivros()
+    activate Sis
+    Sis -> BD: SELECT * FROM Livro
+    BD --> Sis: Retorna os livros
+    deactivate Sis
+    Sis --> Tela: Retorna lista de livros
+    
+    Tela --> Adm: Informa os livros disponíveis para serem excluídos
+    
+    Adm -> Tela: Informa os livros que deseja excluir
+    Tela --> Adm: Exibe mensagem de confirmação de exclusão
+    
+    Adm -> Tela: Confirma a exclusão
+    Tela -> Sis: deletar(IdLivros)
+    activate Sis
+    Sis -> BD: DELETE FROM Livro WHERE id IN (...)
+    BD --> Sis: Confirma exclusão das linhas
+    deactivate Sis
+    
+    Sis --> Tela: Retorna true
+    Tela --> Adm: Informa a confirmação de exclusão dos livros
+end
+
+@enduml
+```
+
+### UC7: Gerenciar Avaliações
+
+```plantuml
+@startuml
+autonumber
+
+actor "Administrador" as Adm
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Adm -> Tela: Informa identificação
+Tela -> Sis: autenticar(identificacao)
+Sis --> Tela: Administrador autenticado
+Tela --> Adm: Informa opções de ADM
+
+Adm -> Tela: Escolhe excluir avaliações de clientes
+Tela -> Sis: buscarAvaliacoes()
+activate Sis
+Sis -> BD: SELECT * FROM Avaliacao
+BD --> Sis: Retorna lista 
+deactivate Sis
+Sis --> Tela: Retorna avaliações 
+Tela --> Adm: exibe as avaliações
+
+Adm -> Tela: Informa as avaliações e efetua a exclusão
+Tela -> Sis: excluirAvaliacoes(Avaliacoes)
+activate Sis
+Sis -> BD: DELETE FROM Avaliacao WHERE id IN (...)
+BD --> Sis: Confirma exclusão das linhas
+deactivate Sis
+
+Sis --> Tela: Retorna true
+Tela --> Adm: confirma exclusão das avaliações
+
+@enduml
+```
+
+UC8: Gerenciar Contas de Clientes
+
+```plantuml
+@startuml
+autonumber
+
+actor "Administrador" as Adm
+participant "Interface" as Tela
+participant "Sistema" as Sis
+database "MySql" as BD
+
+Adm -> Tela: Informa identificação
+Tela -> Sis: autenticar(identificacao)
+Sis --> Tela: Administrador autenticado
+Tela --> Adm: Informa opções de ADM
+
+Adm -> Tela: Escolhe excluir contas de clientes
+Tela -> Sis: buscar(Clientes)
+activate Sis
+Sis -> BD: SELECT * FROM Cliente
+BD --> Sis: Retorna lista de clientes
+deactivate Sis
+Sis --> Tela: Retorna contas 
+Tela --> Adm: Informa as contas disponíveis para exclusão
+
+Adm -> Tela: Informa as contas que deseja 
+Tela -> Sis: deletar(Clientes)
+activate Sis
+Sis -> BD: DELETE FROM Cliente WHERE id IN (...)
+BD --> Sis: Confirma exclusão das linhas
+deactivate Sis
+
+Sis --> Tela: Retorna true
+Tela --> Adm: confirma exclusão das contas
+
+@enduml
+```
