@@ -148,6 +148,7 @@ RS02. O ator deve informar suas credenciais e o sistema deve identificar se essa
 ## UC8. Gerenciar Contas
 
 ### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
 
 ### FLUXO PRINCIPAL
 
