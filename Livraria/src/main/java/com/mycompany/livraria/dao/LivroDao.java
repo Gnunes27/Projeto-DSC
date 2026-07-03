@@ -69,7 +69,7 @@ public class LivroDao {
         try (Connection conn = ConnectionFactory.getConnection();
              java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
             
-            stmt.setString(1, codigo);
+            stmt.setString(1, codigo);  
             
             try (java.sql.ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -84,7 +84,7 @@ public class LivroDao {
                 }
             }
         } catch (java.sql.SQLException e) {
-            System.err.println("Erro ao buscar livro por código: " + e.getMessage());
+            throw new  RuntimeException("Erro ao buscar livro por código: " + e.getMessage());
         }
         return null; 
     }

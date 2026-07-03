@@ -4,6 +4,7 @@
  */
 package com.mycompany.livraria.view;
 
+import com.mycompany.livraria.controller.LivroController;
 import com.mycompany.livraria.dao.*;
 import com.mycompany.livraria.model.*;
 import java.util.*;
@@ -15,12 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaAdmView extends javax.swing.JFrame {
 
+    private final LivroController livroController;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAdmView.class.getName());
 
     /**
      * Creates new form TelaAdmView
      */
-    public TelaAdmView() {
+    public TelaAdmView(LivroController livroController) {
+        this.livroController = livroController;
         initComponents();
     }
 
@@ -382,31 +385,39 @@ public class TelaAdmView extends javax.swing.JFrame {
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         String codigoBusca = txtBusca.getText();
-
-        if (codigoBusca.isEmpty()) {
-            mensagem("aviso", "Digite um código para buscar!");
+        Livro livro;
+        
+        //Manda para o controller procurar
+        try{
+            livro = livroController.search(codigoBusca);
+        } catch (IllegalArgumentException e){
+            mensagem("dados incorretos", e.getMessage());
+            return;
+        } catch (RuntimeException e){
+            
+            //Printa o erro se vier do banco de dados ou se vier apenas do controller
+            if(e.getCause() != null)
+                mensagem("erro", e.getCause().getMessage());
+            else
+                  mensagem("erro", e.getMessage());
+            
+            //Reseta o campo de texto e desativa o botão de deletar
+            txtAreaInfo.setText("");
+            buttonDeletar.setEnabled(false);
             return;
         }
-
-        LivroDao dao = new LivroDao();
-        Livro livro = dao.buscar(codigoBusca);
-
-        if (livro != null) {
-            String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
+        
+        //Mostrando as informações 
+        String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
                     + "Título: " + livro.getNome() + "\n"
                     + "Autor: " + livro.getAutor() + "\n"
                     + "Categoria: " + livro.getCategoria() + "\n"
                     + "Preço: R$ " + String.format("%.2f", livro.getPreco()) + "\n\n"
                     + "Este é o livro que deseja excluir?";
 
-            txtAreaInfo.setText(informacoes);
+         txtAreaInfo.setText(informacoes);
 
-            buttonDeletar.setEnabled(true);
-        } else {
-            txtAreaInfo.setText("");
-            buttonDeletar.setEnabled(false);
-            mensagem("erro", "Nenhum livro encontrado com o código: " + codigoBusca);
-        }
+         buttonDeletar.setEnabled(true);
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed
@@ -452,6 +463,9 @@ public class TelaAdmView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        LivroDao livroDao = new LivroDao();
+        LivroController livroController = new LivroController(livroDao);
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -468,9 +482,9 @@ public class TelaAdmView extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaAdmView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaAdmView(livroController).setVisible(true));
     }
 
     /**
