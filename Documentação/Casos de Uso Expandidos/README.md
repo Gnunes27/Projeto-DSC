@@ -3,6 +3,9 @@
 
 ## UC1. Registrar Venda
 
+### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
+
 ### FLUXO PRINCIPAL
 
 - 1\. [IN] Cliente informa sua identificação.
@@ -25,9 +28,10 @@ Avança para o passo 6 do fluxo principal.
 
 ### EXCEÇÕES 
 
-#### Exceção 1a: Cliente não autenticado
-
 ## UC2. Manter Avaliações
+
+### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
 
 ### FLUXO PRINCIPAL
 
@@ -44,6 +48,8 @@ Avança para o passo 6 do fluxo principal.
 
 ## UC3. Consultar Catálogo
 
+### PRÉ-CONDIÇÕES
+
 ### FLUXO PRINCIPAL
 
 - 1\. [IN] Cliente informa as opções para a consulta do catálogo (título, categorias);
@@ -56,6 +62,9 @@ Avança para o passo 6 do fluxo principal.
 ### EXCEÇÕES
 
 ## UC4. Manter Conta
+
+### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
 
 ### FLUXO PRINCIPAL
 
@@ -71,6 +80,9 @@ Avança para o passo 6 do fluxo principal.
 ### EXCEÇÕES
 
 ## UC5. Exibir Relatório
+
+### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
 
 ### FLUXO PRINCIPAL 
 
@@ -91,6 +103,9 @@ Avança para o passo 6 do fluxo principal.
 ### EXCEÇÕES
 
 ## UC6. Gerenciar Catálogo
+
+### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
 
 ### FLUXO PRINCIPAL
 
@@ -114,6 +129,9 @@ Avança para o passo 6 do fluxo principal.
 
 ## UC7. Gerenciar Avaliações
 
+### PRÉ-CONDIÇÕES
+RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
+
 ### FLUXO PRINCIPAL
 
 - 1\. [IN] Administrador informa sua identificação.
@@ -128,6 +146,8 @@ Avança para o passo 6 do fluxo principal.
 ### EXCEÇÕES
 
 ## UC8. Gerenciar Contas
+
+### PRÉ-CONDIÇÕES
 
 ### FLUXO PRINCIPAL
 
