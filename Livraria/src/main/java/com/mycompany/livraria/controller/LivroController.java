@@ -5,7 +5,7 @@
 package com.mycompany.livraria.controller;
 import com.mycompany.livraria.dao.LivroDao;
 import com.mycompany.livraria.model.Livro;
-
+import java.util.List;
 
 /**
  *
@@ -31,7 +31,7 @@ public class LivroController {
            return livro;
            
         } catch (RuntimeException e) {
-            throw new RuntimeException("Não foi possível encontrar o livro!", e);
+            throw new RuntimeException("Erro ao encontrar o livro: " + e.getMessage(), e);
         }
     }
     
@@ -41,13 +41,16 @@ public class LivroController {
             throw new RuntimeException("O preço do livro não pode ser zero ou negativo! ");
         
         //verifica se já não existe um livro com o mesmo código no banco de dados
-        if(livroDao.buscar(livro.getCodigo()) != null)
-            throw new RuntimeException("Esse código já está cadastrado para outro livro! ");
-        
+        try{
+            if(livroDao.buscar(livro.getCodigo()) != null)
+                throw new RuntimeException("Esse código já está cadastrado para outro livro! ");
+        } catch (RuntimeException e){
+            throw new RuntimeException("Erro ao verificar a validade do código: "+e.getMessage(),e);
+        }
         try{
             livroDao.cadastrar(livro);
         } catch (RuntimeException e){
-            throw e;
+            throw new RuntimeException("Erro ao cadastrar livro: " + e.getMessage(), e);
         }
     }
     
@@ -55,7 +58,18 @@ public class LivroController {
         try{
             livroDao.excluir(codigo);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Erro ao excluir o livro: "+e.getMessage());
+            throw new RuntimeException("Erro ao excluir o livro: "+e.getMessage(), e);
+        }
+    }
+    
+    public List<Livro> list(){
+        try{
+            List<Livro> listaLivros =  livroDao.listarTodos();
+            
+            //retorna a lista se não ocorrer erros
+            return listaLivros;
+        } catch (RuntimeException e){
+            throw new RuntimeException("Erro ao listar os livros: " + e.getMessage(), e);
         }
     }
 }

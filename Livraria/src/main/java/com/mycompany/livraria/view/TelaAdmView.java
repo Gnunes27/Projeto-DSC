@@ -303,13 +303,19 @@ public class TelaAdmView extends javax.swing.JFrame {
     private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
 
         mudarTela("cardCatalogo");
-
-        LivroDao dao = new LivroDao();
-        List<Livro> livros = dao.listarTodos();
-
+        List<Livro> livros = new ArrayList<>();
+        //Tenta trazer a lista de livros
+        try{
+            livros = livroController.list();
+        } catch (RuntimeException e) {
+            //Se não der certo, mensagem de erro
+            mensagem("aviso", e.getMessage());
+        }
+        
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
         modelo.setNumRows(0);
-
+        
+        //lista os livros encontrados
         for (Livro l : livros) {
             modelo.addRow(new Object[]{
                 l.getNome(),
@@ -383,20 +389,17 @@ public class TelaAdmView extends javax.swing.JFrame {
         Livro livro;
         
         //verificando se é a pessoa digitou alguma coisa
-        if(codigoBusca.trim().isEmpty())
+        if(codigoBusca.trim().isEmpty()){
             mensagem("aviso", "O campo código não pode estar em branco");
+            return;
+        }
         
         //Manda para o controller procurar
         try{
             livro = livroController.search(codigoBusca);
         } catch (RuntimeException e){
-            
-            //Printa o erro se vier do banco de dados ou se vier apenas do controller
-            if(e.getCause() != null)
-                mensagem("erro", e.getCause().getMessage());
-            else
-                  mensagem("erro", e.getMessage());
-            
+            //exibe a mensagem de erro
+            mensagem("aviso", e.getMessage());
             //Reseta o campo de texto e desativa o botão de deletar
             txtAreaInfo.setText("");
             buttonDeletar.setEnabled(false);

@@ -29,7 +29,7 @@ public class LivroDao {
             stmt.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao cadastrar livro: " + e.getMessage());
+            throw new RuntimeException("Não foi possível adicionar o livro ao banco de dados! ",e);
         }        
     }
    
@@ -54,7 +54,7 @@ public class LivroDao {
             }
 
         } catch (SQLException e) {
-            System.err.println("Erro ao listar livros: " + e.getMessage());
+            throw new RuntimeException("Não foi possível buscar os livros no banco de dados! ", e);
         }
         
         return listaDeLivros; 
@@ -81,7 +81,7 @@ public class LivroDao {
                 }
             }
         } catch (java.sql.SQLException e) {
-            throw new  RuntimeException("Erro ao buscar livro por código: " + e.getMessage());
+            throw new  RuntimeException("Não foi possível buscar livros no banco de dados!  " , e);
         }
         return null; 
     }
@@ -98,7 +98,7 @@ public class LivroDao {
             if(linhasAfetadas == 0)
                  throw new RuntimeException("Livro não encontrado! ");
         } catch (java.sql.SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("Não foi possível excluir o livro no banco de dados! ", e);
         }
     }
 }
