@@ -20,10 +20,6 @@ public class LivroController {
     }
     
     public Livro search(String txtCodigo){
-        //verificando se é a pessoa digitou alguma coisa
-        if(txtCodigo.isEmpty() || txtCodigo.trim().isEmpty())
-            throw new IllegalArgumentException("Digite um código válido!");
-        
         //mandando para o DAO procurar
         try {
            //Buscando o livro 
@@ -36,6 +32,22 @@ public class LivroController {
            
         } catch (RuntimeException e) {
             throw new RuntimeException("Não foi possível encontrar o livro!", e);
+        }
+    }
+    
+    public void register(Livro livro){
+        //verificando validade das informações
+        if(livro.getPreco() <= 0)
+            throw new RuntimeException("O preço do livro não pode ser zero ou negativo! ");
+        
+        //verifica se já não existe um livro com o mesmo código no banco de dados
+        if(livroDao.buscar(livro.getCodigo()) != null)
+            throw new RuntimeException("Esse código já está cadastrado para outro livro! ");
+        
+        try{
+            livroDao.cadastrar(livro);
+        } catch (RuntimeException e){
+            throw e;
         }
     }
 }

@@ -330,49 +330,43 @@ public class TelaAdmView extends javax.swing.JFrame {
         String autor = txtAutor.getText();
         String tempPreco = txtPreco.getText();
         String codigo = txtCodigo.getText();
-
-        if (titulo.isEmpty() || autor.isEmpty() || tempPreco.isEmpty() || codigo.isEmpty()) {
-            mensagem("aviso", "Preencha todos os campos!");
+        String categoria = cBoxCategoria.getSelectedItem().toString();
+        Livro livro = new Livro();
+        
+        //verificando argumentos inválidos
+        if(titulo.trim().isEmpty() || autor.trim().isEmpty() || tempPreco.trim().isEmpty() || codigo.trim().isEmpty() || cBoxCategoria.getSelectedIndex() == 0){
+            mensagem("aviso", "Todos os campos devem ser preenchidos");
             return;
         }
+        
+        //transformando em valores válidos
+        tempPreco = tempPreco.replace(",", ".");
+        double preco = Double.parseDouble(tempPreco);
+        
+        //setando os valores de livro
+        livro.setNome(titulo);
+        livro.setAutor(autor);
+        livro.setCategoria(categoria);
+        livro.setPreco(preco);
+        livro.setCodigo(codigo);
+        
+        try{
+            
+            livroController.register(livro);
+            
+            //Se o livro foi cadastrado com sucesso exibe a mensagem
+            mensagem("sucesso", "Livro adicionado com sucesso!");
 
-        if (cBoxCategoria.getSelectedIndex() == 0) {
-            mensagem("aviso", "Por favor, selecione uma categoria válida!");
-            return;
+            txtTitulo.setText("");
+            txtAutor.setText("");
+            txtPreco.setText("");
+            txtCodigo.setText("");
+            cBoxCategoria.setSelectedIndex(0);
+            txtTitulo.requestFocus();
+            
+        } catch (RuntimeException e){
+            mensagem("aviso", e.getMessage());
         }
-
-        try {
-            tempPreco = tempPreco.replace(",", ".");
-            double preco = Double.parseDouble(tempPreco);
-
-            String categoria = cBoxCategoria.getSelectedItem().toString();
-
-            LivroDao dao = new LivroDao();
-            Livro livro = new Livro();
-            livro.setNome(titulo);
-            livro.setAutor(autor);
-            livro.setCategoria(categoria);
-            livro.setPreco(preco);
-            livro.setCodigo(codigo);
-
-            if (dao.cadastrar(livro)) {
-                mensagem("sucesso", "Livro adicionado com sucesso!");
-
-                txtTitulo.setText("");
-                txtAutor.setText("");
-                txtPreco.setText("");
-                txtCodigo.setText("");
-                cBoxCategoria.setSelectedIndex(0);
-                txtTitulo.requestFocus();
-            } else {
-                mensagem("erro", "Erro ao cadastrar o livro. Verifique o código!");
-            }
-
-        } catch (NumberFormatException e) {
-            mensagem("erro", "Por favor, digite um valor numérico válido para o preço!");
-        }
-
-
     }//GEN-LAST:event_buttonCadastrarLivroActionPerformed
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
@@ -387,12 +381,13 @@ public class TelaAdmView extends javax.swing.JFrame {
         String codigoBusca = txtBusca.getText();
         Livro livro;
         
+        //verificando se é a pessoa digitou alguma coisa
+        if(codigoBusca.trim().isEmpty())
+            mensagem("aviso", "O campo código não pode estar em branco");
+        
         //Manda para o controller procurar
         try{
             livro = livroController.search(codigoBusca);
-        } catch (IllegalArgumentException e){
-            mensagem("dados incorretos", e.getMessage());
-            return;
         } catch (RuntimeException e){
             
             //Printa o erro se vier do banco de dados ou se vier apenas do controller

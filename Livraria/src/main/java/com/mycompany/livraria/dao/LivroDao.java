@@ -14,7 +14,7 @@ import java.util.*;
 
 public class LivroDao {
 
-    public boolean cadastrar(Livro livro) {
+    public void cadastrar(Livro livro) {
         String sql = "INSERT INTO Livro (nome, autor, categoria, preco, codigo) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
@@ -27,15 +27,12 @@ public class LivroDao {
             stmt.setString(5, livro.getCodigo());
 
             stmt.execute();
-            return true; 
 
         } catch (SQLException e) {
-            System.err.println("Erro ao cadastrar livro: " + e.getMessage());
-            return false; 
-        }
+            throw new RuntimeException("Erro ao cadastrar livro: " + e.getMessage());
+        }        
     }
-
-    
+   
     public List<Livro> listarTodos() {
         String sql = "SELECT nome, autor, categoria, preco, codigo FROM Livro";
         List<Livro> listaDeLivros = new ArrayList<>();
