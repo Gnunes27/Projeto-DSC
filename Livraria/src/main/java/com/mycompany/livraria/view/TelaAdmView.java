@@ -21,6 +21,7 @@ public class TelaAdmView extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaAdmView
+     * @param livroController a controladora de livros
      */
     public TelaAdmView(LivroController livroController) {
         this.livroController = livroController;
@@ -426,24 +427,24 @@ public class TelaAdmView extends javax.swing.JFrame {
                 javax.swing.JOptionPane.YES_NO_OPTION,
                 javax.swing.JOptionPane.WARNING_MESSAGE
         );
-
-        if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
-
-            LivroDao dao = new LivroDao();
-
-            if (dao.excluir(codigo)) {
+        
+        //Se a pessoa confirmar a exclusão ele tenta deletar
+        if(confirmacao == javax.swing.JOptionPane.YES_OPTION){
+            try{
+                livroController.delete(codigo);
+              
+              //Se der tudo acerto envia mesagem de confirmação
                 mensagem("sucesso", "O livro foi excluído com sucesso!");
 
                 txtBusca.setText("");
                 txtAreaInfo.setText("");
                 buttonDeletar.setEnabled(false);
                 txtBusca.requestFocus();
-
-            } else {
-                mensagem("erro", "Erro ao tentar excluir o livro. Tente novamente.");
+            } catch (RuntimeException e){
+                //Se der algum erro envia a mensagem de erro
+                mensagem("aviso", e.getMessage());
             }
         }
-
     }//GEN-LAST:event_buttonDeletarActionPerformed
 
     private void mudarTela(String nomeDoCard) {

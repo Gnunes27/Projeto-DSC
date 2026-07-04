@@ -50,4 +50,12 @@ public class LivroController {
             throw e;
         }
     }
+    
+    public void delete(String codigo){
+        try{
+            livroDao.excluir(codigo);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Erro ao excluir o livro: "+e.getMessage());
+        }
+    }
 }

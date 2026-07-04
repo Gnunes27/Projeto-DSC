@@ -86,7 +86,7 @@ public class LivroDao {
         return null; 
     }
     
-    public boolean excluir(String codigo) {
+    public void excluir(String codigo) {
         String sql = "DELETE FROM Livro WHERE codigo = ?";
         
         try (java.sql.Connection conn = ConnectionFactory.getConnection();
@@ -95,11 +95,10 @@ public class LivroDao {
             stmt.setString(1, codigo);
             int linhasAfetadas = stmt.executeUpdate();
             
-            return linhasAfetadas > 0; 
-            
+            if(linhasAfetadas == 0)
+                 throw new RuntimeException("Livro não encontrado! ");
         } catch (java.sql.SQLException e) {
-            System.err.println("Erro ao excluir livro: " + e.getMessage());
-            return false;
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
