@@ -3,34 +3,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.livraria.view;
+
 import com.mycompany.livraria.dao.PessoaDao;
 import com.mycompany.livraria.model.Pessoa;
+import com.mycompany.livraria.conexao.*;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Gnunes
  */
-  
+public class TelaInicialView extends javax.swing.JFrame {
 
-    public class TelaInicialView extends javax.swing.JFrame {
+    /**
+     * Creates new form TelaInicialView
+     */
+    public TelaInicialView() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        cardAddFileira(panelLivros1, "Tecnologia", 10);
 
-        /**
-         * Creates new form TelaInicialView
-         */
-        public TelaInicialView() {
-            initComponents();
-            this.setLocationRelativeTo(null);
+    }
 
-        }
-
-        public TelaInicialView(Pessoa usuario) {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            // Aqui você pode usar o objeto 'usuario' para personalizar a tela, mostrar o nome, etc.
-        }
-
-    
+    public TelaInicialView(Pessoa usuario) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        // Aqui você pode usar o objeto 'usuario' para personalizar a tela, mostrar o nome, etc.
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,19 +43,26 @@ import javax.swing.JOptionPane;
     private void initComponents() {
 
         painel1Banner = new javax.swing.JPanel();
+        buttonCarrinho = new javax.swing.JButton();
+        buttonLogar = new javax.swing.JButton();
+        buttonPesquisar = new javax.swing.JButton();
         txtBarraPesquisa = new javax.swing.JTextField();
         labelBanner = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        panelConteudoTotal = new javax.swing.JPanel();
-        panelCategoriasPrincipais = new javax.swing.JPanel();
         panelOpcoes = new javax.swing.JPanel();
-        labelPanelOpcoes = new javax.swing.JLabel();
-        panelTop5 = new javax.swing.JPanel();
-        labelTop5MaisVendidos = new javax.swing.JLabel();
-        panelFileira1 = new javax.swing.JPanel();
+        buttonCatalogo = new javax.swing.JButton();
+        cBoxCategorias = new javax.swing.JComboBox<>();
+        buttonOfertas = new javax.swing.JButton();
+        panelLogoNovidades = new javax.swing.JPanel();
+        labelBot = new javax.swing.JLabel();
+        panelLogoTop10 = new javax.swing.JPanel();
+        labelTop = new javax.swing.JLabel();
+        scrollTop = new javax.swing.JScrollPane();
+        panelLivros1 = new javax.swing.JPanel();
+        scrollBot = new javax.swing.JScrollPane();
+        panelLivros2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("frameInicial"); // NOI18N
         setResizable(false);
@@ -62,6 +70,33 @@ import javax.swing.JOptionPane;
 
         painel1Banner.setBackground(new java.awt.Color(204, 204, 255));
         painel1Banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonCarrinho.setBorderPainted(false);
+        buttonCarrinho.setContentAreaFilled(false);
+        buttonCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCarrinhoActionPerformed(evt);
+            }
+        });
+        painel1Banner.add(buttonCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 50, 40));
+
+        buttonLogar.setBorderPainted(false);
+        buttonLogar.setContentAreaFilled(false);
+        buttonLogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLogarActionPerformed(evt);
+            }
+        });
+        painel1Banner.add(buttonLogar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 50, 40));
+
+        buttonPesquisar.setBorderPainted(false);
+        buttonPesquisar.setContentAreaFilled(false);
+        buttonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisarActionPerformed(evt);
+            }
+        });
+        painel1Banner.add(buttonPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 20, 20));
 
         txtBarraPesquisa.setBorder(null);
         painel1Banner.add(txtBarraPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 140, 20));
@@ -71,118 +106,375 @@ import javax.swing.JOptionPane;
 
         getContentPane().add(painel1Banner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
 
-        panelConteudoTotal.setLayout(new javax.swing.BoxLayout(panelConteudoTotal, javax.swing.BoxLayout.Y_AXIS));
+        panelOpcoes.setBackground(new java.awt.Color(51, 51, 51));
+        panelOpcoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelCategoriasPrincipais.setLayout(new javax.swing.BoxLayout(panelCategoriasPrincipais, javax.swing.BoxLayout.Y_AXIS));
+        buttonCatalogo.setBackground(new java.awt.Color(204, 204, 204));
+        buttonCatalogo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonCatalogo.setText("Catalogo");
+        buttonCatalogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonCatalogo.setOpaque(true);
+        buttonCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCatalogoActionPerformed(evt);
+            }
+        });
+        panelOpcoes.add(buttonCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
-        labelPanelOpcoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PainelTopo.png"))); // NOI18N
-        panelOpcoes.add(labelPanelOpcoes);
+        cBoxCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "⭐ Destaques", "Ficção Científica", "Romance", "Suspense", "Fantasia", "Terror", "Biografia", "Autoajuda", "História" }));
+        cBoxCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBoxCategoriasActionPerformed(evt);
+            }
+        });
+        panelOpcoes.add(cBoxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
 
-        panelCategoriasPrincipais.add(panelOpcoes);
+        buttonOfertas.setBackground(new java.awt.Color(204, 204, 204));
+        buttonOfertas.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonOfertas.setText("Ofertas");
+        buttonOfertas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonOfertas.setOpaque(true);
+        buttonOfertas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOfertasActionPerformed(evt);
+            }
+        });
+        panelOpcoes.add(buttonOfertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, -1, 20));
 
-        labelTop5MaisVendidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Top5MaisVendidos.png"))); // NOI18N
-        panelTop5.add(labelTop5MaisVendidos);
+        getContentPane().add(panelOpcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 30));
 
-        panelCategoriasPrincipais.add(panelTop5);
+        panelLogoNovidades.setBackground(new java.awt.Color(0, 102, 153));
+        panelLogoNovidades.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelFileira1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 25, 5));
-        panelCategoriasPrincipais.add(panelFileira1);
+        labelBot.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        labelBot.setForeground(new java.awt.Color(255, 255, 255));
+        labelBot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelBot.setText("NOVIDADES");
+        panelLogoNovidades.add(labelBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
-        panelConteudoTotal.add(panelCategoriasPrincipais);
+        getContentPane().add(panelLogoNovidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 800, 30));
 
-        jScrollPane1.setViewportView(panelConteudoTotal);
+        panelLogoTop10.setBackground(new java.awt.Color(0, 102, 153));
+        panelLogoTop10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 500));
+        labelTop.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        labelTop.setForeground(new java.awt.Color(255, 255, 255));
+        labelTop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTop.setText("TOP 10 LIVROS MAIS VENDIDOS");
+        panelLogoTop10.add(labelTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+
+        getContentPane().add(panelLogoTop10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 800, 30));
+
+        scrollTop.setToolTipText("");
+
+        panelLivros1.setBackground(new java.awt.Color(118, 158, 203));
+        panelLivros1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+        scrollTop.setViewportView(panelLivros1);
+
+        getContentPane().add(scrollTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 800, 200));
+
+        scrollBot.setToolTipText("");
+
+        panelLivros2.setBackground(new java.awt.Color(118, 158, 203));
+        panelLivros2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+        scrollBot.setViewportView(panelLivros2);
+
+        getContentPane().add(scrollBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 200));
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 800, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        
+
+    private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCatalogoActionPerformed
+
+    private void buttonOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOfertasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOfertasActionPerformed
+
+    private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCarrinhoActionPerformed
+
+    private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonLogarActionPerformed
+
+    private void buttonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarActionPerformed
+        String titulo = txtBarraPesquisa.getText();
+
+        if (!titulo.equals("")) {
+            labelTop.setText("Resultados da Pesquisa");
+            labelBot.setText("Sugestões com a mesma categoria");
+            searchBooks(panelLivros1, panelLivros2, titulo, 20);
+        }
+
+    }//GEN-LAST:event_buttonPesquisarActionPerformed
+
+    private void cBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxCategoriasActionPerformed
+        String categoriaSelecionada = cBoxCategorias.getSelectedItem().toString();
+
+        if (categoriaSelecionada.equals("⭐ Destaques") || categoriaSelecionada.equals("Selecione uma Categoria...")) {
+            restartTelaInicial();
+        } else {
+            if (labelTop != null) {
+                labelTop.setText("CATEGORIA: " + categoriaSelecionada.toUpperCase());
+            }
+/*
+            if (panelLogoNovidades != null) {
+                panelLogoNovidades.setVisible(false);
+            }
+            if (labelBot != null) {
+                labelBot.setVisible(false);
+            }
+            if (scrollBot != null) {
+                scrollBot.setVisible(false);
+            }
+*/
+            
+            if (scrollTop != null) {
+                scrollTop.setBounds(scrollTop.getX(), scrollTop.getY(), scrollTop.getWidth(), 520);
+            }
+
+            // 6. Transforma o painel interno em GRADE VERTICAL (0 linhas = cresce para baixo, 5 livros por coluna)
+            if (panelLivros1 != null) {
+                panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+            }
+
+            // 7. Altera o scrollTop para rolar apenas na VERTICAL
+            if (scrollTop != null) {
+                scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            }
+
+            // 8. Busca todos os livros da categoria no painel 1 (passando null no painel 2)
+            searchBooks(panelLivros1, null, categoriaSelecionada, 100);
+
+            // 9. Força a janela a recalcular o design na mesma hora
+            this.revalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_cBoxCategoriasActionPerformed
+
+    public void restartTelaInicial() {
+        // 1. Limpa o texto da barra de pesquisa, se houver
+        if (txtBarraPesquisa != null) {
+            txtBarraPesquisa.setText("");
+        }
+
+        // 2. Redefine o JComboBox para a primeira opção sem travar em loop
+        if (cBoxCategorias != null && cBoxCategorias.getSelectedIndex() != 0) {
+            cBoxCategorias.setSelectedIndex(0);
+        }
+
+        // 3. Restaura o texto original do título superior
+        if (labelTop != null) {
+            labelTop.setText("TOP 10 LIVROS MAIS VENDIDOS");
+        }
+
+        // 4. Traz de volta a faixa azul, o texto "NOVIDADES" e o scroll inferior
+        if (panelLogoNovidades != null) {
+            panelLogoNovidades.setVisible(true);
+        }
+        if (labelBot != null) {
+            labelBot.setVisible(true);
+            labelBot.setText("NOVIDADES");
+        }
+        if (scrollBot != null) {
+            scrollBot.setVisible(true);
+        }
+
+        // 5. Devolve a altura original mais baixa para o scroll superior (ex: 220 pixels)
+        if (scrollTop != null) {
+            scrollTop.setBounds(scrollTop.getX(), scrollTop.getY(), scrollTop.getWidth(), 220);
+        }
+
+        // 6. Devolve o layout HORIZONTAL (FlowLayout) original ao painel de cima
+        if (panelLivros1 != null) {
+            panelLivros1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 10));
+        }
+
+        // 7. Configura o scrollTop de volta para rolar apenas na HORIZONTAL
+        if (scrollTop != null) {
+            scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        }
+
+        // 8. Recarrega os livros iniciais na vitrine
+        searchBooks(panelLivros1, null, "", 10);
+
+        // 9. Atualiza e redesenha a tela
+        this.revalidate();
+        this.repaint();
+    }
+
     // Metodo para criação de cards de livro
-    private javax.swing.JPanel criarCardLivroDinamico(String titulo, double preco) {
-        // 1. Instancia o painel do Card
+    private javax.swing.JPanel cardLivro(String titulo, double preco) {
+
         javax.swing.JPanel card = new javax.swing.JPanel();
         card.setLayout(new javax.swing.BoxLayout(card, javax.swing.BoxLayout.Y_AXIS));
-        card.setBackground(java.awt.Color.WHITE);
-        card.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        card.setOpaque(false);
+        card.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 4, 4, 5));
 
-        // 2. Cria a Capa (JLabel) com o tamanho fixo padrão
+        // Criação da Label da Capa
         javax.swing.JLabel lblCapa = new javax.swing.JLabel();
-        lblCapa.setPreferredSize(new java.awt.Dimension(120, 180));
-        lblCapa.setMaximumSize(new java.awt.Dimension(120, 180));
-        lblCapa.setMinimumSize(new java.awt.Dimension(120, 180));
+
+        lblCapa.setPreferredSize(new java.awt.Dimension(80, 120));
+        lblCapa.setMaximumSize(new java.awt.Dimension(80, 120));
+        lblCapa.setMinimumSize(new java.awt.Dimension(80, 120));
         lblCapa.setAlignmentX(0.5F);
 
         lblCapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capaLivro.png")));
 
-        // Aplica o truque de escrever o título centralizado dentro da capa padrão
-        lblCapa.setText("<html><body style='width: 90px; text-align: center; margin: 0 auto;'>" 
-             + "<span style='color: #FFFFFF; font-family: Arial; font-size: 13px; font-weight: bold;"
-             + "text-shadow: 1px 1px 3px rgba(0,0,0,0.8);'>" 
-             + titulo 
-             + "</span>" 
-             + "</body></html>");
+        lblCapa.setText("<html><body style='width: 65px; text-align: center; margin: 0 auto;'>"
+                + "<span style='color: #000000; font-family: Arial; font-size: 9px; font-weight: bold;"
+                + "text-shadow: 1px 1px 3px rgba(0,0,0,0.8);'>"
+                + titulo
+                + "</span>"
+                + "</body></html>");
+
         lblCapa.setHorizontalTextPosition(javax.swing.JLabel.CENTER);
         lblCapa.setVerticalTextPosition(javax.swing.JLabel.CENTER);
         lblCapa.setAlignmentX(0.5F);
 
-        // 3. Cria a Label do Preço embaixo
+        // Cria a Label do Preço embaixo
         javax.swing.JLabel lblPreco = new javax.swing.JLabel("R$ " + String.format("%.2f", preco));
-        lblPreco.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
+        lblPreco.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 10));
         lblPreco.setAlignmentX(0.5F);
         lblPreco.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 5, 0));
 
-        // 4. Cria o Botão do Carrinho
+        // Cria o Botão do Carrinho
         javax.swing.JButton btnCarrinho = new javax.swing.JButton("+ Carrinho");
+        java.awt.Dimension tamanhoBotao = new java.awt.Dimension(90, 15);
+        btnCarrinho.setPreferredSize(tamanhoBotao);
+        btnCarrinho.setMaximumSize(tamanhoBotao);
+        btnCarrinho.setMinimumSize(tamanhoBotao);
         btnCarrinho.setAlignmentX(0.5F);
 
-        // Configura o evento do botão do carrinho (Exemplo rápido)
+        // Evento do botão do carrinho 
         btnCarrinho.addActionListener(e -> {
             System.out.println("Livro adicionado: " + titulo);
-            // Aqui futuramente vai a lógica de injetar no carrinho da equipe de vocês
+            // Aqui futuramente vai a lógica de injetar no carrinho 
         });
 
-        // 5. Junta todo mundo dentro do painel do Card
+        // Junta os componentes dentro do painel do Card
         card.add(lblCapa);
         card.add(lblPreco);
-        card.add(card.add(btnCarrinho));
+        card.add(btnCarrinho); // Correção aplicada aqui (sem o add duplicado)
 
         return card;
+
     }
 
-    /*public void popularFileiraNoBanco(javax.swing.JPanel painelFileira, String categoria, int limite) {
-        // Limpa a fileira para não duplicar os livros caso o método seja chamado duas vezes
+    // Função para criar os banners de categoria
+    public void cardAddFileira(javax.swing.JPanel painelFileira, String categoria, int limite) {
+
         painelFileira.removeAll();
 
-        // Query dinâmica usando interrogações (?) para evitar SQL Injection
-        String sql = "SELECT titulo, preco FROM livros WHERE categoria = ? LIMIT ?";
+        String sql = "SELECT nome, preco FROM Livro WHERE categoria = ? LIMIT ?";
 
-        try (java.sql.Connection conn = ConexaoBanco.getConexao(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Define os parâmetros da busca com base no que foi passado no método
             stmt.setString(1, categoria);
             stmt.setInt(2, limite);
 
             try (java.sql.ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    String titulo = rs.getString("titulo");
+                    String titulo = rs.getString("nome");
                     double preco = rs.getDouble("preco");
 
-                    // Fabrica o card completo usando nossa função anterior
-                    javax.swing.JPanel novoCard = criarCardLivroDinamico(titulo, preco);
+                    javax.swing.JPanel novoCard = cardLivro(titulo, preco);
 
-                    // Adiciona o card criado direto dentro da fileira do NetBeans!
                     painelFileira.add(novoCard);
                 }
             }
 
-            // COMANDO CRÍTICO: Avisa o Swing para redesenhar a tela com os novos componentes
             painelFileira.revalidate();
             painelFileira.repaint();
 
         } catch (java.sql.SQLException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar fileira: " + e.getMessage());
         }
-    }*/
+    }
+
+    // Função para procurar no bando de dados os livros procurados pelo usuario
+    public void searchBooks(javax.swing.JPanel painel, javax.swing.JPanel painel2, String txt, int qtde) {
+
+        painel.removeAll();
+
+        String sql = "SELECT * FROM Livro WHERE nome LIKE ? OR categoria LIKE ? OR autor LIKE ? LIMIT ?";
+        String categoria = null;
+        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + txt + "%");
+            stmt.setString(2, "%" + txt + "%");
+            stmt.setString(3, "%" + txt + "%");
+            stmt.setInt(4, qtde);
+
+            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+                // Se houverem menos registros que o limiteMaximo, o rs.next() fica falso antes e o Java para sozinho!
+                while (rs.next()) {
+                    String titulo = rs.getString("nome");
+                    double preco = rs.getDouble("preco");
+
+                    if (categoria == null) {
+                        categoria = rs.getString("categoria");
+                    }
+
+                    javax.swing.JPanel novoCard = cardLivro(titulo, preco);
+
+                    painel.add(novoCard);
+                }
+            }
+
+            //Atualiza o layout do painel na tela
+            painel.revalidate();
+            painel.repaint();
+
+        } catch (java.sql.SQLException e) {
+            System.out.println("Aviso de banco de dados: " + e.getMessage());
+        }
+
+        if (painel2 != null && categoria != null) {
+            searchSugestedBooks(painel2, categoria, txt, 5);
+        }
+
+    }
+
+    // Função auxuliar 
+    public void searchSugestedBooks(javax.swing.JPanel painel, String categoria, String txt, int limite) {
+
+        painel.removeAll();
+
+        String sql = "SELECT nome, preco FROM Livro WHERE categoria = ? AND nome NOT LIKE ? LIMIT ?";
+
+        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categoria);
+            stmt.setString(2, "%" + txt + "%");
+            stmt.setInt(3, limite);
+
+            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String titulo = rs.getString("nome");
+                    double preco = rs.getDouble("preco");
+
+                    javax.swing.JPanel novoCard = cardLivro(titulo, preco);
+                    painel.add(novoCard);
+                }
+            }
+
+            painel.revalidate();
+            painel.repaint();
+
+        } catch (java.sql.SQLException e) {
+            System.out.println("Aviso de banco de dados: " + e.getMessage());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -220,17 +512,29 @@ import javax.swing.JOptionPane;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton buttonCarrinho;
+    private javax.swing.JButton buttonCatalogo;
+    private javax.swing.JButton buttonLogar;
+    private javax.swing.JButton buttonOfertas;
+    private javax.swing.JButton buttonPesquisar;
+    private javax.swing.JComboBox<String> cBoxCategorias;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelBanner;
-    private javax.swing.JLabel labelPanelOpcoes;
-    private javax.swing.JLabel labelTop5MaisVendidos;
+    private javax.swing.JLabel labelBot;
+    private javax.swing.JLabel labelTop;
     private javax.swing.JPanel painel1Banner;
-    private javax.swing.JPanel panelCategoriasPrincipais;
-    private javax.swing.JPanel panelConteudoTotal;
-    private javax.swing.JPanel panelFileira1;
+    private javax.swing.JPanel panelLivros1;
+    private javax.swing.JPanel panelLivros2;
+    private javax.swing.JPanel panelLogoNovidades;
+    private javax.swing.JPanel panelLogoTop10;
     private javax.swing.JPanel panelOpcoes;
-    private javax.swing.JPanel panelTop5;
+    private javax.swing.JScrollPane scrollBot;
+    private javax.swing.JScrollPane scrollTop;
     private javax.swing.JTextField txtBarraPesquisa;
     // End of variables declaration//GEN-END:variables
+
+    private void searchBarraPequisa(JPanel panelTop10, String titulo, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
