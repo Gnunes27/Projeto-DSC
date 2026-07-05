@@ -52,15 +52,18 @@ public class TelaInicialView extends javax.swing.JFrame {
         buttonCatalogo = new javax.swing.JButton();
         cBoxCategorias = new javax.swing.JComboBox<>();
         buttonOfertas = new javax.swing.JButton();
-        panelLogoNovidades = new javax.swing.JPanel();
-        labelBot = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        panelConteudo = new javax.swing.JPanel();
+        jPanelSuperior = new javax.swing.JPanel();
         panelLogoTop10 = new javax.swing.JPanel();
         labelTop = new javax.swing.JLabel();
         scrollTop = new javax.swing.JScrollPane();
         panelLivros1 = new javax.swing.JPanel();
+        jPanelInferior = new javax.swing.JPanel();
+        panelLogoNovidades = new javax.swing.JPanel();
+        labelBot = new javax.swing.JLabel();
         scrollBot = new javax.swing.JScrollPane();
         panelLivros2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -143,16 +146,12 @@ public class TelaInicialView extends javax.swing.JFrame {
 
         getContentPane().add(panelOpcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 30));
 
-        panelLogoNovidades.setBackground(new java.awt.Color(0, 102, 153));
-        panelLogoNovidades.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 800, 10));
 
-        labelBot.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
-        labelBot.setForeground(new java.awt.Color(255, 255, 255));
-        labelBot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelBot.setText("NOVIDADES");
-        panelLogoNovidades.add(labelBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+        panelConteudo.setLayout(new java.awt.BorderLayout());
 
-        getContentPane().add(panelLogoNovidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 800, 30));
+        jPanelSuperior.setLayout(new java.awt.BorderLayout());
 
         panelLogoTop10.setBackground(new java.awt.Color(0, 102, 153));
         panelLogoTop10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -163,26 +162,44 @@ public class TelaInicialView extends javax.swing.JFrame {
         labelTop.setText("TOP 10 LIVROS MAIS VENDIDOS");
         panelLogoTop10.add(labelTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
-        getContentPane().add(panelLogoTop10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 800, 30));
+        jPanelSuperior.add(panelLogoTop10, java.awt.BorderLayout.NORTH);
 
         scrollTop.setToolTipText("");
+        scrollTop.setPreferredSize(new java.awt.Dimension(46, 231));
 
         panelLivros1.setBackground(new java.awt.Color(118, 158, 203));
         panelLivros1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
         scrollTop.setViewportView(panelLivros1);
 
-        getContentPane().add(scrollTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 800, 200));
+        jPanelSuperior.add(scrollTop, java.awt.BorderLayout.CENTER);
+
+        panelConteudo.add(jPanelSuperior, java.awt.BorderLayout.CENTER);
+
+        jPanelInferior.setLayout(new java.awt.BorderLayout());
+
+        panelLogoNovidades.setBackground(new java.awt.Color(0, 102, 153));
+        panelLogoNovidades.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelBot.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        labelBot.setForeground(new java.awt.Color(255, 255, 255));
+        labelBot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelBot.setText("NOVIDADES");
+        panelLogoNovidades.add(labelBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+
+        jPanelInferior.add(panelLogoNovidades, java.awt.BorderLayout.NORTH);
 
         scrollBot.setToolTipText("");
+        scrollBot.setPreferredSize(new java.awt.Dimension(50, 200));
 
         panelLivros2.setBackground(new java.awt.Color(118, 158, 203));
         panelLivros2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
         scrollBot.setViewportView(panelLivros2);
 
-        getContentPane().add(scrollBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 200));
+        jPanelInferior.add(scrollBot, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 800, 10));
+        panelConteudo.add(jPanelInferior, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(panelConteudo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 800, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -217,39 +234,22 @@ public class TelaInicialView extends javax.swing.JFrame {
     private void cBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxCategoriasActionPerformed
         String categoriaSelecionada = cBoxCategorias.getSelectedItem().toString();
 
-        if (categoriaSelecionada.equals("⭐ Destaques") || categoriaSelecionada.equals("Selecione uma Categoria...")) {
+        if (categoriaSelecionada.equals("⭐ Destaques")) {
             restartTelaInicial();
         } else {
-            if (labelTop != null) {
-                labelTop.setText("CATEGORIA: " + categoriaSelecionada.toUpperCase());
-            }
-/*
-            if (panelLogoNovidades != null) {
-                panelLogoNovidades.setVisible(false);
-            }
-            if (labelBot != null) {
-                labelBot.setVisible(false);
-            }
-            if (scrollBot != null) {
-                scrollBot.setVisible(false);
-            }
-*/
+            labelTop.setText("CATEGORIA: " + categoriaSelecionada.toUpperCase());
             
-            if (scrollTop != null) {
-                scrollTop.setBounds(scrollTop.getX(), scrollTop.getY(), scrollTop.getWidth(), 520);
-            }
-
-            // 6. Transforma o painel interno em GRADE VERTICAL (0 linhas = cresce para baixo, 5 livros por coluna)
-            if (panelLivros1 != null) {
-                panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
-            }
-
-            // 7. Altera o scrollTop para rolar apenas na VERTICAL
-            if (scrollTop != null) {
-                scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            }
-
+             //Esconde a tela de novidades
+             panelLogoNovidades.setVisible(false);
+             scrollBot.setVisible(false);
+            
+             // Altera o scrollTop para rolar na VERTICAL quando necessário
+            scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+            
+             //Transforma o painel interno em GRADE VERTICAL
+            panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+             
             // 8. Busca todos os livros da categoria no painel 1 (passando null no painel 2)
             searchBooks(panelLivros1, null, categoriaSelecionada, 100);
 
@@ -264,12 +264,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         if (txtBarraPesquisa != null) {
             txtBarraPesquisa.setText("");
         }
-
-        // 2. Redefine o JComboBox para a primeira opção sem travar em loop
-        if (cBoxCategorias != null && cBoxCategorias.getSelectedIndex() != 0) {
-            cBoxCategorias.setSelectedIndex(0);
-        }
-
+        
         // 3. Restaura o texto original do título superior
         if (labelTop != null) {
             labelTop.setText("TOP 10 LIVROS MAIS VENDIDOS");
@@ -519,10 +514,13 @@ public class TelaInicialView extends javax.swing.JFrame {
     private javax.swing.JButton buttonPesquisar;
     private javax.swing.JComboBox<String> cBoxCategorias;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelInferior;
+    private javax.swing.JPanel jPanelSuperior;
     private javax.swing.JLabel labelBanner;
     private javax.swing.JLabel labelBot;
     private javax.swing.JLabel labelTop;
     private javax.swing.JPanel painel1Banner;
+    private javax.swing.JPanel panelConteudo;
     private javax.swing.JPanel panelLivros1;
     private javax.swing.JPanel panelLivros2;
     private javax.swing.JPanel panelLogoNovidades;
