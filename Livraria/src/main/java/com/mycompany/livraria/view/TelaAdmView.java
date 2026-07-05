@@ -14,11 +14,13 @@ import java.util.*;
  * @author Gnunes
  */
 public class TelaAdmView extends javax.swing.JFrame {
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAdmView.class.getName());
-    
+
     //instanciando controladores
-     private final PessoaController pessoaController = new PessoaController();
-     private final LivroController livroController = new LivroController();
+    private final PessoaController pessoaController = new PessoaController();
+    private final LivroController livroController = new LivroController();
+
     /**
      * Creates new form TelaAdmView
      *
@@ -281,7 +283,7 @@ public class TelaAdmView extends javax.swing.JFrame {
 
     private void buttonListaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaClienteActionPerformed
         mudarTela("cardListaClientes");
-        
+
         //Chama o controller para listar os clientes
         List<Pessoa> pessoas;
         try {
@@ -311,28 +313,31 @@ public class TelaAdmView extends javax.swing.JFrame {
     private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
 
         mudarTela("cardCatalogo");
-        List<Livro> livros = new ArrayList<>();
-    
+        List<Livro> livros;
+
         //Tenta trazer a lista de livros
         try {
             livros = livroController.list();
+
+            //Limpa as linhas do modelo
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
+            modelo.setNumRows(0);
+
+            //lista os livros encontrados
+            for (Livro l : livros) {
+                modelo.addRow(new Object[]{
+                    l.getNome(),
+                    l.getAutor(),
+                    l.getCategoria(),
+                    "R$ " + String.format("%.2f", l.getPreco()),
+                    l.getCodigo()
+                });
+            }
         } catch (RuntimeException e) {
             //Se não der certo, mensagem de erro
             mensagem("aviso", e.getMessage());
-        }
-
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
-        modelo.setNumRows(0);
-
-        //lista os livros encontrados
-        for (Livro l : livros) {
-            modelo.addRow(new Object[]{
-                l.getNome(),
-                l.getAutor(),
-                l.getCategoria(),
-                "R$ " + String.format("%.2f", l.getPreco()),
-                l.getCodigo()
-            });
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
+            modelo.setNumRows(0);
         }
     }//GEN-LAST:event_buttonCatalogoActionPerformed
 
@@ -406,26 +411,26 @@ public class TelaAdmView extends javax.swing.JFrame {
         //Manda para o controller procurar
         try {
             livro = livroController.search(codigoBusca);
+
+            //Mostrando as informações 
+            String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
+                    + "Título: " + livro.getNome() + "\n"
+                    + "Autor: " + livro.getAutor() + "\n"
+                    + "Categoria: " + livro.getCategoria() + "\n"
+                    + "Preço: R$ " + String.format("%.2f", livro.getPreco()) + "\n\n"
+                    + "Este é o livro que deseja excluir?";
+
+            txtAreaInfo.setText(informacoes);
+
+            buttonDeletar.setEnabled(true);
         } catch (RuntimeException e) {
             //exibe a mensagem de erro
             mensagem("aviso", e.getMessage());
+
             //Reseta o campo de texto e desativa o botão de deletar
             txtAreaInfo.setText("");
             buttonDeletar.setEnabled(false);
-            return;
         }
-
-        //Mostrando as informações 
-        String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
-                + "Título: " + livro.getNome() + "\n"
-                + "Autor: " + livro.getAutor() + "\n"
-                + "Categoria: " + livro.getCategoria() + "\n"
-                + "Preço: R$ " + String.format("%.2f", livro.getPreco()) + "\n\n"
-                + "Este é o livro que deseja excluir?";
-
-        txtAreaInfo.setText(informacoes);
-
-        buttonDeletar.setEnabled(true);
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed

@@ -21,6 +21,7 @@ public class LivroController {
            //Buscando o livro 
            Livro livro =  livroDao.buscar(txtCodigo);
            
+           
            if (livro == null)
                throw new RuntimeException("Não foi encontrado livro com esse código");
            
@@ -43,6 +44,8 @@ public class LivroController {
         } catch (RuntimeException e){
             throw new RuntimeException("Erro ao verificar a validade do código: "+e.getMessage(),e);
         }
+        
+        //Cadastra o livro
         try{
             livroDao.cadastrar(livro);
         } catch (RuntimeException e){
@@ -59,11 +62,14 @@ public class LivroController {
     }
     
     public List<Livro> list(){
+        
+        //Tenta listar os livros usando o livroDao
         try{
             List<Livro> listaLivros =  livroDao.listarTodos();
             
             //retorna a lista se não ocorrer erros
             return listaLivros;
+            
         } catch (RuntimeException e){
             throw new RuntimeException("Erro ao listar os livros: " + e.getMessage(), e);
         }
