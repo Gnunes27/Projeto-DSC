@@ -85,7 +85,7 @@ public class PessoaDao {
             }
 
         } catch (SQLException e) {
-            System.err.println("Erro ao listar Usuarios: " + e.getMessage());
+            throw new RuntimeException("Não foi possível buscar os clientes no banco de dados! ", e);
         }
         
         return list; 

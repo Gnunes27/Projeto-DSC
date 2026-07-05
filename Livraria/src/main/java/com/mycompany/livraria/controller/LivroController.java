@@ -13,14 +13,10 @@ import java.util.List;
  */
 public class LivroController {
     
-    private final LivroDao livroDao; 
-    
-    public LivroController(LivroDao livroDao){
-        this.livroDao = livroDao;
-    }
+    //Instanciando DAO de livro
+    private final LivroDao livroDao = new LivroDao();
     
     public Livro search(String txtCodigo){
-        //mandando para o DAO procurar
         try {
            //Buscando o livro 
            Livro livro =  livroDao.buscar(txtCodigo);
