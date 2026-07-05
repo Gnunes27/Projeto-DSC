@@ -5,10 +5,9 @@
 package com.mycompany.livraria.view;
 
 import com.mycompany.livraria.controller.LivroController;
-import com.mycompany.livraria.dao.*;
+import com.mycompany.livraria.controller.PessoaController;
 import com.mycompany.livraria.model.*;
 import java.util.*;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,14 +15,17 @@ import javax.swing.JOptionPane;
  */
 public class TelaAdmView extends javax.swing.JFrame {
 
-    private final LivroController livroController;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAdmView.class.getName());
+
+    //instanciando controladores
+    private final PessoaController pessoaController = new PessoaController();
+    private final LivroController livroController = new LivroController();
 
     /**
      * Creates new form TelaAdmView
+     *
      */
-    public TelaAdmView(LivroController livroController) {
-        this.livroController = livroController;
+    public TelaAdmView() {
         initComponents();
     }
 
@@ -282,41 +284,60 @@ public class TelaAdmView extends javax.swing.JFrame {
     private void buttonListaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaClienteActionPerformed
         mudarTela("cardListaClientes");
 
-        PessoaDao dao = new PessoaDao();
-        List<Pessoa> pessoas = dao.listarTodos();
+        //Chama o controller para listar os clientes
+        List<Pessoa> pessoas;
+        try {
+            pessoas = pessoaController.list();
 
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableClientes.getModel();
-        modelo.setNumRows(0);
+            //Se não houver erros lista os clientes
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableClientes.getModel();
+            modelo.setNumRows(0);
 
-        for (Pessoa p : pessoas) {
-            modelo.addRow(new Object[]{
-                p.getNome(),
-                p.getEmail(),
-                p.getIdUsuario()
-            });
+            for (Pessoa p : pessoas) {
+                modelo.addRow(new Object[]{
+                    p.getNome(),
+                    p.getEmail(),
+                    p.getIdUsuario()
+                });
+            }
+
+        } catch (RuntimeException e) {
+            //Se houver erro exibe mensgaem de erro 
+            mensagem("aviso", e.getMessage());
+            //E apaga a caixa de texto
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableClientes.getModel();
+            modelo.setNumRows(0);
         }
-
-
     }//GEN-LAST:event_buttonListaClienteActionPerformed
 
     private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
 
         mudarTela("cardCatalogo");
+        List<Livro> livros;
 
-        LivroDao dao = new LivroDao();
-        List<Livro> livros = dao.listarTodos();
+        //Tenta trazer a lista de livros
+        try {
+            livros = livroController.list();
 
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
-        modelo.setNumRows(0);
+            //Limpa as linhas do modelo
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
+            modelo.setNumRows(0);
 
-        for (Livro l : livros) {
-            modelo.addRow(new Object[]{
-                l.getNome(),
-                l.getAutor(),
-                l.getCategoria(),
-                "R$ " + String.format("%.2f", l.getPreco()),
-                l.getCodigo()
-            });
+            //lista os livros encontrados
+            for (Livro l : livros) {
+                modelo.addRow(new Object[]{
+                    l.getNome(),
+                    l.getAutor(),
+                    l.getCategoria(),
+                    "R$ " + String.format("%.2f", l.getPreco()),
+                    l.getCodigo()
+                });
+            }
+        } catch (RuntimeException e) {
+            //Se não der certo, mensagem de erro
+            mensagem("aviso", e.getMessage());
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
+            modelo.setNumRows(0);
         }
     }//GEN-LAST:event_buttonCatalogoActionPerformed
 
@@ -332,28 +353,28 @@ public class TelaAdmView extends javax.swing.JFrame {
         String codigo = txtCodigo.getText();
         String categoria = cBoxCategoria.getSelectedItem().toString();
         Livro livro = new Livro();
-        
+
         //verificando argumentos inválidos
-        if(titulo.trim().isEmpty() || autor.trim().isEmpty() || tempPreco.trim().isEmpty() || codigo.trim().isEmpty() || cBoxCategoria.getSelectedIndex() == 0){
+        if (titulo.trim().isEmpty() || autor.trim().isEmpty() || tempPreco.trim().isEmpty() || codigo.trim().isEmpty() || cBoxCategoria.getSelectedIndex() == 0) {
             mensagem("aviso", "Todos os campos devem ser preenchidos");
             return;
         }
-        
+
         //transformando em valores válidos
         tempPreco = tempPreco.replace(",", ".");
         double preco = Double.parseDouble(tempPreco);
-        
+
         //setando os valores de livro
         livro.setNome(titulo);
         livro.setAutor(autor);
         livro.setCategoria(categoria);
         livro.setPreco(preco);
         livro.setCodigo(codigo);
-        
-        try{
-            
+
+        try {
+
             livroController.register(livro);
-            
+
             //Se o livro foi cadastrado com sucesso exibe a mensagem
             mensagem("sucesso", "Livro adicionado com sucesso!");
 
@@ -363,8 +384,8 @@ public class TelaAdmView extends javax.swing.JFrame {
             txtCodigo.setText("");
             cBoxCategoria.setSelectedIndex(0);
             txtTitulo.requestFocus();
-            
-        } catch (RuntimeException e){
+
+        } catch (RuntimeException e) {
             mensagem("aviso", e.getMessage());
         }
     }//GEN-LAST:event_buttonCadastrarLivroActionPerformed
@@ -380,39 +401,36 @@ public class TelaAdmView extends javax.swing.JFrame {
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         String codigoBusca = txtBusca.getText();
         Livro livro;
-        
+
         //verificando se é a pessoa digitou alguma coisa
-        if(codigoBusca.trim().isEmpty())
+        if (codigoBusca.trim().isEmpty()) {
             mensagem("aviso", "O campo código não pode estar em branco");
-        
-        //Manda para o controller procurar
-        try{
-            livro = livroController.search(codigoBusca);
-        } catch (RuntimeException e){
-            
-            //Printa o erro se vier do banco de dados ou se vier apenas do controller
-            if(e.getCause() != null)
-                mensagem("erro", e.getCause().getMessage());
-            else
-                  mensagem("erro", e.getMessage());
-            
-            //Reseta o campo de texto e desativa o botão de deletar
-            txtAreaInfo.setText("");
-            buttonDeletar.setEnabled(false);
             return;
         }
-        
-        //Mostrando as informações 
-        String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
+
+        //Manda para o controller procurar
+        try {
+            livro = livroController.search(codigoBusca);
+
+            //Mostrando as informações 
+            String informacoes = "=== INFORMAÇÕES DO LIVRO ===\n\n"
                     + "Título: " + livro.getNome() + "\n"
                     + "Autor: " + livro.getAutor() + "\n"
                     + "Categoria: " + livro.getCategoria() + "\n"
                     + "Preço: R$ " + String.format("%.2f", livro.getPreco()) + "\n\n"
                     + "Este é o livro que deseja excluir?";
 
-         txtAreaInfo.setText(informacoes);
+            txtAreaInfo.setText(informacoes);
 
-         buttonDeletar.setEnabled(true);
+            buttonDeletar.setEnabled(true);
+        } catch (RuntimeException e) {
+            //exibe a mensagem de erro
+            mensagem("aviso", e.getMessage());
+
+            //Reseta o campo de texto e desativa o botão de deletar
+            txtAreaInfo.setText("");
+            buttonDeletar.setEnabled(false);
+        }
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed
@@ -427,23 +445,23 @@ public class TelaAdmView extends javax.swing.JFrame {
                 javax.swing.JOptionPane.WARNING_MESSAGE
         );
 
+        //Se a pessoa confirmar a exclusão ele tenta deletar
         if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+            try {
+                livroController.delete(codigo);
 
-            LivroDao dao = new LivroDao();
-
-            if (dao.excluir(codigo)) {
+                //Se der tudo acerto envia mesagem de confirmação
                 mensagem("sucesso", "O livro foi excluído com sucesso!");
 
                 txtBusca.setText("");
                 txtAreaInfo.setText("");
                 buttonDeletar.setEnabled(false);
                 txtBusca.requestFocus();
-
-            } else {
-                mensagem("erro", "Erro ao tentar excluir o livro. Tente novamente.");
+            } catch (RuntimeException e) {
+                //Se der algum erro envia a mensagem de erro
+                mensagem("aviso", e.getMessage());
             }
         }
-
     }//GEN-LAST:event_buttonDeletarActionPerformed
 
     private void mudarTela(String nomeDoCard) {
@@ -458,9 +476,6 @@ public class TelaAdmView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        LivroDao livroDao = new LivroDao();
-        LivroController livroController = new LivroController(livroDao);
-        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -477,9 +492,9 @@ public class TelaAdmView extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaAdmView(livroController).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaAdmView().setVisible(true));
     }
 
     /**
