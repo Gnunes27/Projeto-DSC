@@ -306,33 +306,13 @@ public class TelaAdmView extends javax.swing.JFrame {
             javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableClientes.getModel();
             modelo.setNumRows(0);
         }
-
-        /*
-        PessoaDao dao = new PessoaDao();
-        List<Pessoa> pessoas = dao.listarTodos();
-
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableClientes.getModel();
-        modelo.setNumRows(0);
-
-        for (Pessoa p : pessoas) {
-            modelo.addRow(new Object[]{
-                p.getNome(),
-                p.getEmail(),
-                p.getIdUsuario()
-            });
-        }
-         */
-
     }//GEN-LAST:event_buttonListaClienteActionPerformed
 
     private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
 
         mudarTela("cardCatalogo");
         List<Livro> livros = new ArrayList<>();
-        
-        //Instancia Controller na função
-        LivroController livroController = new LivroController();
-        
+    
         //Tenta trazer a lista de livros
         try {
             livros = livroController.list();
