@@ -24,8 +24,12 @@ public class TelaInicialView extends javax.swing.JFrame {
     //Controladores 
     LivroController livroController = new LivroController();
     
-    //Carrinho de compras
+    //Telas relacionadas
     TelaCarrinhoView telaCarrinho = null;
+    TelaInfoView telaInfo = null;
+    
+    //Usuário
+    Pessoa usuarioLogado = null;
     
     /**
      * Creates new form TelaInicialView
@@ -49,6 +53,8 @@ public class TelaInicialView extends javax.swing.JFrame {
         
         //Criando cards de novidades
         cardAddFileira(livroController.searchLastBooks(10), panelLivros2);
+        
+        this.usuarioLogado = usuario;
     }
 
     /**
@@ -273,9 +279,16 @@ public class TelaInicialView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
 
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
-       TelaLoginView telaLogin = new TelaLoginView(this);
-       this.setVisible(false);
-       telaLogin.setVisible(true);
+        if(usuarioLogado == null){
+            TelaLoginView telaLogin = new TelaLoginView(this);
+            this.setVisible(false);
+            telaLogin.setVisible(true);
+        }else{
+            if(telaInfo == null)
+                telaInfo = new TelaInfoView(usuarioLogado, this);
+            telaInfo.setLocation(1000, 600);
+            telaInfo.setVisible(true);
+        }
     }//GEN-LAST:event_buttonLogarActionPerformed
 
     private void buttonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarActionPerformed
