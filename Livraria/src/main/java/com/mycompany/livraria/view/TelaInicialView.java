@@ -4,6 +4,8 @@
  */
 package com.mycompany.livraria.view;
 
+
+
 import com.mycompany.livraria.dao.PessoaDao;
 import com.mycompany.livraria.controller.*;
 import com.mycompany.livraria.model.Pessoa;
@@ -16,7 +18,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Gnunes
+ * @author Bruno
  */
 public class TelaInicialView extends javax.swing.JFrame {
     

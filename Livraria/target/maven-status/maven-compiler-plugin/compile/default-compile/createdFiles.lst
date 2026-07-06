@@ -5,11 +5,11 @@ com\mycompany\livraria\view\TelaLoginView$7.class
 com\mycompany\livraria\conexao\ConnectionFactory.class
 com\mycompany\livraria\view\TelaAdmView$1.class
 com\mycompany\livraria\model\Pessoa.class
-com\mycompany\livraria\model\ItemCarrinho.class
 com\mycompany\livraria\view\TelaInicialView.class
 com\mycompany\livraria\view\TelaCarrinhoView$1.class
 com\mycompany\livraria\view\TelaLoginView$3.class
 com\mycompany\livraria\dao\PessoaDao.class
+com\mycompany\livraria\view\ItemCarrinho.class
 com\mycompany\livraria\view\TelaInicialView$6.class
 com\mycompany\livraria\view\TelaInicialView$1.class
 com\mycompany\livraria\view\TelaLoginView$6.class

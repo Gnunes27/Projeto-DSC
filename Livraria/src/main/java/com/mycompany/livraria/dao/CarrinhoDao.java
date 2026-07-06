@@ -25,12 +25,12 @@ public class CarrinhoDao {
         }
 
         // Se não achou, cria um carrinho 
-        String sqlCria = "INSERT INTO Venda (id_usuario, valor_total, status) VALUES (?, 0.0, 'CARRINHO')";
+        String sql = "INSERT INTO Venda (id_usuario, valor_total, status) VALUES (?, 0.0, 'CARRINHO')";
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmtCria = conn.prepareStatement(sqlCria, Statement.RETURN_GENERATED_KEYS)) {
-            stmtCria.setInt(1, idUsuario);
-            stmtCria.executeUpdate();
-            try (ResultSet rs = stmtCria.getGeneratedKeys()) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, idUsuario);
+            stmt.executeUpdate();
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     return rs.getInt(1); // Retorna o ID do novo carrinho
                 }
@@ -48,15 +48,15 @@ public class CarrinhoDao {
             int idVenda = searchCarrinho(idUsuario);
 
             // Verifica se este livro já foi adicionado a este carrinho antes
-            String sqlVerificaItem = "SELECT id_item, quantidade FROM ItemVenda WHERE id_venda = ? AND id_livro = ?";
+            String sql = "SELECT id_item, quantidade FROM ItemVenda WHERE id_venda = ? AND id_livro = ?";
             boolean itemExiste = false;
             int qtdAtual = 0;
 
             try (Connection conn = ConnectionFactory.getConnection();
-                 PreparedStatement stmtVer = conn.prepareStatement(sqlVerificaItem)) {
-                stmtVer.setInt(1, idVenda);
-                stmtVer.setInt(2, idLivro);
-                try (ResultSet rs = stmtVer.executeQuery()) {
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, idVenda);
+                stmt.setInt(2, idLivro);
+                try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
                         itemExiste = true;
                         qtdAtual = rs.getInt("quantidade");
@@ -66,9 +66,9 @@ public class CarrinhoDao {
 
             if (itemExiste) {
                 // Se já existir, apenas soma a nova quantidade
-                String sqlUpdateItem = "UPDATE ItemVenda SET quantidade = ? WHERE id_venda = ? AND id_livro = ?";
+                String sql1 = "UPDATE ItemVenda SET quantidade = ? WHERE id_venda = ? AND id_livro = ?";
                 try (Connection conn = ConnectionFactory.getConnection();
-                     PreparedStatement stmtUpd = conn.prepareStatement(sqlUpdateItem)) {
+                     PreparedStatement stmtUpd = conn.prepareStatement(sql1)) {
                     stmtUpd.setInt(1, qtdAtual + quantidade);
                     stmtUpd.setInt(2, idVenda);
                     stmtUpd.setInt(3, idLivro);
@@ -99,13 +99,13 @@ public class CarrinhoDao {
 
     
     private void valorTotal(int idVenda) throws SQLException {
-         String sqlTotal = "SELECT SUM(iv.quantidade * l.preco) AS total " +
+         String sql = "SELECT SUM(iv.quantidade * l.preco) AS total " +
                           "FROM ItemVenda iv JOIN Livro l ON iv.id_livro = l.id_livro " +
                           "WHERE iv.id_venda = ?";
         double novoTotal = 0.0;
         
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sqlTotal)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idVenda);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -114,9 +114,9 @@ public class CarrinhoDao {
             }
         }
 
-        String sqlUpdateTotal = "UPDATE Venda SET valor_total = ? WHERE id_venda = ?";
+        String sql1 = "UPDATE Venda SET valor_total = ? WHERE id_venda = ?";
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sqlUpdateTotal)) {
+             PreparedStatement stmt = conn.prepareStatement(sql1)) {
             stmt.setDouble(1, novoTotal);
             stmt.setInt(2, idVenda);
             stmt.executeUpdate();
