@@ -246,6 +246,9 @@ public class TelaInicialView extends javax.swing.JFrame {
             if(livros != null && !livros.isEmpty()){
                 String categoria = livros.get(0).getCategoria();
                 searchSugestedBooks(panelLivros2, categoria, titulo, 10);
+            }else{
+                //Apaga as recomendações
+                panelLivros2.removeAll();
             }
             
             //Deixando visível a caixa de recomendação
