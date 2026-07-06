@@ -238,7 +238,7 @@ public class TelaInicialView extends javax.swing.JFrame {
             labelBot.setText("Sugestões com a mesma categoria");
             
             //Pesquisa
-            List<Livro> livros = livroController.searchTitle(titulo, 20);
+            List<Livro> livros = livroController.searchTitle(titulo, 50);
             cardAddFileira(livros, panelLivros1);
             
             
@@ -255,7 +255,6 @@ public class TelaInicialView extends javax.swing.JFrame {
             panelLogoNovidades.setVisible(true);
             scrollBot.setVisible(true);
         }
-
     }//GEN-LAST:event_buttonPesquisarActionPerformed
 
     private void cBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxCategoriasActionPerformed
@@ -287,8 +286,8 @@ public class TelaInicialView extends javax.swing.JFrame {
             //Transforma o painel interno em GRADE VERTICAL
             panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
 
-            //Busca todos os livros da categoria no painel 1
-            cardAddFileira(livroController.searchCategories(categoriaSelecionada, 10),panelLivros1);
+            //Busca os livros da categoria no painel 1
+            cardAddFileira(livroController.searchCategories(categoriaSelecionada, 300),panelLivros1);
             
             // 9. Força a janela a recalcular o design na mesma hora
             this.revalidate();
