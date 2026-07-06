@@ -7,7 +7,7 @@ package com.mycompany.livraria.dao;
 import com.mycompany.livraria.model.Pessoa;
 import com.mycompany.livraria.conexao.ConnectionFactory;
 
-import org.mindrot.jbcrypt.BCrypt; 
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.*;
@@ -66,14 +66,12 @@ public class PessoaDao {
 
         return null;
     }
-    
+
     public List<Pessoa> listarTodos() {
         String sql = "SELECT id_usuario, nome, email FROM Usuario";
         List<Pessoa> list = new ArrayList<>();
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Pessoa p = new Pessoa();
@@ -87,9 +85,57 @@ public class PessoaDao {
         } catch (SQLException e) {
             throw new RuntimeException("Não foi possível buscar os clientes no banco de dados! ", e);
         }
-        
-        return list; 
+
+        return list;
     }
 
+    public Pessoa buscar(String id) {
+        String sql = "SELECT * FROM Usuario WHERE id_usuario = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    int iD = rs.getInt("id_usuario");
+                    String nome = rs.getString("nome");
+                    String email = rs.getString("email");
+                    double saldo = rs.getDouble("saldo");
+                    boolean adm = rs.getBoolean("adm");
+
+                    Pessoa c = new Pessoa();
+                    c.setIdUsuario(iD);
+                    c.setNome(nome);
+                    c.setEmail(email);
+                    c.setSaldo(saldo);
+                    c.setAdm(adm);
+
+                    return c;
+
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Não foi possível buscar os clientes no banco de dados! ", e);
+        }
+        
+        return null;
+    }
     
+    public void excluir(String id) {
+        String sql = "DELETE FROM Usuario WHERE id_usuario = ?";
+        
+        try (java.sql.Connection conn = ConnectionFactory.getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, id);
+            
+            stmt.executeUpdate();
+            
+        } catch (java.sql.SQLException e) {
+            throw new RuntimeException("Não foi possível excluir o usuário no banco de dados! ", e);
+        }
+    }
 }

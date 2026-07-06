@@ -15,16 +15,18 @@ public class Pessoa {
     private String email;
     private String senha;
     private boolean adm;
+    private double saldo;
 
     public Pessoa() {
     }
 
-    public Pessoa(int idUsuario, String nome, String email, String senha, boolean adm) {
+    public Pessoa(int idUsuario, String nome, String email, String senha, boolean adm, double saldo) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.adm = adm;
+        this.saldo = saldo;
     }
 
     public int getIdUsuario() {
@@ -58,7 +60,7 @@ public class Pessoa {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
+    
     public boolean isAdm() {
         return adm;
     }
@@ -66,4 +68,13 @@ public class Pessoa {
     public void setAdm(boolean adm) {
         this.adm = adm;
     }
+    
+    public void setSaldo(double saldo){
+        this.saldo = saldo;
+    }
+    
+    public double getSaldo(){
+        return saldo;
+    }
+    
 }
