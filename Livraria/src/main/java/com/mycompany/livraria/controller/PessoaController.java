@@ -12,8 +12,20 @@ import java.util.List;
  */
 public class PessoaController {
     //Intanciando o DAO de pessoa
-    private final PessoaDao pessoaDao = new PessoaDao();
+    private final PessoaDao pessoaDao = new PessoaDao();    
     
+    //Função de logar
+    public Pessoa login(String email, String senha){
+        try{
+            Pessoa pessoaLogada = pessoaDao.autenticar(email, senha);
+            
+            //retorna a pessoa logada ou nulo caso esteja com senha ou usuário incorretos
+            return pessoaLogada;
+            
+        } catch (RuntimeException e){
+            throw new RuntimeException ("Erro ao fazer login: "+e.getMessage(), e);
+        }
+    }
     
     public List<Pessoa> list(){
         //Chama pessoaDao para retornar a lista de clientes no banco de dados

@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 package com.mycompany.livraria.view;
 
 import javax.swing.JOptionPane;
-
+import com.mycompany.livraria.controller.PessoaController;
 import com.mycompany.livraria.dao.PessoaDao;
 import com.mycompany.livraria.model.Pessoa;
 
@@ -18,20 +19,29 @@ public class TelaLoginView extends javax.swing.JFrame {
     /**
      * Creates new form TelaLoginView
      */
-    // Atributo para alternar entre telas temporarias
-    private javax.swing.JFrame telaAnterior;
-
+    
+    //Tela inicial
+    
+    //Controladores
+    PessoaController pessoaController = new PessoaController();
+    
     public TelaLoginView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
-    public TelaLoginView(javax.swing.JFrame telaAnterior) {
+    public TelaLoginView(TelaInicialView telaInicial) {
         initComponents();
-        this.telaAnterior = telaAnterior;
         this.setLocationRelativeTo(null);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                // Se fechar no X, faz a tela inicial reaparecer
+                voltar();
+            }
+        });
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +49,7 @@ public class TelaLoginView extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panelLoginGrid = new javax.swing.JPanel();
@@ -66,7 +76,7 @@ public class TelaLoginView extends javax.swing.JFrame {
         labelSenha = new javax.swing.JLabel();
         labelConfirmar = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelLoginGrid.setBackground(new java.awt.Color(0, 0, 0));
@@ -108,8 +118,7 @@ public class TelaLoginView extends javax.swing.JFrame {
         panelLogin.setBackground(new java.awt.Color(51, 51, 51));
         panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelLogo.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
+        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
         labelLogo.setPreferredSize(new java.awt.Dimension(550, 100));
         panelLogin.add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
 
@@ -148,8 +157,7 @@ public class TelaLoginView extends javax.swing.JFrame {
         panelRegistrar.setBackground(new java.awt.Color(51, 51, 51));
         panelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelLogo1.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
+        labelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_HD_-_text-removebg-preview.png"))); // NOI18N
         labelLogo1.setPreferredSize(new java.awt.Dimension(550, 100));
         panelRegistrar.add(labelLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
         panelRegistrar.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 460, -1));
@@ -206,6 +214,12 @@ public class TelaLoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void voltar(){
+        TelaInicialView telaInicial = new TelaInicialView();
+        telaInicial.setVisible(true);
+        this.dispose();
+    }
+    
     private void buttonNewLoginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonNewLoginActionPerformed
         java.awt.CardLayout card = (java.awt.CardLayout) panelDireitoCards.getLayout();
 
@@ -247,6 +261,24 @@ public class TelaLoginView extends javax.swing.JFrame {
                     avisoTitulo,
                     tipoMensagem);
         } else {
+            try{
+                Pessoa usuarioLogado = pessoaController.login(email, senha);
+                
+                //Retorna se o usuário não for identificado
+                if(usuarioLogado == null){
+                    mensagem("aviso", "Usuário ou senha incorretos");
+                    return;
+                }
+                //Se usuárioLogado não for nulo, login realizado com sucesso
+                TelaInicialView telaPrincipal = new TelaInicialView(usuarioLogado);
+                telaPrincipal.setVisible(true);
+                this.dispose(); // Fecha a tela de login
+                
+            } catch(RuntimeException e){
+                mensagem("aviso", e.getMessage());
+            }
+            
+            /*
             PessoaDao pessoaDao = new PessoaDao();
             Pessoa usuarioLogado = pessoaDao.autenticar(email, senha);
             boolean adm = usuarioLogado != null && usuarioLogado.isAdm();
@@ -262,7 +294,7 @@ public class TelaLoginView extends javax.swing.JFrame {
                         "Email ou senha incorretos. Tente novamente.",
                         "Erro de Login",
                         javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
         }
 
     }// GEN-LAST:event_buttonOKLogarActionPerformed
@@ -370,6 +402,34 @@ public class TelaLoginView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    private void mensagem(String tipo, String mensagem) {
+        int tipoIcone;
+        String titulo;
+
+        switch (tipo.toLowerCase()) {
+            case "erro":
+                tipoIcone = javax.swing.JOptionPane.ERROR_MESSAGE;
+                titulo = "Erro no Sistema";
+                break;
+            case "aviso":
+                tipoIcone = javax.swing.JOptionPane.WARNING_MESSAGE;
+                titulo = "Atenção";
+                break;
+            case "sucesso":
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Sucesso";
+                break;
+            default:
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Informação";
+                break;
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(this, mensagem, titulo, tipoIcone);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonConfirmar;
