@@ -287,7 +287,7 @@ public class TelaInicialView extends javax.swing.JFrame {
             telaLogin.setVisible(true);
         }else{
             if(telaInfo == null)
-                telaInfo = new TelaInfoView(usuarioLogado, this);
+                telaInfo = new TelaInfoView(usuarioLogado);
             telaInfo.setLocation(1000, 600);
             telaInfo.setVisible(true);
         }

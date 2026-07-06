@@ -7,32 +7,35 @@ package com.mycompany.livraria.view;
 import com.mycompany.livraria.controller.PessoaController;
 import com.mycompany.livraria.model.Pessoa;
 import com.mycompany.livraria.dao.PessoaDao;
+
 /**
  *
  * @author br992
  */
 public class TelaInfoView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInfoView.class.getName());
-    
-    
+
     //Controller
     PessoaController pessoaController = new PessoaController();
-    
+
     private final Pessoa usuario;
-    
+
     /**
      * Creates new form TelaInfoView
+     *
      * @param usuario usuario logado
      * @param telaInicial tela inicial view
      */
-    public TelaInfoView(Pessoa usuario, TelaInicialView telaInicial) {
+    public TelaInfoView(Pessoa usuario) {
         initComponents();
         this.usuario = usuario;
         this.setLocationRelativeTo(null);
-        
+
         preencherDados();
     }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,32 +46,53 @@ public class TelaInfoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        ButtonExcluirConta = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        panelTitle = new javax.swing.JPanel();
+        labelTop = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtArea = new javax.swing.JTextArea();
+        buttonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(300, 500));
+        setMinimumSize(new java.awt.Dimension(300, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelTitle.setBackground(new java.awt.Color(0, 0, 0));
+        panelTitle.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ButtonExcluirConta.setText("jButton1");
-        ButtonExcluirConta.addActionListener(this::ButtonExcluirContaActionPerformed);
-        jPanel1.add(ButtonExcluirConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, -1, -1));
+        labelTop.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        labelTop.setForeground(new java.awt.Color(255, 255, 255));
+        labelTop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTop.setText("Info");
+        panelTitle.add(labelTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, -1));
 
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 61, -1));
+        getContentPane().add(panelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 40));
 
-        jLabel2.setText("jLabelTipoDeUsuario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 61, -1));
+        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -1, 310, 500));
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        txtArea.setOpaque(false);
+        jScrollPane1.setViewportView(txtArea);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 260, 280));
+
+        buttonExcluir.setBackground(new java.awt.Color(204, 204, 204));
+        buttonExcluir.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonExcluir.setText("Excluir Conta");
+        buttonExcluir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonExcluir.setOpaque(true);
+        buttonExcluir.addActionListener(this::buttonExcluirActionPerformed);
+        jPanel3.add(buttonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 100, 20));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 300, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ButtonExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonExcluirContaActionPerformed
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         int resposta = javax.swing.JOptionPane.showConfirmDialog(
             this, 
             "Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita!", 
@@ -97,20 +121,23 @@ public class TelaInfoView extends javax.swing.JFrame {
                 mensagem("aviso", e.getMessage());
             }
         }
-    }//GEN-LAST:event_ButtonExcluirContaActionPerformed
+    }//GEN-LAST:event_buttonExcluirActionPerformed
 
-    private void preencherDados(){
-        lblNome.setText("Usuário: "+usuario.getNome());
-        lblEmail.setText("E-mail: " + usuario.getEmail());
-        lblSaldo.setText("Saldo Total: " + usuario.getSaldo());
-        
+    private void preencherDados() {
+
         String tipoDaConta = usuario.isAdm() ? "Administrador" : "Usuário Comum";
-        
-        lblTipoConta.setText("Tipo: " + tipoDaConta);
+
+        String informacoesFormatadas = String.format(
+                "Usuário: %s\n\nE-mail: %s\n\nSaldo Total: R$ %.2f\n\nTipo: %s",
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getSaldo(),
+                tipoDaConta
+        );
+
+        txtArea.setText(informacoesFormatadas);
     }
-    
-    
-    
+
     private void mensagem(String tipo, String mensagem) {
         int tipoIcone;
         String titulo;
@@ -133,11 +160,11 @@ public class TelaInfoView extends javax.swing.JFrame {
                 titulo = "Informação";
                 break;
         }
-    
-    
-    /**
-     * @param args the command line arguments
-     */
+    }
+        /**
+         * @param args the command line arguments
+         */
+       
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -155,15 +182,19 @@ public class TelaInfoView extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        Pessoa pessoa = new Pessoa();
+        
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaInfoView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaInfoView(pessoa).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ButtonExcluirConta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton buttonExcluir;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelTop;
+    private javax.swing.JPanel panelTitle;
+    private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
 }
