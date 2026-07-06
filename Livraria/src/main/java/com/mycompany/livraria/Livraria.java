@@ -15,7 +15,7 @@ public class Livraria {
               
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                // Inicia a Tela Inicial do teu projeto
+                
                 new TelaInicialView().setVisible(true);
             }
         });

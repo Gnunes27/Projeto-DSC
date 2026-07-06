@@ -4,12 +4,15 @@
  */
 package com.mycompany.livraria.view;
 
+import com.mycompany.livraria.dao.CarrinhoDao;
+import com.mycompany.livraria.model.Carrinho;
+
 /**
  *
  * @author Gnunes
  */
 public class TelaCarrinhoView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCarrinhoView.class.getName());
 
     /**
@@ -33,8 +36,9 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonComprar = new javax.swing.JButton();
+        labelPreco = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableCatalogo = new javax.swing.JTable();
+        tableCarrinho = new javax.swing.JTable();
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,34 +67,40 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
         buttonComprar.addActionListener(this::buttonComprarActionPerformed);
         jPanel1.add(buttonComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 110, -1));
 
+        labelPreco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelPreco.setOpaque(true);
+        jPanel1.add(labelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 300, 45));
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
 
-        tableCatalogo.setBackground(new java.awt.Color(204, 204, 204));
-        tableCatalogo.setModel(new javax.swing.table.DefaultTableModel(
+        tableCarrinho.setBackground(new java.awt.Color(204, 204, 204));
+        tableCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Preço"
+                "Nome", "Qtde", "Preço"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableCatalogo);
-        if (tableCatalogo.getColumnModel().getColumnCount() > 0) {
-            tableCatalogo.getColumnModel().getColumn(1).setMinWidth(90);
-            tableCatalogo.getColumnModel().getColumn(1).setMaxWidth(95);
+        jScrollPane1.setViewportView(tableCarrinho);
+        if (tableCarrinho.getColumnModel().getColumnCount() > 0) {
+            tableCarrinho.getColumnModel().getColumn(1).setMinWidth(40);
+            tableCarrinho.getColumnModel().getColumn(1).setMaxWidth(50);
+            tableCarrinho.getColumnModel().getColumn(2).setMinWidth(90);
+            tableCarrinho.getColumnModel().getColumn(2).setMaxWidth(95);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 300, 420));
@@ -99,7 +109,39 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonComprarActionPerformed
-        // TODO add your handling code here:
+
+        
+        int idUsuarioLogado = 1;
+
+        
+        CarrinhoDao dao = new CarrinhoDao();
+        Carrinho carrinho = dao.restaurarCarrinho(idUsuarioLogado);
+
+        try {
+           
+            java.util.List<ItemCarrinho> listaDeItens = carrinho.getItens();
+
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCarrinho.getModel();
+            modelo.setNumRows(0);
+
+            for (ItemCarrinho item : listaDeItens) {
+
+                double subtotal = item.getPreco() * item.getQuantidade();
+
+                modelo.addRow(new Object[]{
+                    item.getTitulo(), 
+                    item.getQuantidade(), 
+                    String.format("R$ %.2f", subtotal) 
+                });
+            }
+
+           
+     
+          labelPreco.setText(String.format("Total: R$ %.2f", carrinho.calcularTotal()));
+            
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar os itens do carrinho: " + e.getMessage());
+        }
     }//GEN-LAST:event_buttonComprarActionPerformed
 
     /**
@@ -134,6 +176,7 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableCatalogo;
+    private javax.swing.JLabel labelPreco;
+    private javax.swing.JTable tableCarrinho;
     // End of variables declaration//GEN-END:variables
 }

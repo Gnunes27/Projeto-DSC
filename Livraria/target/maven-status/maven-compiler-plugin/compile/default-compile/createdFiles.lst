@@ -1,3 +1,4 @@
+com\mycompany\livraria\dao\CarrinhoDao.class
 com\mycompany\livraria\view\TelaInicialView$4.class
 com\mycompany\livraria\view\TelaAdmView.class
 com\mycompany\livraria\view\TelaLoginView$7.class
@@ -8,6 +9,7 @@ com\mycompany\livraria\view\TelaInicialView.class
 com\mycompany\livraria\view\TelaCarrinhoView$1.class
 com\mycompany\livraria\view\TelaLoginView$3.class
 com\mycompany\livraria\dao\PessoaDao.class
+com\mycompany\livraria\view\ItemCarrinho.class
 com\mycompany\livraria\view\TelaInicialView$6.class
 com\mycompany\livraria\view\TelaInicialView$1.class
 com\mycompany\livraria\view\TelaLoginView$6.class
@@ -27,5 +29,7 @@ com\mycompany\livraria\view\TelaInicialView$2.class
 com\mycompany\livraria\dao\LivroDao.class
 com\mycompany\livraria\view\TelaLoginView$5.class
 com\mycompany\livraria\view\TelaLoginView$2.class
+com\mycompany\livraria\controller\CarrinhoController.class
+com\mycompany\livraria\model\Carrinho.class
 com\mycompany\livraria\view\TelaLoginView.class
 com\mycompany\livraria\model\Livro.class
