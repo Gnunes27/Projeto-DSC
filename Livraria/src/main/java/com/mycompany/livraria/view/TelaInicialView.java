@@ -5,7 +5,10 @@
 package com.mycompany.livraria.view;
 
 import com.mycompany.livraria.dao.PessoaDao;
+import com.mycompany.livraria.controller.*;
 import com.mycompany.livraria.model.Pessoa;
+import com.mycompany.livraria.model.Livro;
+import java.util.List;
 import com.mycompany.livraria.conexao.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -16,15 +19,22 @@ import javax.swing.JPanel;
  * @author Gnunes
  */
 public class TelaInicialView extends javax.swing.JFrame {
-
+    
+    //Controladores 
+    LivroController livroController = new LivroController();
+    
     /**
      * Creates new form TelaInicialView
      */
     public TelaInicialView() {
         initComponents();
         this.setLocationRelativeTo(null);
-        cardAddFileira(panelLivros1, "Tecnologia", 10);
-
+        
+        //Criando cards de Top 10
+        cardAddFileira(livroController.searchCategories("Terror", 10),panelLivros1);
+        
+        //Criando cards de novidades
+        cardAddFileira(livroController.searchLastBooks(10), panelLivros2);
     }
 
     public TelaInicialView(Pessoa usuario) {
@@ -226,7 +236,24 @@ public class TelaInicialView extends javax.swing.JFrame {
         if (!titulo.equals("")) {
             labelTop.setText("Resultados da Pesquisa");
             labelBot.setText("Sugestões com a mesma categoria");
-            searchBooks(panelLivros1, panelLivros2, titulo, 20);
+            
+            //Pesquisa
+            List<Livro> livros = livroController.searchTitle(titulo, 20);
+            cardAddFileira(livros, panelLivros1);
+            
+            
+            //Fazendo a recomendação com base no título pesquisado se achou algum livro
+            if(livros != null && !livros.isEmpty()){
+                String categoria = livros.get(0).getCategoria();
+                searchSugestedBooks(panelLivros2, categoria, titulo, 10);
+            }else{
+                //Apaga as recomendações
+                panelLivros2.removeAll();
+            }
+            
+            //Deixando visível a caixa de recomendação
+            panelLogoNovidades.setVisible(true);
+            scrollBot.setVisible(true);
         }
 
     }//GEN-LAST:event_buttonPesquisarActionPerformed
@@ -234,25 +261,35 @@ public class TelaInicialView extends javax.swing.JFrame {
     private void cBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxCategoriasActionPerformed
         String categoriaSelecionada = cBoxCategorias.getSelectedItem().toString();
 
+        //Mostra as informações de tela inicial
         if (categoriaSelecionada.equals("⭐ Destaques")) {
+            //Reinicia a tela com os livros em destaques
             restartTelaInicial();
+
+            //Deixa o panel de novidades visível
+            panelLogoNovidades.setVisible(true);
+            scrollBot.setVisible(true);
+            
+            //Atualiza e redesenha a tela
+            this.revalidate();
+            this.repaint();
         } else {
             labelTop.setText("CATEGORIA: " + categoriaSelecionada.toUpperCase());
-            
-             //Esconde a tela de novidades
-             panelLogoNovidades.setVisible(false);
-             scrollBot.setVisible(false);
-            
-             // Altera o scrollTop para rolar na VERTICAL quando necessário
+
+            //Esconde a tela de novidades
+            panelLogoNovidades.setVisible(false);
+            scrollBot.setVisible(false);
+
+            // Altera o scrollTop para rolar na VERTICAL quando necessário
             scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-            
-             //Transforma o painel interno em GRADE VERTICAL
-            panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
-             
-            // 8. Busca todos os livros da categoria no painel 1 (passando null no painel 2)
-            searchBooks(panelLivros1, null, categoriaSelecionada, 100);
 
+            //Transforma o painel interno em GRADE VERTICAL
+            panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+
+            //Busca todos os livros da categoria no painel 1
+            cardAddFileira(livroController.searchCategories(categoriaSelecionada, 10),panelLivros1);
+            
             // 9. Força a janela a recalcular o design na mesma hora
             this.revalidate();
             this.repaint();
@@ -260,55 +297,47 @@ public class TelaInicialView extends javax.swing.JFrame {
     }//GEN-LAST:event_cBoxCategoriasActionPerformed
 
     public void restartTelaInicial() {
-        // 1. Limpa o texto da barra de pesquisa, se houver
-        if (txtBarraPesquisa != null) {
-            txtBarraPesquisa.setText("");
-        }
+        //Limpa o texto da barra de pesquisa
+        txtBarraPesquisa.setText("");
+
+        //Restaura o texto original do título superior
+        labelTop.setText("TOP 10 LIVROS MAIS VENDIDOS");
+
+        //Torna visível a parte de texto escrito NOVIDADES
+        panelLogoNovidades.setVisible(true);
+
+        //Torna visível o texto de NOVIDADES
+        labelBot.setVisible(true);
+        labelBot.setText("NOVIDADES");
+
+        //Torna visível a caixa que mostra os livros em novidades
+        scrollBot.setVisible(true);
+
+        //Devolve a altura original mais baixa para o scroll superior 
+        scrollTop.setBounds(scrollTop.getX(), scrollTop.getY(), scrollTop.getWidth(), 220);
+
+        //Devolve o layout HORIZONTAL original ao painel de cima
+        panelLivros1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 10));
+
+        //Configura o scrollTop de volta para rolar apenas na HORIZONTAL
+        scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        //Criando cards de Top 10
+        cardAddFileira(livroController.searchCategories("Terror", 10),panelLivros1);
         
-        // 3. Restaura o texto original do título superior
-        if (labelTop != null) {
-            labelTop.setText("TOP 10 LIVROS MAIS VENDIDOS");
-        }
+        //Criando cards de novidades
+        cardAddFileira(livroController.searchLastBooks(10), panelLivros2);
 
-        // 4. Traz de volta a faixa azul, o texto "NOVIDADES" e o scroll inferior
-        if (panelLogoNovidades != null) {
-            panelLogoNovidades.setVisible(true);
-        }
-        if (labelBot != null) {
-            labelBot.setVisible(true);
-            labelBot.setText("NOVIDADES");
-        }
-        if (scrollBot != null) {
-            scrollBot.setVisible(true);
-        }
-
-        // 5. Devolve a altura original mais baixa para o scroll superior (ex: 220 pixels)
-        if (scrollTop != null) {
-            scrollTop.setBounds(scrollTop.getX(), scrollTop.getY(), scrollTop.getWidth(), 220);
-        }
-
-        // 6. Devolve o layout HORIZONTAL (FlowLayout) original ao painel de cima
-        if (panelLivros1 != null) {
-            panelLivros1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 10));
-        }
-
-        // 7. Configura o scrollTop de volta para rolar apenas na HORIZONTAL
-        if (scrollTop != null) {
-            scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        }
-
-        // 8. Recarrega os livros iniciais na vitrine
-        searchBooks(panelLivros1, null, "", 10);
-
-        // 9. Atualiza e redesenha a tela
+        //Atualiza e redesenha a tela
         this.revalidate();
         this.repaint();
     }
 
     // Metodo para criação de cards de livro
     private javax.swing.JPanel cardLivro(String titulo, double preco) {
-
+        
+        //Cria o painel do livro
         javax.swing.JPanel card = new javax.swing.JPanel();
         card.setLayout(new javax.swing.BoxLayout(card, javax.swing.BoxLayout.Y_AXIS));
         card.setOpaque(false);
@@ -364,81 +393,29 @@ public class TelaInicialView extends javax.swing.JFrame {
 
     }
 
-    // Função para criar os banners de categoria
-    public void cardAddFileira(javax.swing.JPanel painelFileira, String categoria, int limite) {
-
-        painelFileira.removeAll();
-
-        String sql = "SELECT nome, preco FROM Livro WHERE categoria = ? LIMIT ?";
-
-        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, categoria);
-            stmt.setInt(2, limite);
-
-            try (java.sql.ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    String titulo = rs.getString("nome");
-                    double preco = rs.getDouble("preco");
-
-                    javax.swing.JPanel novoCard = cardLivro(titulo, preco);
-
-                    painelFileira.add(novoCard);
-                }
-            }
-
-            painelFileira.revalidate();
-            painelFileira.repaint();
-
-        } catch (java.sql.SQLException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar fileira: " + e.getMessage());
-        }
-    }
-
-    // Função para procurar no bando de dados os livros procurados pelo usuario
-    public void searchBooks(javax.swing.JPanel painel, javax.swing.JPanel painel2, String txt, int qtde) {
-
+    //Função que recebe livros e adiciona em fileira no card
+    public void cardAddFileira(List<Livro> livros, javax.swing.JPanel painel){
+        //Remove os livros anteriormente na fileira
         painel.removeAll();
-
-        String sql = "SELECT * FROM Livro WHERE nome LIKE ? OR categoria LIKE ? OR autor LIKE ? LIMIT ?";
-        String categoria = null;
-        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, "%" + txt + "%");
-            stmt.setString(2, "%" + txt + "%");
-            stmt.setString(3, "%" + txt + "%");
-            stmt.setInt(4, qtde);
-
-            try (java.sql.ResultSet rs = stmt.executeQuery()) {
-                // Se houverem menos registros que o limiteMaximo, o rs.next() fica falso antes e o Java para sozinho!
-                while (rs.next()) {
-                    String titulo = rs.getString("nome");
-                    double preco = rs.getDouble("preco");
-
-                    if (categoria == null) {
-                        categoria = rs.getString("categoria");
-                    }
-
-                    javax.swing.JPanel novoCard = cardLivro(titulo, preco);
-
-                    painel.add(novoCard);
-                }
-            }
-
-            //Atualiza o layout do painel na tela
+        
+        if(livros == null || livros.isEmpty()){
+            mensagem("aviso", "A lista de livros está vazia!");
+            //Resetando o painel 
             painel.revalidate();
             painel.repaint();
-
-        } catch (java.sql.SQLException e) {
-            System.out.println("Aviso de banco de dados: " + e.getMessage());
+            return;
         }
-
-        if (painel2 != null && categoria != null) {
-            searchSugestedBooks(painel2, categoria, txt, 5);
+        
+        for(Livro livro : livros){
+            javax.swing.JPanel novoCard =cardLivro(livro.getNome(), livro.getPreco());
+            painel.add(novoCard);
         }
-
+        
+        //
+        painel.revalidate();
+        painel.repaint();
     }
-
+    
     // Função auxuliar 
     public void searchSugestedBooks(javax.swing.JPanel painel, String categoria, String txt, int limite) {
 
@@ -501,7 +478,6 @@ public class TelaInicialView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicialView().setVisible(true);
-
             }
         });
     }
@@ -533,6 +509,32 @@ public class TelaInicialView extends javax.swing.JFrame {
 
     private void searchBarraPequisa(JPanel panelTop10, String titulo, int i) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    private void mensagem(String tipo, String mensagem) {
+        int tipoIcone;
+        String titulo;
+
+        switch (tipo.toLowerCase()) {
+            case "erro":
+                tipoIcone = javax.swing.JOptionPane.ERROR_MESSAGE;
+                titulo = "Erro no Sistema";
+                break;
+            case "aviso":
+                tipoIcone = javax.swing.JOptionPane.WARNING_MESSAGE;
+                titulo = "Atenção";
+                break;
+            case "sucesso":
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Sucesso";
+                break;
+            default:
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Informação";
+                break;
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(this, mensagem, titulo, tipoIcone);
     }
 
 }
