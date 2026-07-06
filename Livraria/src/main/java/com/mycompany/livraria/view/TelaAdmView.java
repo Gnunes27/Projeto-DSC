@@ -63,15 +63,22 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonCadastrarLivro = new javax.swing.JButton();
         cBoxCategoria = new javax.swing.JComboBox<>();
         cardDelLivro = new javax.swing.JPanel();
-        buttonBuscar = new javax.swing.JButton();
+        buttonBuscarLivro = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
         labelCodLivro = new javax.swing.JLabel();
-        buttonDeletar = new javax.swing.JButton();
+        buttonDeletarLivro = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaInfo = new javax.swing.JTextArea();
         cardListaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableClientes = new javax.swing.JTable();
+        cadDelCliente = new javax.swing.JPanel();
+        labelCodCliente = new javax.swing.JLabel();
+        txtBuscaCliente = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAreaCInfo = new javax.swing.JTextArea();
+        buttonDeletarCliente = new javax.swing.JButton();
+        buttonBuscarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -209,13 +216,13 @@ public class TelaAdmView extends javax.swing.JFrame {
         cardDelLivro.setBackground(new java.awt.Color(153, 153, 153));
         cardDelLivro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonBuscar.setBackground(new java.awt.Color(204, 204, 204));
-        buttonBuscar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        buttonBuscar.setText("Buscar");
-        buttonBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        buttonBuscar.setOpaque(true);
-        buttonBuscar.addActionListener(this::buttonBuscarActionPerformed);
-        cardDelLivro.add(buttonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 80, 20));
+        buttonBuscarLivro.setBackground(new java.awt.Color(204, 204, 204));
+        buttonBuscarLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonBuscarLivro.setText("Buscar");
+        buttonBuscarLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonBuscarLivro.setOpaque(true);
+        buttonBuscarLivro.addActionListener(this::buttonBuscarLivroActionPerformed);
+        cardDelLivro.add(buttonBuscarLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 80, 20));
         cardDelLivro.add(txtBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 250, -1));
 
         labelCodLivro.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -223,14 +230,14 @@ public class TelaAdmView extends javax.swing.JFrame {
         labelCodLivro.setOpaque(true);
         cardDelLivro.add(labelCodLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        buttonDeletar.setBackground(new java.awt.Color(204, 204, 204));
-        buttonDeletar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        buttonDeletar.setText("Deletar");
-        buttonDeletar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        buttonDeletar.setEnabled(false);
-        buttonDeletar.setOpaque(true);
-        buttonDeletar.addActionListener(this::buttonDeletarActionPerformed);
-        cardDelLivro.add(buttonDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 80, 20));
+        buttonDeletarLivro.setBackground(new java.awt.Color(204, 204, 204));
+        buttonDeletarLivro.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonDeletarLivro.setText("Deletar");
+        buttonDeletarLivro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonDeletarLivro.setEnabled(false);
+        buttonDeletarLivro.setOpaque(true);
+        buttonDeletarLivro.addActionListener(this::buttonDeletarLivroActionPerformed);
+        cardDelLivro.add(buttonDeletarLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 80, 20));
 
         txtAreaInfo.setColumns(20);
         txtAreaInfo.setRows(5);
@@ -268,13 +275,47 @@ public class TelaAdmView extends javax.swing.JFrame {
         panelCards.add(cardListaClientes, "cardListaClientes");
         cardListaClientes.getAccessibleContext().setAccessibleParent(panelCards);
 
+        cadDelCliente.setBackground(new java.awt.Color(102, 102, 102));
+        cadDelCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelCodCliente.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelCodCliente.setText("ID do Cliente:");
+        labelCodCliente.setOpaque(true);
+        cadDelCliente.add(labelCodCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        cadDelCliente.add(txtBuscaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 280, -1));
+
+        txtAreaCInfo.setColumns(20);
+        txtAreaCInfo.setRows(5);
+        jScrollPane3.setViewportView(txtAreaCInfo);
+
+        cadDelCliente.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 280, 130));
+
+        buttonDeletarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        buttonDeletarCliente.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonDeletarCliente.setText("Deletar");
+        buttonDeletarCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonDeletarCliente.setOpaque(true);
+        buttonDeletarCliente.addActionListener(this::buttonDeletarClienteActionPerformed);
+        cadDelCliente.add(buttonDeletarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 80, 20));
+
+        buttonBuscarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        buttonBuscarCliente.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonBuscarCliente.setText("Buscar");
+        buttonBuscarCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonBuscarCliente.setOpaque(true);
+        buttonBuscarCliente.addActionListener(this::buttonBuscarClienteActionPerformed);
+        cadDelCliente.add(buttonBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 80, 20));
+
+        panelCards.add(cadDelCliente, "cardDelCliente");
+
         getContentPane().add(panelCards, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 650, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelClienteActionPerformed
-        // TODO add your handling code here:
+        mudarTela("cardDelCliente");
+        buttonDeletarCliente.setEnabled(false);
     }//GEN-LAST:event_buttonDelClienteActionPerformed
 
     private void buttonDelLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelLivroActionPerformed
@@ -398,7 +439,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoActionPerformed
 
-    private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
+    private void buttonBuscarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarLivroActionPerformed
         String codigoBusca = txtBusca.getText();
         Livro livro;
 
@@ -422,18 +463,18 @@ public class TelaAdmView extends javax.swing.JFrame {
 
             txtAreaInfo.setText(informacoes);
 
-            buttonDeletar.setEnabled(true);
+            buttonDeletarLivro.setEnabled(true);
         } catch (RuntimeException e) {
             //exibe a mensagem de erro
             mensagem("aviso", e.getMessage());
 
             //Reseta o campo de texto e desativa o botão de deletar
             txtAreaInfo.setText("");
-            buttonDeletar.setEnabled(false);
+            buttonDeletarLivro.setEnabled(false);
         }
-    }//GEN-LAST:event_buttonBuscarActionPerformed
+    }//GEN-LAST:event_buttonBuscarLivroActionPerformed
 
-    private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed
+    private void buttonDeletarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarLivroActionPerformed
 
         String codigo = txtBusca.getText();
 
@@ -455,14 +496,86 @@ public class TelaAdmView extends javax.swing.JFrame {
 
                 txtBusca.setText("");
                 txtAreaInfo.setText("");
-                buttonDeletar.setEnabled(false);
+                buttonDeletarLivro.setEnabled(false);
                 txtBusca.requestFocus();
             } catch (RuntimeException e) {
                 //Se der algum erro envia a mensagem de erro
                 mensagem("aviso", e.getMessage());
             }
         }
-    }//GEN-LAST:event_buttonDeletarActionPerformed
+    }//GEN-LAST:event_buttonDeletarLivroActionPerformed
+
+    private void buttonDeletarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarClienteActionPerformed
+        String p = txtBuscaCliente.getText();
+                
+        int confirmacao = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "ATENÇÃO: Tem certeza que deseja excluir permanentemente este usuário?",
+                "Confirmar Exclusão",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        
+        if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+            try {
+                pessoaController.delete(p);
+
+                mensagem("sucesso", "O usuario foi deletado!");
+
+                txtBuscaCliente.setText("");
+                txtAreaCInfo.setText("");
+                buttonDeletarCliente.setEnabled(false);
+                txtBuscaCliente.requestFocus();
+            } catch (RuntimeException e) {
+                mensagem("aviso", e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_buttonDeletarClienteActionPerformed
+
+    private void buttonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarClienteActionPerformed
+        
+        String p = txtBuscaCliente.getText();
+        if (p.trim().isEmpty()) {
+            mensagem("aviso", "O campo código não pode estar em branco");
+            return;
+        }
+        
+        try {
+            
+            
+            // Busca a pessoa
+            Pessoa pessoa = pessoaController.search(p);
+
+            // CORREÇÃO: Só mostra as informações SE a pessoa existir no banco!
+            if (pessoa != null) {
+                String informacoes = "=== INFORMAÇÕES ===\n\n"
+                        + "Nome: " + pessoa.getNome() + "\n"
+                        + "Email: " + pessoa.getEmail() + "\n"
+                        + "Crédito: R$ " + String.format("%.2f", pessoa.getSaldo()) + "\n\n"
+                        + "Deseja deletar esse cliente?";
+
+                txtAreaCInfo.setText(informacoes);
+                buttonDeletarCliente.setEnabled(true);
+            } else {
+                // Se devolver null, avisa que não existe
+                mensagem("aviso", "Nenhum cliente encontrado com este código!");
+                txtAreaCInfo.setText("");
+                buttonDeletarCliente.setEnabled(false);
+            }
+
+        } catch (NumberFormatException ex) {
+            // Se ele digitar letras em vez de números no campo ID
+            mensagem("aviso", "Por favor, digite um número válido.");
+            
+        } catch (RuntimeException e) {
+            mensagem("aviso", e.getMessage());
+            txtAreaCInfo.setText("");
+            // CORREÇÃO: Estava buttonDeletarLivro, alterado para buttonDeletarCliente
+            buttonDeletarCliente.setEnabled(false);
+        }
+        
+      
+    }//GEN-LAST:event_buttonBuscarClienteActionPerformed
 
     private void mudarTela(String nomeDoCard) {
         java.awt.CardLayout card = (java.awt.CardLayout) panelCards.getLayout();
@@ -532,20 +645,25 @@ public class TelaAdmView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddLivro;
-    private javax.swing.JButton buttonBuscar;
+    private javax.swing.JButton buttonBuscarCliente;
+    private javax.swing.JButton buttonBuscarLivro;
     private javax.swing.JButton buttonCadastrarLivro;
     private javax.swing.JButton buttonCatalogo;
     private javax.swing.JButton buttonDelCliente;
     private javax.swing.JButton buttonDelLivro;
-    private javax.swing.JButton buttonDeletar;
+    private javax.swing.JButton buttonDeletarCliente;
+    private javax.swing.JButton buttonDeletarLivro;
     private javax.swing.JButton buttonListaCliente;
     private javax.swing.JComboBox<String> cBoxCategoria;
+    private javax.swing.JPanel cadDelCliente;
     private javax.swing.JPanel cardAddLivro;
     private javax.swing.JPanel cardCatalogo;
     private javax.swing.JPanel cardDelLivro;
     private javax.swing.JPanel cardListaClientes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel labelCodCliente;
     private javax.swing.JLabel labelCodLivro;
     private javax.swing.JLabel labelLogo;
     private javax.swing.JLabel labelUser;
@@ -559,9 +677,11 @@ public class TelaAdmView extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollCatalogo;
     private javax.swing.JTable tableCatalogo;
     private javax.swing.JTable tableClientes;
+    private javax.swing.JTextArea txtAreaCInfo;
     private javax.swing.JTextArea txtAreaInfo;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtBusca;
+    private javax.swing.JTextField txtBuscaCliente;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtTitulo;

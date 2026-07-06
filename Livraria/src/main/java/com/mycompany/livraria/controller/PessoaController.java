@@ -27,4 +27,23 @@ public class PessoaController {
             throw new RuntimeException("Erro ao listar clientes: "+e.getMessage(), e);
         }
     }
+    
+    public Pessoa search(String id){
+        try{
+            Pessoa p = pessoaDao.buscar(id);
+            if (p == null)
+               throw new RuntimeException("Não foi encontrado livro com esse código");
+            return p;
+        }catch (RuntimeException e){
+            throw new RuntimeException("Erro ao buscar cliente: "+e.getMessage(), e);
+        }
+    }
+    
+    public void delete(String id){
+        try{
+            pessoaDao.excluir(id);
+        }catch(RuntimeException e){
+            throw new RuntimeException("Erro ao buscar cliente: "+e.getMessage(), e);
+        }
+    }
 }
