@@ -16,6 +16,36 @@ public class LivroController {
     //Instanciando DAO de livro
     private final LivroDao livroDao = new LivroDao();
     
+    public List<Livro> searchCategories(String categoria, int quantidade){
+        try{
+            List<Livro> livros = livroDao.buscar(categoria, quantidade);
+            
+            return livros;
+        } catch (RuntimeException e){
+            throw new RuntimeException ("Erro ao listar os livros dessa categoria: "+e.getMessage(), e);
+        }
+    }
+    
+    public List<Livro> searchLastBooks(int quantidade) {
+        //Chama a função DAO que faz a busca dos livros
+        try{
+            List<Livro> livros = livroDao.buscarRecentes(quantidade);
+            //retorna os livros pesquisados
+            return livros;
+        } catch(RuntimeException e){
+            throw new RuntimeException("Erro ao listar os livros mais recentes: "+e.getMessage(), e);
+        }
+    }
+    
+    public List<Livro> searchTitle(String titulo, int quantidade){
+        try{
+            List<Livro> livros = livroDao.buscarTitulo(titulo, quantidade);
+            return livros;
+        } catch(RuntimeException e){
+            throw new RuntimeException ("Não foi buscar os livros! "+e.getMessage(), e);
+        }
+    }
+    
     public Livro search(String txtCodigo){
         try {
            //Buscando o livro 

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.livraria.dao;
+
 import com.mycompany.livraria.model.Livro;
 import com.mycompany.livraria.conexao.ConnectionFactory;
 
@@ -18,7 +19,7 @@ public class LivroDao {
         String sql = "INSERT INTO Livro (nome, autor, categoria, preco, codigo) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, livro.getNome());
             stmt.setString(2, livro.getAutor());
@@ -29,17 +30,16 @@ public class LivroDao {
             stmt.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Não foi possível adicionar o livro ao banco de dados! ",e);
-        }        
+            throw new RuntimeException("Não foi possível adicionar o livro ao banco de dados! ", e);
+        }
     }
-   
+
     public List<Livro> listarTodos() {
         String sql = "SELECT nome, autor, categoria, preco, codigo FROM Livro";
         List<Livro> listaDeLivros = new ArrayList<>();
 
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+                PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Livro livro = new Livro();
@@ -48,7 +48,6 @@ public class LivroDao {
                 livro.setCategoria(rs.getString("categoria"));
                 livro.setPreco(rs.getDouble("preco"));
                 livro.setCodigo(rs.getString("codigo"));
-               
 
                 listaDeLivros.add(livro);
             }
@@ -56,18 +55,46 @@ public class LivroDao {
         } catch (SQLException e) {
             throw new RuntimeException("Não foi possível buscar os livros no banco de dados! ", e);
         }
-        
-        return listaDeLivros; 
+
+        return listaDeLivros;
     }
 
+    public List<Livro> buscarRecentes(int quantidade){
+        String sql = "SELECT * FROM Livro ORDER BY id_livro DESC LIMIT ?";
+        
+        try (Connection conn = ConnectionFactory.getConnection(); 
+                java.sql.PreparedStatement stmt = conn.prepareStatement(sql)){
+            
+            stmt.setInt(1, quantidade);
+            
+            try (java.sql.ResultSet rs = stmt.executeQuery()){
+                List<Livro> livros = new ArrayList<>();
+                while(rs.next()){
+                    Livro livro = new Livro();
+                    livro.setIdLivro(rs.getInt("id_livro"));
+                    livro.setNome(rs.getString("nome"));
+                    livro.setAutor(rs.getString("autor"));
+                    livro.setCategoria(rs.getString("categoria"));
+                    livro.setPreco(rs.getDouble("preco"));
+                    livro.setCodigo(rs.getString("codigo"));
+                    
+                    livros.add(livro);
+                }
+                return livros;
+            }
+        } catch (SQLException e){
+            throw new RuntimeException ("Não foi possível buscar livros no banco de dados! ", e);
+        }
+    }
+    
     public Livro buscar(String codigo) {
         String sql = "SELECT * FROM Livro WHERE codigo = ?";
-        
+
         try (Connection conn = ConnectionFactory.getConnection();
-             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setString(1, codigo);  
-            
+                java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, codigo);
+
             try (java.sql.ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Livro livro = new Livro();
@@ -81,22 +108,114 @@ public class LivroDao {
                 }
             }
         } catch (java.sql.SQLException e) {
-            throw new  RuntimeException("Não foi possível buscar livros no banco de dados!  " , e);
+            throw new RuntimeException("Não foi possível buscar livros no banco de dados!  ", e);
         }
-        return null; 
+        return null;
+    }
+    
+    public List<Livro> buscar(String categoria, int limite) {
+        String sql = "SELECT * FROM Livro WHERE categoria = ? LIMIT ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+                java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, categoria);
+            stmt.setInt(2, limite);
+            
+            try (java.sql.ResultSet rs = stmt.executeQuery()){
+                List<Livro> livros = new ArrayList<>();
+                while (rs.next()){
+                    Livro livro = new Livro();
+                    livro.setIdLivro(rs.getInt("id_livro"));
+                    livro.setNome(rs.getString("nome"));
+                    livro.setAutor(rs.getString("autor"));
+                    livro.setCategoria(rs.getString("categoria"));
+                    livro.setPreco(rs.getDouble("preco"));
+                    livro.setCodigo(rs.getString("codigo"));
+                    livros.add(livro);
+                }
+                return livros;
+            }
+        } catch (java.sql.SQLException e) {
+            throw new RuntimeException("Não foi possível buscar livros no banco de dados! ", e);
+        }
+    }
+    
+    public List<Livro> buscar(String categoria, String titulo, int limite) {
+        String sql = "SELECT * FROM Livro WHERE titulo LIKE ? OR categoria LIKE ? OR autor LIKE ? LIMIT ?";
+        
+        try(Connection conn = ConnectionFactory.getConnection(); 
+                 java.sql.PreparedStatement stmt = conn.prepareStatement(sql)){
+            
+            stmt.setString(1, titulo);
+            stmt.setString(2, categoria);
+            stmt.setInt(3, limite);
+            
+            try (java.sql.ResultSet rs = stmt.executeQuery()){
+                List<Livro> livros = new ArrayList<>();
+                while (rs.next()){
+                    Livro livro = new Livro();
+                    livro.setIdLivro(rs.getInt("id_livro"));
+                    livro.setNome(rs.getString("nome"));
+                    livro.setAutor(rs.getString("autor"));
+                    livro.setCategoria(rs.getString("categoria"));
+                    livro.setPreco(rs.getDouble("preco"));
+                    livro.setCodigo(rs.getString("codigo"));
+                    livros.add(livro);
+                }
+                return livros;
+            }
+        } catch (SQLException e){
+            throw new RuntimeException ("Não foi possível buscar livros no banco de dados! ", e);
+        }
+    }
+
+    public List<Livro> buscarTitulo(String titulo, int quantidade){
+    String sql = "SELECT * FROM Livro WHERE nome LIKE ? OR categoria LIKE ? OR autor LIKE ? LIMIT ?";
+        String categoria = null;
+        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + titulo + "%");
+            stmt.setString(2, "%" + titulo + "%");
+            stmt.setString(3, "%" + titulo + "%");
+            stmt.setInt(4, quantidade);
+
+            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+                List<Livro> livros = new ArrayList<>();
+                
+                while (rs.next()) {
+                    Livro livro = new Livro();
+                    String txtTitulo = rs.getString("nome");
+                    double preco = rs.getDouble("preco");
+                    
+                    if (categoria == null) {
+                        categoria = rs.getString("categoria");
+                    }
+                    
+                    livro.setNome(txtTitulo);
+                    livro.setPreco(preco);
+                    livro.setCategoria(categoria);
+                    
+                    livros.add(livro);
+                }
+                return livros;
+            }
+        } catch (java.sql.SQLException e) {
+            throw new RuntimeException ("Aviso de banco de dados: ", e);
+        }
     }
     
     public void excluir(String codigo) {
         String sql = "DELETE FROM Livro WHERE codigo = ?";
-        
-        try (java.sql.Connection conn = ConnectionFactory.getConnection();
-             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+
+        try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, codigo);
             int linhasAfetadas = stmt.executeUpdate();
-            
-            if(linhasAfetadas == 0)
-                 throw new RuntimeException("Livro não encontrado! ");
+
+            if (linhasAfetadas == 0) {
+                throw new RuntimeException("Livro não encontrado! ");
+            }
         } catch (java.sql.SQLException e) {
             throw new RuntimeException("Não foi possível excluir o livro no banco de dados! ", e);
         }
