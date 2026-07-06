@@ -13,6 +13,7 @@ import com.mycompany.livraria.model.Livro;
 import java.util.List;
 import com.mycompany.livraria.conexao.*;
 import java.awt.Color;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,6 +25,9 @@ public class TelaInicialView extends javax.swing.JFrame {
     
     //Controladores 
     LivroController livroController = new LivroController();
+    
+    //Carrinho de compras
+    TelaCarrinhoView telaCarrinho = null;
     
     /**
      * Creates new form TelaInicialView
@@ -42,7 +46,11 @@ public class TelaInicialView extends javax.swing.JFrame {
     public TelaInicialView(Pessoa usuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-        // Aqui você pode usar o objeto 'usuario' para personalizar a tela, mostrar o nome, etc.
+        //Criando cards de Top 10
+        cardAddFileira(livroController.searchCategories("Terror", 10),panelLivros1);
+        
+        //Criando cards de novidades
+        cardAddFileira(livroController.searchLastBooks(10), panelLivros2);
     }
 
     /**
@@ -217,19 +225,59 @@ public class TelaInicialView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
-        // TODO add your handling code here:
+        //Deixando invisivél o painel de novidades
+        panelLogoNovidades.setVisible(false);
+        scrollBot.setVisible(false);
+        
+        //limpando os livros anteriormente naquele local
+        panelLivros1.removeAll();
+        
+        //Mudando o nome exibido
+        labelTop.setText("OFERTAS");
+        
+        //Transforma o painel interno em GRADE VERTICAL
+        panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+        
+        //setando a política para scroll vertical
+        scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        //exibindo todos os livros 
+        cardAddFileira(livroController.list(), panelLivros1);
     }//GEN-LAST:event_buttonCatalogoActionPerformed
 
     private void buttonOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOfertasActionPerformed
-        // TODO add your handling code here:
+        //Deixando invisivél o painel de novidades
+        panelLogoNovidades.setVisible(false);
+        scrollBot.setVisible(false);
+        
+        //limpando os livros anteriormente naquele local
+        panelLivros1.removeAll();
+        
+        //Mudando o nome exibido
+        labelTop.setText("OFERTAS");
+        
+        //Transforma o painel interno em GRADE VERTICAL
+        panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+        
+        //setando a política para scroll vertical
+        scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
     }//GEN-LAST:event_buttonOfertasActionPerformed
 
     private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
-        // TODO add your handling code here:
+        if(telaCarrinho == null)
+            telaCarrinho = new TelaCarrinhoView();
+       
+        telaCarrinho.setLocation(1200, 300);
+        telaCarrinho.setVisible(true);
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
 
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
-        // TODO add your handling code here:
+       TelaLoginView telaLogin = new TelaLoginView(this);
+       this.setVisible(false);
+       telaLogin.setVisible(true);
     }//GEN-LAST:event_buttonLogarActionPerformed
 
     private void buttonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarActionPerformed
@@ -240,7 +288,7 @@ public class TelaInicialView extends javax.swing.JFrame {
             labelBot.setText("Sugestões com a mesma categoria");
             
             //Pesquisa
-            List<Livro> livros = livroController.searchTitle(titulo, 20);
+            List<Livro> livros = livroController.searchTitle(titulo, 50);
             cardAddFileira(livros, panelLivros1);
             
             
@@ -257,7 +305,6 @@ public class TelaInicialView extends javax.swing.JFrame {
             panelLogoNovidades.setVisible(true);
             scrollBot.setVisible(true);
         }
-
     }//GEN-LAST:event_buttonPesquisarActionPerformed
 
     private void cBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxCategoriasActionPerformed
@@ -289,8 +336,8 @@ public class TelaInicialView extends javax.swing.JFrame {
             //Transforma o painel interno em GRADE VERTICAL
             panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
 
-            //Busca todos os livros da categoria no painel 1
-            cardAddFileira(livroController.searchCategories(categoriaSelecionada, 10),panelLivros1);
+            //Busca os livros da categoria no painel 1
+            cardAddFileira(livroController.searchCategories(categoriaSelecionada, 300),panelLivros1);
             
             // 9. Força a janela a recalcular o design na mesma hora
             this.revalidate();

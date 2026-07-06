@@ -61,7 +61,7 @@ public class PessoaDao {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erro na autenticação: " + e.getMessage());
+            throw new RuntimeException("Não foi possível autenticar no banco de dados! ", e);
         }
 
         return null;
