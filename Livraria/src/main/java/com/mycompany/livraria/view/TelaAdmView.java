@@ -6,6 +6,7 @@ package com.mycompany.livraria.view;
 
 import com.mycompany.livraria.controller.LivroController;
 import com.mycompany.livraria.controller.PessoaController;
+import com.mycompany.livraria.controller.RelatorioController;
 import com.mycompany.livraria.model.*;
 import java.util.*;
 
@@ -20,6 +21,7 @@ public class TelaAdmView extends javax.swing.JFrame {
     //instanciando controladores
     private final PessoaController pessoaController = new PessoaController();
     private final LivroController livroController = new LivroController();
+    private final RelatorioController relatorioController = new RelatorioController();
 
     /**
      * Creates new form TelaAdmView
@@ -46,6 +48,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonAddLivro = new javax.swing.JButton();
         buttonDelLivro = new javax.swing.JButton();
         buttonListaCliente = new javax.swing.JButton();
+        buttonRelatorio = new javax.swing.JButton();
         panelCards = new javax.swing.JPanel();
         cardCatalogo = new javax.swing.JPanel();
         scrollCatalogo = new javax.swing.JScrollPane();
@@ -79,6 +82,9 @@ public class TelaAdmView extends javax.swing.JFrame {
         txtAreaCInfo = new javax.swing.JTextArea();
         buttonDeletarCliente = new javax.swing.JButton();
         buttonBuscarCliente = new javax.swing.JButton();
+        cardRelatorio = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        areaRelatorio = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -132,6 +138,14 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonListaCliente.setOpaque(true);
         buttonListaCliente.addActionListener(this::buttonListaClienteActionPerformed);
         panelOpcoes.add(buttonListaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 110, -1));
+
+        buttonRelatorio.setBackground(new java.awt.Color(204, 204, 204));
+        buttonRelatorio.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        buttonRelatorio.setText("Relatório");
+        buttonRelatorio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        buttonRelatorio.setOpaque(true);
+        buttonRelatorio.addActionListener(this::buttonRelatorioActionPerformed);
+        panelOpcoes.add(buttonRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 110, -1));
 
         getContentPane().add(panelOpcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 150, 500));
 
@@ -307,6 +321,17 @@ public class TelaAdmView extends javax.swing.JFrame {
         cadDelCliente.add(buttonBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 80, 20));
 
         panelCards.add(cadDelCliente, "cardDelCliente");
+
+        cardRelatorio.setBackground(new java.awt.Color(102, 102, 102));
+        cardRelatorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        areaRelatorio.setColumns(20);
+        areaRelatorio.setRows(5);
+        jScrollPane4.setViewportView(areaRelatorio);
+
+        cardRelatorio.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 550, 420));
+
+        panelCards.add(cardRelatorio, "cardRelatorio");
 
         getContentPane().add(panelCards, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 650, 500));
 
@@ -507,7 +532,7 @@ public class TelaAdmView extends javax.swing.JFrame {
 
     private void buttonDeletarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarClienteActionPerformed
         String p = txtBuscaCliente.getText();
-                
+
         int confirmacao = javax.swing.JOptionPane.showConfirmDialog(
                 this,
                 "ATENÇÃO: Tem certeza que deseja excluir permanentemente este usuário?",
@@ -515,7 +540,7 @@ public class TelaAdmView extends javax.swing.JFrame {
                 javax.swing.JOptionPane.YES_NO_OPTION,
                 javax.swing.JOptionPane.WARNING_MESSAGE
         );
-        
+
         if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
             try {
                 pessoaController.delete(p);
@@ -533,16 +558,15 @@ public class TelaAdmView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDeletarClienteActionPerformed
 
     private void buttonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarClienteActionPerformed
-        
+
         String p = txtBuscaCliente.getText();
         if (p.trim().isEmpty()) {
             mensagem("aviso", "O campo código não pode estar em branco");
             return;
         }
-        
+
         try {
-            
-            
+
             // Busca a pessoa
             Pessoa pessoa = pessoaController.search(p);
 
@@ -566,16 +590,23 @@ public class TelaAdmView extends javax.swing.JFrame {
         } catch (NumberFormatException ex) {
             // Se ele digitar letras em vez de números no campo ID
             mensagem("aviso", "Por favor, digite um número válido.");
-            
+
         } catch (RuntimeException e) {
             mensagem("aviso", e.getMessage());
             txtAreaCInfo.setText("");
             // CORREÇÃO: Estava buttonDeletarLivro, alterado para buttonDeletarCliente
             buttonDeletarCliente.setEnabled(false);
         }
-        
-      
+
+
     }//GEN-LAST:event_buttonBuscarClienteActionPerformed
+
+    private void buttonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRelatorioActionPerformed
+        mudarTela("cardRelatorio");
+        areaRelatorio.setText("");
+        areaRelatorio.setText(relatorioController.gerarRelatorioFormatado());
+
+    }//GEN-LAST:event_buttonRelatorioActionPerformed
 
     private void mudarTela(String nomeDoCard) {
         java.awt.CardLayout card = (java.awt.CardLayout) panelCards.getLayout();
@@ -644,6 +675,7 @@ public class TelaAdmView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaRelatorio;
     private javax.swing.JButton buttonAddLivro;
     private javax.swing.JButton buttonBuscarCliente;
     private javax.swing.JButton buttonBuscarLivro;
@@ -654,15 +686,18 @@ public class TelaAdmView extends javax.swing.JFrame {
     private javax.swing.JButton buttonDeletarCliente;
     private javax.swing.JButton buttonDeletarLivro;
     private javax.swing.JButton buttonListaCliente;
+    private javax.swing.JButton buttonRelatorio;
     private javax.swing.JComboBox<String> cBoxCategoria;
     private javax.swing.JPanel cadDelCliente;
     private javax.swing.JPanel cardAddLivro;
     private javax.swing.JPanel cardCatalogo;
     private javax.swing.JPanel cardDelLivro;
     private javax.swing.JPanel cardListaClientes;
+    private javax.swing.JPanel cardRelatorio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel labelCodCliente;
     private javax.swing.JLabel labelCodLivro;
     private javax.swing.JLabel labelLogo;
