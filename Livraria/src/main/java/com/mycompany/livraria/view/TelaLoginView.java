@@ -266,14 +266,17 @@ public class TelaLoginView extends javax.swing.JFrame {
         } else {
             try{
                 Pessoa usuarioLogado = pessoaController.login(email, senha);
-                int idCliente = usuarioLogado.getIdUsuario();
-                Carrinho carrinho = carrinhoController.getCarrinho(idCliente);
                 
                 //Retorna se o usuário não for identificado
                 if(usuarioLogado == null){
                     mensagem("aviso", "Usuário ou senha incorretos");
                     return;
                 }
+                
+                //Pega as informações do cliente
+                int idCliente = usuarioLogado.getIdUsuario();
+                Carrinho carrinho = carrinhoController.getCarrinho(idCliente);
+                
                 //Se usuárioLogado não for nulo, login realizado com sucesso
                 TelaInicialView telaPrincipal = new TelaInicialView(usuarioLogado, carrinho);
                 telaPrincipal.setVisible(true);
