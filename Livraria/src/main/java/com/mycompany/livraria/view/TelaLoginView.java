@@ -5,9 +5,11 @@
 
 package com.mycompany.livraria.view;
 
+import com.mycompany.livraria.controller.CarrinhoController;
 import javax.swing.JOptionPane;
 import com.mycompany.livraria.controller.PessoaController;
 import com.mycompany.livraria.dao.PessoaDao;
+import com.mycompany.livraria.model.Carrinho;
 import com.mycompany.livraria.model.Pessoa;
 
 /**
@@ -24,6 +26,7 @@ public class TelaLoginView extends javax.swing.JFrame {
     
     //Controladores
     PessoaController pessoaController = new PessoaController();
+    CarrinhoController carrinhoController = new CarrinhoController();
     
     public TelaLoginView() {
         initComponents();
@@ -263,6 +266,8 @@ public class TelaLoginView extends javax.swing.JFrame {
         } else {
             try{
                 Pessoa usuarioLogado = pessoaController.login(email, senha);
+                int idCliente = usuarioLogado.getIdUsuario();
+                Carrinho carrinho = carrinhoController.getCarrinho(idCliente);
                 
                 //Retorna se o usuário não for identificado
                 if(usuarioLogado == null){
@@ -270,7 +275,7 @@ public class TelaLoginView extends javax.swing.JFrame {
                     return;
                 }
                 //Se usuárioLogado não for nulo, login realizado com sucesso
-                TelaInicialView telaPrincipal = new TelaInicialView(usuarioLogado);
+                TelaInicialView telaPrincipal = new TelaInicialView(usuarioLogado, carrinho);
                 telaPrincipal.setVisible(true);
                 this.dispose(); // Fecha a tela de login
                 

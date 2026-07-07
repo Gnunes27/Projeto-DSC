@@ -4,6 +4,7 @@
  */
 package com.mycompany.livraria.view;
 
+import com.mycompany.livraria.model.ItemCarrinho;
 import com.mycompany.livraria.dao.CarrinhoDao;
 import com.mycompany.livraria.model.Carrinho;
 
