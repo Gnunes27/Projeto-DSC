@@ -58,7 +58,19 @@ git clone https://github.com/Gnunes27/Projeto-DSC
 
 <img width="1600" height="915" alt="5" src="https://github.com/user-attachments/assets/ebda8718-86f1-471b-9860-3d28d40fcd28" />
 
-## Passo 3.2: Configurar a conexão com o Banco de Dados no código do sistema.
+## Passo 3.2: Rodar o script
+
+- Na pasta Projeto-DSC/MySql, procure pelo 'script Livraria' e execute no banco de dados.
+
+  <img width="551" height="188" alt="9" src="https://github.com/user-attachments/assets/6dc56afc-975f-4c39-bfb7-63aacaa92704" />
+
+- Cole esse script na conexão Livraria que vc criou e execute clicando no ícone de raio.
+
+  <img width="1498" height="1075" alt="10" src="https://github.com/user-attachments/assets/b2050ff8-b994-489d-9b46-8023dc2f5c6e" />
+
+
+
+## Passo 3.3: Configurar a conexão com o Banco de Dados no código do sistema.
 
 #### Volte ao NetBeans e, na barra lateral direita, clique em 'Files' e siga o caminha até achar o arquivo 'ConnectionFactory.java'.
     Livraria/src/main/java/com/mycompany/livraria/conexao/ConnectionFactory.java
