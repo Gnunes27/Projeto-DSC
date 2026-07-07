@@ -14,6 +14,9 @@ import com.mycompany.livraria.dao.PessoaDao;
  */
 public class TelaInfoView extends javax.swing.JFrame {
 
+    //Tela inicial anterior
+    private  javax.swing.JFrame telaInicialAntiga = null;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInfoView.class.getName());
 
     //Controller
@@ -27,11 +30,11 @@ public class TelaInfoView extends javax.swing.JFrame {
      * @param usuario usuario logado
      * @param telaInicial tela inicial view
      */
-    public TelaInfoView(Pessoa usuario) {
+    public TelaInfoView(Pessoa usuario, javax.swing.JFrame telaInicial) {
         initComponents();
         this.usuario = usuario;
+        this.telaInicialAntiga = telaInicial;
         this.setLocationRelativeTo(null);
-
         preencherDados();
     }
 
@@ -110,13 +113,16 @@ public class TelaInfoView extends javax.swing.JFrame {
                 //Se for excluído corretamente 
                 javax.swing.JOptionPane.showMessageDialog(this, "Conta excluída com sucesso!");
                 
-                //Seta o usuário logado como nenhum em tela incial
+                //Cria uma nova tela inicial sem nenhum usuario logado
                 TelaInicialView telaInicial = new TelaInicialView();
                 telaInicial.setVisible(true);
                 
                 //Fecha essa janela
                 this.dispose();
                 
+                //Fecha a tela inicial anterior
+                telaInicialAntiga.dispose();
+
             } catch(RuntimeException e){
                 mensagem("aviso", e.getMessage());
             }
@@ -183,10 +189,11 @@ public class TelaInfoView extends javax.swing.JFrame {
         }
         //</editor-fold>
         Pessoa pessoa = new Pessoa();
+        javax.swing.JFrame telaInicial = new javax.swing.JFrame();
         
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaInfoView(pessoa).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaInfoView(pessoa, telaInicial).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

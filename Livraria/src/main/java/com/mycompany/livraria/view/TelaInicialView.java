@@ -82,7 +82,6 @@ public class TelaInicialView extends javax.swing.JFrame {
         panelOpcoes = new javax.swing.JPanel();
         buttonCatalogo = new javax.swing.JButton();
         cBoxCategorias = new javax.swing.JComboBox<>();
-        buttonOfertas = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         panelConteudo = new javax.swing.JPanel();
         jPanelSuperior = new javax.swing.JPanel();
@@ -162,18 +161,6 @@ public class TelaInicialView extends javax.swing.JFrame {
             }
         });
         panelOpcoes.add(cBoxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
-
-        buttonOfertas.setBackground(new java.awt.Color(204, 204, 204));
-        buttonOfertas.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        buttonOfertas.setText("Ofertas");
-        buttonOfertas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        buttonOfertas.setOpaque(true);
-        buttonOfertas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOfertasActionPerformed(evt);
-            }
-        });
-        panelOpcoes.add(buttonOfertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, -1, 20));
 
         getContentPane().add(panelOpcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, 30));
 
@@ -257,26 +244,6 @@ public class TelaInicialView extends javax.swing.JFrame {
         cardAddFileira(livroController.list(), panelLivros1);
     }//GEN-LAST:event_buttonCatalogoActionPerformed
 
-    private void buttonOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOfertasActionPerformed
-        //Deixando invisivél o painel de novidades
-        panelLogoNovidades.setVisible(false);
-        scrollBot.setVisible(false);
-
-        //limpando os livros anteriormente naquele local
-        panelLivros1.removeAll();
-
-        //Mudando o nome exibido
-        labelTop.setText("OFERTAS");
-        
-        //Transforma o painel interno em GRADE VERTICAL
-        panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
-
-        //setando a política para scroll vertical
-        scrollTop.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollTop.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-    }//GEN-LAST:event_buttonOfertasActionPerformed
-
     private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
         
         if(usuarioLogado == null){
@@ -294,28 +261,13 @@ public class TelaInicialView extends javax.swing.JFrame {
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
         //Se o usuário não estiver logado, chama a tela de login
         if (usuarioLogado == null) {
-            TelaLoginView telaLogin = new TelaLoginView(this);
+            TelaLoginView telaLogin = new TelaLoginView();
             this.setVisible(false);
             telaLogin.setVisible(true);
         } else {
-            //Se ele já estiver logado, verfica se é um Administrador ou usuário logado
-            if(usuarioLogado.isAdm()){
-                //Mostra a tela de adm
-                TelaAdmView telaAdm = new TelaAdmView();
-                telaAdm.setVisible(true);
-                
-                telaAdm.setLocationRelativeTo(null);
-                
-                //esconde essa tela
-                this.setVisible(false);
-                
-                //Retorna mais cedo para evitar mostrar a tela de informações de usuários comuns
-                return;
-            }
-            
             //Código para verificar se a tela de info já está aberta e evitar várias telas de info ao mesmo tempo
             if (telaInfo == null) {
-                telaInfo = new TelaInfoView(usuarioLogado);
+                telaInfo = new TelaInfoView(usuarioLogado, this);
             }
             telaInfo.setLocation(0, 0);
             telaInfo.setVisible(true);
@@ -591,7 +543,6 @@ public class TelaInicialView extends javax.swing.JFrame {
     private javax.swing.JButton buttonCarrinho;
     private javax.swing.JButton buttonCatalogo;
     private javax.swing.JButton buttonLogar;
-    private javax.swing.JButton buttonOfertas;
     private javax.swing.JButton buttonPesquisar;
     private javax.swing.JComboBox<String> cBoxCategorias;
     private javax.swing.JPanel jPanel1;

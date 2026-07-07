@@ -27,8 +27,16 @@ public class TelaAdmView extends javax.swing.JFrame {
      * Creates new form TelaAdmView
      *
      */
-    public TelaAdmView() {
+    public TelaAdmView(){
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                // Se fechar no X, faz a tela inicial reaparecer
+                voltar();
+            }
+        });
     }
 
     /**
@@ -86,7 +94,7 @@ public class TelaAdmView extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         areaRelatorio = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelLogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -343,6 +351,12 @@ public class TelaAdmView extends javax.swing.JFrame {
         buttonDeletarCliente.setEnabled(false);
     }//GEN-LAST:event_buttonDelClienteActionPerformed
 
+    private void voltar(){
+        TelaLoginView telaLogin = new TelaLoginView();
+        telaLogin.setVisible(true);
+        this.dispose();
+    }
+    
     private void buttonDelLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelLivroActionPerformed
         mudarTela("cardDelLivro");
     }//GEN-LAST:event_buttonDelLivroActionPerformed

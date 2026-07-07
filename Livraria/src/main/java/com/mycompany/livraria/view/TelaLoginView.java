@@ -21,19 +21,12 @@ public class TelaLoginView extends javax.swing.JFrame {
     /**
      * Creates new form TelaLoginView
      */
-    
-    //Tela inicial
-    
+   
     //Controladores
     PessoaController pessoaController = new PessoaController();
     CarrinhoController carrinhoController = new CarrinhoController();
-    
-    public TelaLoginView() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-    }
 
-    public TelaLoginView(TelaInicialView telaInicial) {
+    public TelaLoginView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -272,6 +265,18 @@ public class TelaLoginView extends javax.swing.JFrame {
                     mensagem("aviso", "Usuário ou senha incorretos");
                     return;
                 }
+                
+                //Se o usuário for Administrador mostra a tela de administrador
+                if(usuarioLogado.isAdm()){
+                    TelaAdmView telaAdm = new TelaAdmView();
+                    telaAdm.setLocationRelativeTo(null);
+                    telaAdm.setVisible(true);
+                    
+                   this.setVisible(false);
+                   return;
+                }
+                    
+                
                 
                 //Pega as informações do cliente
                 int idCliente = usuarioLogado.getIdUsuario();
