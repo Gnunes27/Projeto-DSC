@@ -297,10 +297,10 @@ public class TelaInicialView extends javax.swing.JFrame {
             this.setVisible(false);
             telaLogin.setVisible(true);
         } else {
-            if (telaInfo == null) {
+            if (telaInfo == null ) {
                 telaInfo = new TelaInfoView(usuarioLogado);
             }
-            telaInfo.setLocation(1000, 600);
+            telaInfo.setLocation(0, 0);
             telaInfo.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogarActionPerformed
