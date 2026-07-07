@@ -9,8 +9,7 @@ import com.mycompany.livraria.conexao.ConnectionFactory;
 import java.sql.*;
 
 public class CarrinhoDao {
-
-   
+    
     // Função que procura um carrinho vinculado ao cliente
     public int searchCarrinho(int idUsuario) throws SQLException{
         String sqlBusca = "SELECT id_venda FROM Venda WHERE id_usuario = ? AND status = 'CARRINHO'";
@@ -42,8 +41,11 @@ public class CarrinhoDao {
     /**
      * Chamado toda vez que o cliente clicar no botão "+ Carrinho".
      * Adiciona o livro direto na base de dados.
+     * @param idUsuario
+     * @param idLivro
+     * @param quantidade
      */
-    public boolean addItem(int idUsuario, int idLivro, int quantidade) {
+    public void addItem(int idUsuario, int idLivro, int quantidade) {
         try {
             int idVenda = searchCarrinho(idUsuario);
 
@@ -88,12 +90,8 @@ public class CarrinhoDao {
 
             // Recalcula o valor total da venda consultando o preço dos livros
             valorTotal(idVenda);
-
-            return true;
-
         } catch (SQLException e) {
-            System.out.println("Erro ao adicionar item no banco: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Erro ao adicionar item no banco de dados! ", e);
         }
     }
 
@@ -126,6 +124,7 @@ public class CarrinhoDao {
     /**
      * Chama este método logo após o Login do cliente!
      * Ele vai no banco, procura se tem carrinho aberto e restaura para a memória.
+     * @param idUsuario
      */
     public Carrinho restaurarCarrinho(int idUsuario) {
          Carrinho carrinho = new Carrinho();
@@ -152,13 +151,13 @@ public class CarrinhoDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao restaurar carrinho: " + e.getMessage());
+            throw new RuntimeException("Erro ao restaurar carrinho: " + e.getMessage());
         }
         return carrinho;
     }
 
    
-    public boolean finalizarCompra(int idUsuario) {
+    public void finalizarCompra(int idUsuario) {
         String sql = "UPDATE Venda SET status = 'FINALIZADA', data_venda = CURRENT_TIMESTAMP " +
                      "WHERE id_usuario = ? AND status = 'CARRINHO'";
                      
@@ -167,11 +166,12 @@ public class CarrinhoDao {
             
             stmt.setInt(1, idUsuario);
             int linhas = stmt.executeUpdate();
-            return linhas > 0; // Retorna true se finalizou com sucesso
+            
+            if(linhas == 0)
+                throw new RuntimeException ("Não foi possível encontrar a compra no banco de dados! ");
 
         } catch (SQLException e) {
-            System.out.println("Erro ao finalizar compra: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Não foi possível buscar a compra no banco de dados! ", e);
         }
     
     }

@@ -14,6 +14,25 @@ import java.util.*;
 
 public class PessoaDao {
 
+    public void atualizarSaldo(int idUsuario, Double valorPago){
+        String sql = "UPDATE usuario SET saldo = saldo - ? WHERE id_usuario = ?";
+        
+        try (Connection conn = ConnectionFactory.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, valorPago);
+            stmt.setInt(2, idUsuario);
+            
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            if(linhasAfetadas == 0){
+                throw new RuntimeException("Nenhum usuário foi encontrado no banco de dados! ");
+            }
+            
+        } catch(SQLException e){
+            throw new RuntimeException("Não foi possível buscar o usuário no banco de dados! ", e);
+        }
+    }
+    
     public boolean cadastrar(Pessoa pessoa) {
         String sql = "INSERT INTO Usuario (nome, email, senha, adm) VALUES (?, ?, ?, ?)";
 
@@ -55,6 +74,7 @@ public class PessoaDao {
                         usuarioLogado.setEmail(rs.getString("email"));
                         usuarioLogado.setSenha(hashDoBanco);
                         usuarioLogado.setAdm(rs.getBoolean("adm"));
+                        usuarioLogado.setSaldo(rs.getDouble("saldo"));
 
                         return usuarioLogado;
                     }

@@ -25,7 +25,7 @@ public class TelaInicialView extends javax.swing.JFrame {
     //Controladores 
     LivroController livroController = new LivroController();
     CarrinhoController carrinhoController = new CarrinhoController();
-
+    
     //Telas relacionadas
     TelaCarrinhoView telaCarrinho = null;
     TelaInfoView telaInfo = null;
@@ -58,6 +58,9 @@ public class TelaInicialView extends javax.swing.JFrame {
         cardAddFileira(livroController.searchLastBooks(10), panelLivros2);
         
         this.usuarioLogado = usuario;
+        
+        //Cria o carrinho
+        this.telaCarrinho = new TelaCarrinhoView(usuario);
         this.carrinho = carrinho;
     }
 
@@ -263,8 +266,8 @@ public class TelaInicialView extends javax.swing.JFrame {
         panelLivros1.removeAll();
 
         //Mudando o nome exibido
-        labelTop.setText("OFERTAS");
-
+        labelTop.setText("CATÁLOGO");
+        
         //Transforma o painel interno em GRADE VERTICAL
         panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
 
@@ -275,12 +278,17 @@ public class TelaInicialView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonOfertasActionPerformed
 
     private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
-        if (telaCarrinho == null) {
-            telaCarrinho = new TelaCarrinhoView();
+        
+        if(usuarioLogado == null){
+                mensagem("aviso", "Faça login pra adicionar itens ao carrinho! ");
+                return;
         }
         
+        telaCarrinho = new TelaCarrinhoView(usuarioLogado);
+       
         telaCarrinho.setLocation(1200, 300);
         telaCarrinho.setVisible(true);
+        
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
 
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
@@ -401,7 +409,7 @@ public class TelaInicialView extends javax.swing.JFrame {
 
     // Metodo para criação de cards de livro
     private javax.swing.JPanel cardLivro(String titulo, double preco, int idLivro) {
-
+        
         //Cria o painel do livro
         javax.swing.JPanel card = new javax.swing.JPanel();
         card.setLayout(new javax.swing.BoxLayout(card, javax.swing.BoxLayout.Y_AXIS));
@@ -445,10 +453,21 @@ public class TelaInicialView extends javax.swing.JFrame {
 
         // Evento do botão do carrinho 
         btnCarrinho.addActionListener(e -> {
-            
-            if (usuarioLogado != null) {
-              
-                System.out.println("Livro adicionado: " + titulo);
+            //Se o user não tiver logado não permite adicionar itens ao carrinho
+            if(usuarioLogado == null){
+                mensagem("aviso", "Faça login pra adicionar itens ao carrinho! ");
+            }else{
+                //adicionando o livro escolhido no carrinho
+                try{
+                    carrinhoController.addItem(usuarioLogado.getIdUsuario(), idLivro, 1);
+                    
+                    //Atualiza carrinho
+                    telaCarrinho.atualizarCarrinho();
+                    
+                    mensagem("aviso", "Livro adicionado ao carrinho!");
+                }catch (RuntimeException ex){
+                    mensagem("erro", ex.getMessage());
+                }
             }
         });
 
@@ -502,6 +521,7 @@ public class TelaInicialView extends javax.swing.JFrame {
                     String titulo = rs.getString("nome");
                     double preco = rs.getDouble("preco");
                     int idLivro = rs.getInt("id_livro");
+
                     javax.swing.JPanel novoCard = cardLivro(titulo, preco, idLivro);
                     painel.add(novoCard);
                 }
