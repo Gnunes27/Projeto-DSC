@@ -4,15 +4,25 @@
  */
 package com.mycompany.livraria.view;
 
+import com.mycompany.livraria.controller.CarrinhoController;
+import com.mycompany.livraria.model.ItemCarrinho;
 import com.mycompany.livraria.dao.CarrinhoDao;
-import com.mycompany.livraria.model.Carrinho;
+import com.mycompany.livraria.model.*;
+import java.util.*;
 
 /**
  *
  * @author Gnunes
  */
 public class TelaCarrinhoView extends javax.swing.JFrame {
-
+    
+    Pessoa usuarioLogado = null;
+    
+    //Controller
+    CarrinhoController carrinhoController = new CarrinhoController();
+    
+    //Carrinho
+    Carrinho carrinho;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCarrinhoView.class.getName());
 
     /**
@@ -20,6 +30,13 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
      */
     public TelaCarrinhoView() {
         initComponents();
+    }
+    
+    public TelaCarrinhoView(Pessoa usuarioLogado) {
+        initComponents();
+        this.carrinho = carrinhoController.getCarrinho(usuarioLogado.getIdUsuario());
+        this.usuarioLogado = usuarioLogado;
+        atualizarCarrinho();
     }
 
     /**
@@ -69,7 +86,7 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
 
         labelPreco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         labelPreco.setOpaque(true);
-        jPanel1.add(labelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 20));
+        jPanel1.add(labelPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 300, 45));
 
@@ -109,11 +126,42 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonComprarActionPerformed
-
         
-        int idUsuarioLogado = 1;
-
+        //Verificando se o usuário tem saldo suficiente na conta para a transação
+        Double totalCompra = carrinho.calcularTotal();
         
+        //Mensagem de confirmação de compra
+           
+        int confirmacao = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "ATENÇÃO: Tem certeza que deseja Continuar com a compra?",
+                "Confirmar Compra",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        
+        if (confirmacao == javax.swing.JOptionPane.NO_OPTION) {
+            return;
+        }
+            
+        
+        if(usuarioLogado.getSaldo() < totalCompra){
+            mensagem("aviso", "Saldo insuficiente na conta! ");
+            return;
+        }
+        
+        try{
+            carrinhoController.finalizarCompra(usuarioLogado.getIdUsuario(), totalCompra);
+             
+            //Atualiza o carrinho
+            atualizarCarrinho();
+            
+            mensagem("aviso", "compra realizada com sucesso! ");
+        } catch(RuntimeException e){
+            mensagem("aviso", e.getMessage());
+        }
+        
+        /*
         CarrinhoDao dao = new CarrinhoDao();
         Carrinho carrinho = dao.restaurarCarrinho(idUsuarioLogado);
 
@@ -141,9 +189,76 @@ public class TelaCarrinhoView extends javax.swing.JFrame {
             
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar os itens do carrinho: " + e.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_buttonComprarActionPerformed
 
+    
+    public void atualizarCarrinho(){
+        
+        if(usuarioLogado == null)
+            return;
+        
+        this.carrinho = carrinhoController.getCarrinho(usuarioLogado.getIdUsuario());
+        
+        //Cria o modelo do carrinho
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCarrinho.getModel();
+        modelo.setNumRows(0);
+        
+        //limpa o modelo
+        modelo.setRowCount(0);
+        
+        
+        
+        List<ItemCarrinho> itens = carrinho.getItens();
+        
+        Double total = 0.0;
+        //Adiciona os itens do carrinho no modelo
+        for  (ItemCarrinho i : itens){
+            modelo.addRow(new Object[]{
+                    i.getTitulo(),
+                    i.getQuantidade(),
+                    i.getPreco()*i.getQuantidade()
+                }        
+            );
+            total += i.getPreco()*i.getQuantidade();
+        }
+        
+        //Mostra o total pago;
+        labelPreco.setText(String.format("Total: R$ %.2f", total));
+        
+        //Atualiza os dados na view
+        modelo.fireTableDataChanged(); 
+        tableCarrinho.revalidate();
+        tableCarrinho.repaint();
+    }
+    
+    
+    private void mensagem(String tipo, String mensagem) {
+        int tipoIcone;
+        String titulo;
+
+        switch (tipo.toLowerCase()) {
+            case "erro":
+                tipoIcone = javax.swing.JOptionPane.ERROR_MESSAGE;
+                titulo = "Erro no Sistema";
+                break;
+            case "aviso":
+                tipoIcone = javax.swing.JOptionPane.WARNING_MESSAGE;
+                titulo = "Atenção";
+                break;
+            case "sucesso":
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Sucesso";
+                break;
+            default:
+                tipoIcone = javax.swing.JOptionPane.INFORMATION_MESSAGE;
+                titulo = "Informação";
+                break;
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(this, mensagem, titulo, tipoIcone);
+    }
+    
     /**
      * @param args the command line arguments
      */

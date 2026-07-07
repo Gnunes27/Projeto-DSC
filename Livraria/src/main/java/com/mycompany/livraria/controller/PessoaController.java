@@ -14,6 +14,15 @@ public class PessoaController {
     //Intanciando o DAO de pessoa
     private final PessoaDao pessoaDao = new PessoaDao();    
     
+    //Função de atualizar saldo
+    public void balanceUpdate(int idUsuario, Double valorPago){
+        try{
+            pessoaDao.atualizarSaldo(idUsuario, valorPago);
+        } catch(RuntimeException e){
+            throw new RuntimeException("Erro ao atualizar o saldo: "+e.getMessage(), e);
+        }
+    }
+    
     //Função de logar
     public Pessoa login(String email, String senha){
         try{

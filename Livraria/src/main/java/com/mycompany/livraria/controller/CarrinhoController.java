@@ -13,6 +13,9 @@ import com.mycompany.livraria.model.Carrinho;
  * @author Gnunes
  */
 public class CarrinhoController {
+    
+    //PessoaController
+    PessoaController pessoaController = new PessoaController();
 
     private final CarrinhoDao carrinho = new CarrinhoDao();
 
@@ -26,13 +29,15 @@ public class CarrinhoController {
 
     }
 
-    public boolean addItem(int idCliente, int idLivro, int qtde) {
+    public void addItem(int idCliente, int idLivro, int qtde) {
         try {
-            boolean add = carrinho.addItem(idCliente, idLivro, qtde);
-            return add;
+            carrinho.addItem(idCliente, idLivro, qtde);
         } catch (RuntimeException e) {
             throw new RuntimeException("Erro ao adicionar Item: " + e.getMessage(), e);
         }
+        
+        
+        
     }
 
     public Carrinho getCarrinho(int idCliente) {
@@ -44,12 +49,14 @@ public class CarrinhoController {
         }
     }
 
-    public boolean finalizarCompra(int idCliente) {
+    public void finalizarCompra(int idCliente, Double valorCompra) {
         try {
-            boolean q = carrinho.finalizarCompra(idCliente);
-            return q;
+            carrinho.finalizarCompra(idCliente);
+            
+            //Subtrair o valor da compra no usuário
+            pessoaController.balanceUpdate(idCliente, valorCompra);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Erro: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao finalizar compra: " + e.getMessage(), e);
         }
     }
 

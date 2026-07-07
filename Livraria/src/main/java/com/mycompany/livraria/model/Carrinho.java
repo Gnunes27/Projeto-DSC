@@ -4,7 +4,6 @@
  */
 package com.mycompany.livraria.model;
 
-import com.mycompany.livraria.view.ItemCarrinho;
 import java.util.*;
 
 /**
