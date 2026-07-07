@@ -244,7 +244,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         panelLivros1.removeAll();
 
         //Mudando o nome exibido
-        labelTop.setText("OFERTAS");
+        labelTop.setText("CATÁLOGO");
 
         //Transforma o painel interno em GRADE VERTICAL
         panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
@@ -266,7 +266,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         panelLivros1.removeAll();
 
         //Mudando o nome exibido
-        labelTop.setText("CATÁLOGO");
+        labelTop.setText("OFERTAS");
         
         //Transforma o painel interno em GRADE VERTICAL
         panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
@@ -292,15 +292,32 @@ public class TelaInicialView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
 
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
+        //Se o usuário não estiver logado, chama a tela de login
         if (usuarioLogado == null) {
             TelaLoginView telaLogin = new TelaLoginView(this);
             this.setVisible(false);
             telaLogin.setVisible(true);
         } else {
+            //Se ele já estiver logado, verfica se é um Administrador ou usuário logado
+            if(usuarioLogado.isAdm()){
+                //Mostra a tela de adm
+                TelaAdmView telaAdm = new TelaAdmView();
+                telaAdm.setVisible(true);
+                
+                telaAdm.setLocationRelativeTo(null);
+                
+                //esconde essa tela
+                this.setVisible(false);
+                
+                //Retorna mais cedo para evitar mostrar a tela de informações de usuários comuns
+                return;
+            }
+            
+            //Código para verificar se a tela de info já está aberta e evitar várias telas de info ao mesmo tempo
             if (telaInfo == null) {
                 telaInfo = new TelaInfoView(usuarioLogado);
             }
-            telaInfo.setLocation(1000, 600);
+            telaInfo.setLocation(0, 0);
             telaInfo.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogarActionPerformed
@@ -508,7 +525,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         
         painel.removeAll();
         
-        String sql = "SELECT nome, preco FROM Livro WHERE categoria = ? AND nome NOT LIKE ? LIMIT ?";
+        String sql = "SELECT id_livro, nome, preco FROM Livro WHERE categoria = ? AND nome NOT LIKE ? LIMIT ?";
         
         try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
             

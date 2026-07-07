@@ -33,7 +33,7 @@ public class PessoaDao {
         }
     }
     
-    public boolean cadastrar(Pessoa pessoa) {
+    public void cadastrar(Pessoa pessoa) {
         String sql = "INSERT INTO Usuario (nome, email, senha, adm) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -47,11 +47,8 @@ public class PessoaDao {
             stmt.setBoolean(4, pessoa.isAdm());
 
             stmt.execute();
-            return true;
-
         } catch (SQLException e) {
-            System.err.println("Erro ao cadastrar usuário: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Não foi possível cadastrar usuário no banco de dados! ",e);
         }
     }
 

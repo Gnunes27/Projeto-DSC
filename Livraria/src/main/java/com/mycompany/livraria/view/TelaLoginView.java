@@ -266,14 +266,17 @@ public class TelaLoginView extends javax.swing.JFrame {
         } else {
             try{
                 Pessoa usuarioLogado = pessoaController.login(email, senha);
-                int idCliente = usuarioLogado.getIdUsuario();
-                Carrinho carrinho = carrinhoController.getCarrinho(idCliente);
                 
                 //Retorna se o usuário não for identificado
                 if(usuarioLogado == null){
                     mensagem("aviso", "Usuário ou senha incorretos");
                     return;
                 }
+                
+                //Pega as informações do cliente
+                int idCliente = usuarioLogado.getIdUsuario();
+                Carrinho carrinho = carrinhoController.getCarrinho(idCliente);
+                
                 //Se usuárioLogado não for nulo, login realizado com sucesso
                 TelaInicialView telaPrincipal = new TelaInicialView(usuarioLogado, carrinho);
                 telaPrincipal.setVisible(true);
@@ -339,27 +342,25 @@ public class TelaLoginView extends javax.swing.JFrame {
                     avisoTitulo,
                     tipoMensagem);
         } else {
+            //Monta a pessoa para mandar para o controller
             Pessoa novaPessoa = new Pessoa();
             novaPessoa.setNome(nome);
             novaPessoa.setEmail(email);
             novaPessoa.setSenha(senha);
-            novaPessoa.setAdm(false); // Por padrão, novos usuários não são administradores
-
-            PessoaDao pessoaDao = new PessoaDao();
-            boolean sucesso = pessoaDao.cadastrar(novaPessoa);
-
-            if (sucesso) {
+            novaPessoa.setAdm(false); 
+            
+            //Chama o controller para registrar pessoa no banco de dados
+            try{
+                pessoaController.register(novaPessoa);
+                
                 javax.swing.JOptionPane.showMessageDialog(this,
                         "Usuário registrado com sucesso!",
                         "Sucesso",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 // Voltar para a tela de login após registro
                 buttonNewLoginActionPerformed(null);
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this,
-                        "Erro ao registrar usuário. Tente novamente.",
-                        "Erro",
-                        javax.swing.JOptionPane.ERROR_MESSAGE);
+            } catch (RuntimeException e){
+                mensagem("aviso", e.getMessage());
             }
         }
     }// GEN-LAST:event_buttonConfirmarActionPerformed
