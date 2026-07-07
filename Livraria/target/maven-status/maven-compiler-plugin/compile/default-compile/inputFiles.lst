@@ -2,14 +2,16 @@ C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\myc
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\controller\CarrinhoController.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\controller\LivroController.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\controller\PessoaController.java
+C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\controller\RelatorioController.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\dao\CarrinhoDao.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\dao\LivroDao.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\dao\PessoaDao.java
+C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\dao\RelatorioDao.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\Livraria.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\model\Carrinho.java
+C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\model\ItemCarrinho.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\model\Livro.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\model\Pessoa.java
-C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\view\ItemCarrinho.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\view\TelaAdmView.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\view\TelaCarrinhoView.java
 C:\Users\Gnunes\Downloads\Git-Hub\DSC\Projeto-DSC\Livraria\src\main\java\com\mycompany\livraria\view\TelaInfoView.java

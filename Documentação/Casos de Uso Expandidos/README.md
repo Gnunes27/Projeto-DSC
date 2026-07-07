@@ -28,25 +28,7 @@ Avança para o passo 6 do fluxo principal.
 
 ### EXCEÇÕES 
 
-## UC2. Manter Avaliações
-
-### PRÉ-CONDIÇÕES
-RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
-
-### FLUXO PRINCIPAL
-
-- 1\. [IN] Cliente informa sua identificação.
-- 2\. [OUT] Sistema exibe os livros comprados anteriormente e que não possuem avaliação feita pelo cliente.
-- 3\. [IN] Cliente informa o livro para ser feita a avaliação.
-- 4\. [OUT] Sistema exibe a interface de avaliação (nota, comentário).
-- 5\. [IN] Cliente informa a nota e o comentário.
-- 6\. [OUT] Sistema informa o registro da avaliação.
-
-### FLUXOS DE VARIANTES
-
-### EXCEÇÕES 
-
-## UC3. Consultar Catálogo
+## UC2. Consultar Catálogo
 
 ### PRÉ-CONDIÇÕES
 
@@ -61,7 +43,7 @@ RS02. O ator deve informar suas credenciais e o sistema deve identificar se essa
 
 ### EXCEÇÕES
 
-## UC4. Manter Conta
+## UC3. Manter Conta
 
 ### PRÉ-CONDIÇÕES
 RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
@@ -79,7 +61,7 @@ RS02. O ator deve informar suas credenciais e o sistema deve identificar se essa
 
 ### EXCEÇÕES
 
-## UC5. Exibir Relatório
+## UC4. Exibir Relatório
 
 ### PRÉ-CONDIÇÕES
 RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
@@ -87,11 +69,9 @@ RS02. O ator deve informar suas credenciais e o sistema deve identificar se essa
 ### FLUXO PRINCIPAL 
 
 - 1\. [IN] Administrador informa sua identificação.
-- 2\. [OUT] Sistema exibe as opções de relatório.
-- 3\. [IN] Administrador escolhe saber quanto foi faturado com as vendas.
-- 4\. [OUT] Sistema informa as opções de pesquisa (período a ser analisado, forma de ordenação dos livros).
-- 5\. [IN] Administrador informa o período e a ordenação dos livros pelos mais vendidos.
-- 6\. [OUT] Sistema exibe o quanto foi faturado no período especificado informando os detalhes das vendas (título do livro, ISBN, quantidade vendida de cada livro, valor individual de cada livro, valor total vendido de cada livro).
+- 2\. [OUT] Sistema exibe a opção de ver o relatório de vendas da loja.
+- 3\. [IN] Administrador escolhe ver o relatório.
+- 4\. [OUT] Sistema exibe faturamento total, quantidade de livros vendidos, livro mais e menos vendido, faturamento por mês e histórico de vendas.
 
 ### FLUXOS DE VARIANTES
 
@@ -102,7 +82,7 @@ Avança para o passo 6 do fluxo principal.
 
 ### EXCEÇÕES
 
-## UC6. Gerenciar Catálogo
+## UC5. Gerenciar Catálogo
 
 ### PRÉ-CONDIÇÕES
 RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
@@ -127,25 +107,7 @@ RS02. O ator deve informar suas credenciais e o sistema deve identificar se essa
 
 ### EXCEÇÕES
 
-## UC7. Gerenciar Avaliações
-
-### PRÉ-CONDIÇÕES
-RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.
-
-### FLUXO PRINCIPAL
-
-- 1\. [IN] Administrador informa sua identificação.
-- 2\. [OUT] Sistema informa as opções para gerenciar as avaliações.
-- 3\. [IN] Administrador escolhe excluir avaliações de clientes.
-- 4\. [OUT] Sistema informa as avaliações disponíveis para serem excluídas.
-- 5\. [IN] Administrador informa as avaliações que deseja excluir e efetua a operação.
-- 6\. [OUT] Sistema informa a confirmação de exclusão das avaliações.
-
-### FLUXOS DE VARIANTES
-
-### EXCEÇÕES
-
-## UC8. Gerenciar Contas
+## UC6. Gerenciar Contas
 
 ### PRÉ-CONDIÇÕES
 RS02. O ator deve informar suas credenciais e o sistema deve identificar se essas credenciais estão corretas concedendo, ou impedindo, o acesso.

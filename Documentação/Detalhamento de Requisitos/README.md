@@ -35,7 +35,7 @@
 #### RF03. O sistema deve possuir um sistema de promoções.
 - Usuário: Administrador, Cliente.
   
-- Descrição: O sistema deve permitir que diferentes livros possam estar disponíveis com diferentes tipos de promoções. Essas promoções devem ser gerenciadas pelo administrador de maneira que permita o controle de quais livros estão em promoção e até quanto tempo, além de ser possível definir uma quantidade limitada de compras de livros ofertadas em promoções. Além disso, o sistema deve permitir a visualização do tempo e quantidade restante da promoção ofertada.
+- Descrição: O sistema deve permitir que o carrinho calcule um desconto baseado na quantidade de livros no carrinho.
 
 - Fontes: Equipe de Desenvolvimento de Software. 
 
@@ -45,10 +45,10 @@
 
 - Requisitos não funcionais relacionados: Nda.
 
-#### RF04. O sistema deve exibir o relatório de quanto foi faturado em um período especificado.
+#### RF04. O sistema deve exibir o relatório do faturamento total e mensal, alem do historico de vendas
 - Usuário: Administrador.
   
-- Descrição: Deve ser permitido a visualização, pelo administrador, do total arrecadado em um período de tempo especificado pelo administrador.
+- Descrição: Deve ser permitido a visualização do total arrecadado com as vendas.
 
 - Fontes: Equipe de Desenvolvimento de Software. 
 
@@ -58,7 +58,7 @@
 
 - Requisitos não funcionais relacionados: RNF01.
 
-#### RF05. O sistema deve mostrar quais foram os livros mais vendidos de um período especificado.
+#### RF05. O sistema deve mostrar quais foram os livros mais vendidos.
 - Usuário: Administrador.
   
 - Descrição: O sistema deve ser capaz de exibir uma quantidade de livros mais vendidos em um período. O administrador deve ser capaz de escolher a quantidade de livros exibida além do período desejado para a visualização.  
@@ -71,7 +71,7 @@
 
 - Requisitos não funcionais relacionados: RNF01.
 
-#### RF06. O sistema deve exibir quais foram os livros menos vendidos de um período especificado.
+#### RF06. O sistema deve exibir quais foram os livros menos vendidos.
 - Usuário: Administrador.
   
 - Descrição: O sistema deve exibir uma quantidade de livros em um período de tempo, especificados pelo administrador, que obtiveram o menor número de vendas.
@@ -110,46 +110,7 @@
 
 - Requisitos não funcionais relacionados: RNF07.
 
-#### RF09.  Dentro do sistema deve ser possível avaliar os livros disponíveis no catálogo.
-- Usuário: Cliente.
-  
-- Descrição: O sistema deve permitir que o cliente avalie livros de sua escolha.
-
-- Fontes: Equipe de Desenvolvimento de Software.
-
-- Informações de entrada: Livro escolhido para a avaliação, texto da avaliação, nota do usuário.
-
-- Informações de saída: Avaliação do usuário com nota escolhida.
-
-- Requisitos não funcionais relacionados: RNF04, RNF07. 
-
-#### RF10. O sistema deve permitir a exclusão de avaliações.
-- Usuário: Administrador, Cliente.
-  
-- Descrição: O administrador deve ser capaz de excluir qualquer avaliação dos clientes. Os clientes têm a possibilidade de excluir a própria avaliação.
-
-- Fontes: Equipe de Desenvolvimento de Software.
-
-- Informações de entrada: Avaliação que deseja ser excluída.
-
-- Informações de saída: Avaliação excluída do sistema.
-
-- Requisitos não funcionais relacionados: RNF02, RNF07, RNF08.
-
-#### RF11. O sistema deve permitir a edição de avaliações.
-- Usuário: Cliente.
-  
-- Descrição: Os clientes possuem a possibilidade de editar a própria avaliação.
-
-- Fontes: Equipe de Desenvolvimento de Software.
-
-- Informações de entrada: Avaliação que deseja ser editada, comentário editado, nota editada.
-
-- Informações de saída: Avaliação editada no sistema.
-
-- Requisitos não funcionais relacionados: RNF09.
-
-#### RF12.  O sistema deve permitir dois níveis de acesso diferentes, administrador e cliente.
+#### RF9.  O sistema deve permitir dois níveis de acesso diferentes, administrador e cliente.
 - Usuário: Administrador, Cliente.
   
 - Descrição: O administrador, quando realizar a autenticação usando suas credenciais, deve ser capaz de usar os serviços específicos à ele. O cliente quando
@@ -163,7 +124,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: RNF02. 
 
-#### RF13. O sistema deve permitir que novos livros possam ser adicionados ao catálogo do sistema.
+#### RF10. O sistema deve permitir que novos livros possam ser adicionados ao catálogo do sistema.
 - Usuário: Administrador.
   
 - Descrição: O administrador deve ser capaz de adicionar novos livros ao catálogo do sistema.
@@ -176,7 +137,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: RNF01, RNF05.
 
-#### RF14. O sistema deve permitir a remoção de livros no catálogo do sistema.
+#### RF11. O sistema deve permitir a remoção de livros no catálogo do sistema.
 - Usuário: Administrador.
   
 - Descrição: O administrador deve ser capaz de remover os livros, adicionados no catálogo previamente, do sistema. O administrador deve informar os dados
@@ -190,7 +151,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: RNF01, RNF02.
  
-#### RF15. Deve ser possível excluir uma conta de cliente do sistema.
+#### RF12. Deve ser possível excluir uma conta de cliente do sistema.
 - Usuário: Administrador, Cliente.
   
 - Descrição: O administrador deve conseguir excluir a conta de qualquer cliente. O cliente deve ser capaz de excluir a própria conta. Além disso, é necessária a
@@ -204,7 +165,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: RNF10.
 
-#### RF16. O sistema deve possuir uma interface simples contendo uma área para as informações e opções da conta do cliente, o carrinho de compras, uma área para pesquisa de livros e uma página principal.
+#### RF13. O sistema deve possuir uma interface simples contendo uma área para as informações e opções da conta do cliente, o carrinho de compras, uma área para pesquisa de livros e uma página principal.
 - Usuário: Cliente.
   
 - Descrição: O sistema deve apresentar uma área que forneça as informações e opções da conta do cliente contendo as informações sobre a conta do cliente além de opções relacionadas à ela. Através da área de pesquisa deve ser possível pesquisar os livros por nome, categoria e autor podendo escolher informar uma ou mais dessas informações. A página principal deve conter os principais serviços ofertados pelo sistema.
@@ -217,10 +178,10 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: Nda.
 
-#### RF17. O sistema deve disponibilizar a visualização dos 5 livros mais comprados da semana.
+#### RF14. O sistema deve disponibilizar a visualização dos 10 livros mais vendidos.
 - Usuário: Cliente.
   
-- Descrição: Deverá ser exibido os 10 livros mais comprados da semana.
+- Descrição: Deverá ser exibido os 10 livros mais comprados.
 
 - Fontes: Equipe de Desenvolvimento de Software.
 
@@ -230,20 +191,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: Nda.
 
-#### RF18. O sistema deve disponibilizar a visualização dos 5 livros mais comprados das três categorias mais compradas.
-- Usuário: Cliente.
-  
-- Descrição: Deverá ser exibido pelo sistema os 5 livros mais comprados de cada uma das três categorias mais compradas.
-
-- Fontes: Equipe de Desenvolvimento de Software.
-
-- Informações de entrada: Nda.
-
-- Informações de saída: Os cinco livros mais comprados de cada uma das três categorias mais compradas.
-
-- Requisitos não funcionais relacionados: Nda.
-
-#### RF19. O sistema deve permitir a visualização dos dados dos clientes com exceção da senha.
+#### RF15. O sistema deve permitir a visualização dos dados dos clientes com exceção da senha.
 - Usuário: Administrador.
   
 - Descrição: O administrador deve ser capaz de visualizar os dados dos clientes do sistema, porém, a senha dos usuários deve permanecer desconhecida para o administrador.
@@ -256,20 +204,8 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: RNF01.
 
-#### RF20. O sistema deve permitir que cada livro tenha mais de uma categoria atribuída à ele.
-- Usuário: Cliente.
-  
-- Descrição: Cada livro, adicionado no catálogo do sistema, deve possuir pelo menos uma categoria relacionada a ele que poderá ser observada pelos usuários.
 
-- Fontes: Equipe de Desenvolvimento de Software.
-
-- Informações de entrada: Nda.
-- 
-- Informações de saída: Nda.
-
-- Requisitos não funcionais relacionados: RNF10.
-
-#### RF21. O sistema deve permitir a busca de livros com base em categorias especificadas.
+#### RF16. O sistema deve permitir a busca de livros com base em categorias especificadas.
 - Usuário: Cliente, Administrador.
   
 - Descrição: Deve ser especificado as categorias que serão pesquisadas no sistema. Logo após isso o sistema deve retornar quais são os livros que possuem as categorias escolhidas.
@@ -282,7 +218,7 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: Nda.
 
-#### RF22. O sistema deve permitir a busca por nomes de livros.
+#### RF17. O sistema deve permitir a busca por nomes de livros.
 - Usuário: Cliente, Administrador.
   
 - Descrição: O sistema deve permitir que o usuário busque por livros, adicionados previamente no catálogo do sistema, informando o nome do livro desejado.
@@ -292,6 +228,20 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 - Informações de entrada: Nome do livro desejado.
 
 - Informações de saída: Livros que contenham o nome informado.
+
+- Requisitos não funcionais relacionados: Nda.
+
+#### RF18. O sistema deve fornercer um crédito de R$ 1000.00 para novos clientes.
+
+- Usuário: Cliente.
+  
+- Descrição: O sistema deve permitir que o usuário receba um crédito para poder comprar os livros da loja.
+
+- Fontes: Equipe de Desenvolvimento de Software.
+
+- Informações de entrada: valor da compra.
+
+- Informações de saída: saldo retirado.
 
 - Requisitos não funcionais relacionados: Nda.
 
@@ -308,15 +258,9 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 #### RNF05. Cada usuário possui um carrinho de compras pessoal inacessível pelos demais usuários.
 
-#### RNF06. O sistema não deve permitir duas avaliações em um mesmo livro por um mesmo cliente.
+#### RNF06. O sistema não deve permitir que um cliente exclua uma conta que não seja a própria.
 
-#### RNF07. O sistema não deve permitir que um cliente exclua uma avaliação que não seja a própria.
-
-#### RNF08. O sistema não deve permitir a edição de uma avaliação que não seja publicada pelo próprio cliente.
-
-#### RNF09. O sistema não deve permitir que um cliente exclua uma conta que não seja a própria.
-
-#### RNF10. O sistema não deve permitir que um livro possua duas categorias iguais.
+#### RNF07. O sistema não deve permitir que um livro possua duas categorias iguais.
 
 ### REQUISITOS SUPLEMENTARES
 

@@ -95,63 +95,8 @@ Sis --> Tela: Retorna sucesso da transação
 Tela --> Cliente: Informa a confirmação da compra
 @enduml
 ```
-### UC2: Manter Avaliações
 
-```plantuml
-@startuml
-autonumber
-
-actor "Cliente" as Cliente
-participant "Interface" as Tela
-control "Sistema" as Sis
-database "MySql" as BD
-
-activate Cliente
-activate Tela
-Cliente -> Tela: Faz Login
-activate Sis
-Tela -> Sis: autenticar(cliente)
-Sis --> Tela: Cliente autenticado
-deactivate Sis
-
-Cliente -> Tela: Avaliar Livros
-Tela -> Sis: buscarLivros(cliente)
-activate Sis
-activate BD
-Sis -> BD: list(Livros);
-BD --> Sis: Retorna lista de livros 
-deactivate BD
-
-Sis --> Tela: Retorna lista 
-deactivate Sis
-
-Tela --> Cliente: Exibe livros comprados
-
-Cliente -> Tela: seleciona o livro 
-activate Sis
-Tela -> Sis: buscar(idLivro)
-Sis --> Tela: Retorna tela de avaliação
-deactivate Sis
-Tela --> Cliente: Exibe a interface de avaliação
-
-Cliente -> Tela: Informa a nota e o comentário
-activate Sis
-Tela -> Sis: registrarAvaliacao(cliente, livro, nota, comentario)
-activate BD
-Sis -> BD: add(Avaliação)
-BD --> Sis: Confirma avaliação
-deactivate BD
-
-
-Sis --> Tela: Retorna true
-deactivate Sis
-Tela --> Cliente: Informa que a avaliação foi registrada
-
-@enduml 
-
-```
-
-### UC3: Consultar Catálogo
+### UC2: Consultar Catálogo
 
 ```plantuml
 @startuml
@@ -195,7 +140,7 @@ Tela --> Cliente: Exibe os detalhes do livro
 
 ```
 
-### UC4: Manter Conta
+### UC3: Manter Conta
 
 ```plantuml
 @startuml
@@ -251,7 +196,7 @@ Tela -> Tela: Redireciona para a tela inicial / Logout
 
 ```
 
-### UC5: Exibir Relatório de Faturamento
+### UC4: Exibir Relatório de Faturamento
 
 ```plantuml
 @startuml
@@ -293,7 +238,7 @@ Tela --> Adm: Exibe o faturamento total
 
 ```
 
-### UC6: Gerenciar Catálogo 
+### UC5: Gerenciar Catálogo 
 
 ```plantuml
 @startuml
@@ -361,55 +306,7 @@ end
 
 ```
 
-### UC7: Gerenciar Avaliações
-
-```plantuml
-@startuml
-autonumber
-
-actor "Administrador" as Adm
-participant "Interface" as Tela
-control "controladora" as Sis
-database "MySql" as BD
-
-activate Adm
-activate Tela
-
-Adm -> Tela: Informa identificação
-Tela -> Sis: autenticar(identificacao)
-activate Sis
-Sis --> Tela: Administrador autenticado
-deactivate Sis
-Tela --> Adm: Informa opções de ADM
-
-Adm -> Tela: Escolhe excluir avaliações de clientes
-Tela -> Sis: buscarAvaliacoes()
-activate Sis
-Sis -> BD: list(avaliação);
-activate BD
-BD --> Sis: Retorna lista 
-deactivate BD
-Sis --> Tela: Retorna avaliações 
-deactivate Sis
-Tela --> Adm: exibe as avaliações
-
-Adm -> Tela: Informa as avaliações e efetua a exclusão
-Tela -> Sis: excluirAvaliacoes(Avaliacoes)
-activate Sis
-Sis -> BD: del(avaliação)
-activate BD
-BD --> Sis: Confirma exclusão das linhas
-deactivate BD
-
-Sis --> Tela: Retorna true
-deactivate Sis
-Tela --> Adm: confirma exclusão das avaliações
-
-@enduml
-
-```
-
-UC8: Gerenciar Contas de Clientes
+UC6: Gerenciar Contas de Clientes
 
 ```plantuml
 @startuml

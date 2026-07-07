@@ -53,7 +53,7 @@ public class TelaInfoView extends javax.swing.JFrame {
         txtArea = new javax.swing.JTextArea();
         buttonExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(300, 500));
         setMinimumSize(new java.awt.Dimension(300, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
