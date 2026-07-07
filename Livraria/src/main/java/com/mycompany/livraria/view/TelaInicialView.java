@@ -244,7 +244,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         panelLivros1.removeAll();
 
         //Mudando o nome exibido
-        labelTop.setText("OFERTAS");
+        labelTop.setText("CATÁLOGO");
 
         //Transforma o painel interno em GRADE VERTICAL
         panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
@@ -266,7 +266,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         panelLivros1.removeAll();
 
         //Mudando o nome exibido
-        labelTop.setText("CATÁLOGO");
+        labelTop.setText("OFERTAS");
         
         //Transforma o painel interno em GRADE VERTICAL
         panelLivros1.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
