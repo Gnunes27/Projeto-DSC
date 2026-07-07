@@ -95,7 +95,7 @@ git clone https://github.com/Gnunes27/Projeto-DSC
 ## Passo 5: Agora basta clicar no ícone de play (ícone verde ao lado de clean and build) que o codigo funcionará.
 
 # Acessos ao Sistema 
-### Com o sistema funcionando, você pode logar com os seguintes usuários clicando no icone de perfil canto superior direito da tela inicial
+### Com o sistema funcionando, você pode logar com os seguintes usuários clicando no icone de perfil canto superior direito da tela inicial. Os usuários comuns possuem um crédito de R$ 1000.00 para gastar com os livros da nossa Livraria
 
 | Usuarios                | Senha | 
 |-------------------------|-------|
