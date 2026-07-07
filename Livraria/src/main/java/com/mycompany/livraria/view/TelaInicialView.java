@@ -525,7 +525,7 @@ public class TelaInicialView extends javax.swing.JFrame {
         
         painel.removeAll();
         
-        String sql = "SELECT nome, preco FROM Livro WHERE categoria = ? AND nome NOT LIKE ? LIMIT ?";
+        String sql = "SELECT id_livro, nome, preco FROM Livro WHERE categoria = ? AND nome NOT LIKE ? LIMIT ?";
         
         try (java.sql.Connection conn = ConnectionFactory.getConnection(); java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
             
