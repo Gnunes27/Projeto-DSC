@@ -30,6 +30,10 @@ public class TelaAdmView extends javax.swing.JFrame {
     public TelaAdmView(){
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        //Carrega as informações de catálogo para quando a janela abrir
+        atualizarCatalogo();
+        
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -390,10 +394,8 @@ public class TelaAdmView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonListaClienteActionPerformed
 
-    private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
-
-        mudarTela("cardCatalogo");
-        List<Livro> livros;
+    private void atualizarCatalogo(){
+       List<Livro> livros;
 
         //Tenta trazer a lista de livros
         try {
@@ -419,6 +421,13 @@ public class TelaAdmView extends javax.swing.JFrame {
             javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tableCatalogo.getModel();
             modelo.setNumRows(0);
         }
+    }
+    
+    private void buttonCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCatalogoActionPerformed
+
+        mudarTela("cardCatalogo");
+        
+        atualizarCatalogo();
     }//GEN-LAST:event_buttonCatalogoActionPerformed
 
     private void buttonAddLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddLivroActionPerformed
