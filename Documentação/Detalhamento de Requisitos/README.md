@@ -231,6 +231,20 @@ realizar sua autenticação deve ser capaz de realizar as ações e acessar serv
 
 - Requisitos não funcionais relacionados: Nda.
 
+#### RF18. O sistema deve fornercer um crédito de R$ 1000.00 para novos clientes.
+
+- Usuário: Cliente.
+  
+- Descrição: O sistema deve permitir que o usuário receba um crédito para poder comprar os livros da loja.
+
+- Fontes: Equipe de Desenvolvimento de Software.
+
+- Informações de entrada: valor da compra.
+
+- Informações de saída: saldo retirado.
+
+- Requisitos não funcionais relacionados: Nda.
+
 ### REQUISITOS NÃO FUNCIONAIS
 
 #### RNF01. Somente o administrador deve possuir acesso à serviços internos do sistema.
