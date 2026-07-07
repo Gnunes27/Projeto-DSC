@@ -14,6 +14,15 @@ public class PessoaController {
     //Intanciando o DAO de pessoa
     private final PessoaDao pessoaDao = new PessoaDao();    
     
+    //Função de registrar pessoa
+    public void register(Pessoa pessoa){
+        try{
+            pessoaDao.cadastrar(pessoa);
+        } catch(RuntimeException e){
+            throw new RuntimeException("Erro ao cadastrar usuário: " + e.getMessage(), e);
+        }
+    }
+    
     //Função de atualizar saldo
     public void balanceUpdate(int idUsuario, Double valorPago){
         try{
@@ -36,6 +45,7 @@ public class PessoaController {
         }
     }
     
+    //Listar pessoas
     public List<Pessoa> list(){
         //Chama pessoaDao para retornar a lista de clientes no banco de dados
         try {
@@ -49,6 +59,7 @@ public class PessoaController {
         }
     }
     
+    //Buscar pessoa
     public Pessoa search(String id){
         try{
             Pessoa p = pessoaDao.buscar(id);
@@ -60,6 +71,7 @@ public class PessoaController {
         }
     }
     
+    //Deletar pessoa
     public void delete(String id){
         try{
             pessoaDao.excluir(id);

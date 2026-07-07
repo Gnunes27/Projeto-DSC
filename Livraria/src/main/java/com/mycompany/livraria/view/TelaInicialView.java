@@ -292,12 +292,29 @@ public class TelaInicialView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
 
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
+        //Se o usuário não estiver logado, chama a tela de login
         if (usuarioLogado == null) {
             TelaLoginView telaLogin = new TelaLoginView(this);
             this.setVisible(false);
             telaLogin.setVisible(true);
         } else {
-            if (telaInfo == null ) {
+            //Se ele já estiver logado, verfica se é um Administrador ou usuário logado
+            if(usuarioLogado.isAdm()){
+                //Mostra a tela de adm
+                TelaAdmView telaAdm = new TelaAdmView();
+                telaAdm.setVisible(true);
+                
+                telaAdm.setLocationRelativeTo(null);
+                
+                //esconde essa tela
+                this.setVisible(false);
+                
+                //Retorna mais cedo para evitar mostrar a tela de informações de usuários comuns
+                return;
+            }
+            
+            //Código para verificar se a tela de info já está aberta e evitar várias telas de info ao mesmo tempo
+            if (telaInfo == null) {
                 telaInfo = new TelaInfoView(usuarioLogado);
             }
             telaInfo.setLocation(0, 0);
