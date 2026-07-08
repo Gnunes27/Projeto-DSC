@@ -119,7 +119,7 @@ public class TelaLoginView extends javax.swing.JFrame {
         panelLogin.add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 550, 150));
 
         labelUser.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        labelUser.setText("Usuario:");
+        labelUser.setText("Email:");
         labelUser.setOpaque(true);
         panelLogin.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
         panelLogin.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 420, -1));
